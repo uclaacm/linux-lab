@@ -1,0 +1,53 @@
+// Variables
+//=======================================
+$header-height: 8vh;
+
+// AppWrapper
+//=======================================
+#app-wrapper {
+  background-color: #cef3b7;
+  margin: $header-height 0 $header-height 0;
+  min-height: calc(100vh - 2 * #{$header-height});
+}
+
+// Header
+//=======================================
+#header {
+  align-items: center;
+  background-color: white;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+  height: $header-height;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+// Footer
+//=======================================
+#footer {
+  align-items: center;
+  background-color: white;
+  bottom: 0;
+  display: flex;
+  font-family: 'Westwood Sans', 'Helvetica Neue', 'Helvetica', sans-serif;
+  height: $header-height;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
+
+#footer h3 {
+  margin: 0;
+}
+
+#footer-link {
+  color: black;
+  text-decoration: none;
+}
+
+#tla-logo {
+  height: 1.66em;
+  vertical-align: -0.5em;
+}

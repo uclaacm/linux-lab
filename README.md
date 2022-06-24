@@ -1,4 +1,4 @@
-# Your Teach LA Project Here!
+# Linux Learning Lab
 
 ![Production Build](https://github.com/uclaacm/teach-la-react-starter-barebones/workflows/Production%20Build/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -46,8 +46,8 @@ We'll use a really common Node.js project workflow + Yarn!
 First, let's clone our repository, and install all of our yarn dependencies:
 
 ```
-git clone https://github.com/uclaacm/YOUR_PROJECT_URL_HERE.git
-cd YOUR_PROJECT_URL_HERE
+git clone https://github.com/uclaacm/linux-lab.git
+cd linux-lab
 ```
 
 The instructions to install Node.js will be different based on which platform you're running. It's heavily advised to install your Node.js using NVM (Node Version Manager) because it's easy to manage a standardized version and update it as needed.
@@ -92,17 +92,25 @@ yarn run build
 
 ## Contribution Workflow
 
-Thanks for your interest in contributing to YOUR_PROJECT_URL_HERE! ❤️
+Thanks for your interest in contributing to Linux Learning Lab! ❤️
 
-Here's a quick guide on how to get started.
+Here's a quick guide on how to get started after cloning this repository.
 
-1. Either make a new branch or a fork of this repository. `main` is a protected branch, **so you cannot push to it**.
-2. Follow the instructions in "Development Setup" above. If you're on a fork, replace the URL with the fork's URL; if you're on a different branch, check it out using `git checkout`.
+1. Before making any changes, run `git pull` to ensure your local repository is up to date.
+2. Make a new branch for your changes. `main` is a protected branch, **so you cannot push to it**.
+```
+git checkout -b firstName/feature
+```
 3. Beep boop away!
 4. **Before you push**, make sure your app runs with `yarn start`. If there are any errors, our CI/CD service will **reject your build**.
 5. Once you're ready, stage and commit your changes!
-6. Make a [pull request](https://github.com/uclaacm/YOUR_PROJECT_URL_HERE/pulls) with your changes, and let someone on your project team know.
-   a. Netlify has a neat feature called "Deploy Previews" that give you a link to preview your changes; [see the blog post](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for more info!
+```
+git add .
+git commit -m "description of your changes"
+git push
+```
+6. Make a [pull request](https://github.com/uclaacm/linux-lab/pulls) with your changes, and let someone on your project team know.
+- Netlify has a neat feature called "Deploy Previews" that give you a link to preview your changes; [see the blog post](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for more info!
 7. If your code passes code review, then we can **squash and merge** it into `main`. Congratulations! If you'd like, it's now safe to delete your branch/fork.
 
 ## Helpful Commands

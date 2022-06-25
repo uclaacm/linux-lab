@@ -98,19 +98,25 @@ Here's a quick guide on how to get started after cloning this repository.
 
 1. Before making any changes, run `git pull` to ensure your local repository is up to date.
 2. Make a new branch for your changes. `main` is a protected branch, **so you cannot push to it**.
+
 ```
 git checkout -b firstName/feature
 ```
+
 3. Beep boop away!
 4. **Before you push**, make sure your app runs with `yarn start`. If there are any errors, our CI/CD service will **reject your build**.
 5. Once you're ready, stage and commit your changes!
+
 ```
 git add .
 git commit -m "description of your changes"
 git push
 ```
+
 6. Make a [pull request](https://github.com/uclaacm/linux-lab/pulls) with your changes, and let someone on your project team know.
+
 - Netlify has a neat feature called "Deploy Previews" that give you a link to preview your changes; [see the blog post](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for more info!
+
 7. If your code passes code review, then we can **squash and merge** it into `main`. Congratulations! If you'd like, it's now safe to delete your branch/fork.
 
 ## Helpful Commands

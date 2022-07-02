@@ -72,6 +72,6 @@ const styles = {
         marginLeft: '70px',
         marginRight: '70px',
     },
-}
+};
 
 export default Moving;

@@ -10,75 +10,75 @@
 }
 
 .modal {
-  width: 100vw;
-  height: 100vh;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 9999;
-  margin: 0 auto;  
-  position: absolute; 
-  left: 0;
-  right: 0;
-  top: 0;
   bottom: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100vh;
+  justify-content: center; 
+  left: 0;
+  margin: 0 auto;  
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 9999;
 }
 
 .modal-content {
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 40vw;
-  height: 40vh;
   background-color: white;
+  bottom: 0;
+  height: 40vh;
+  left: 0;
   margin: 0 auto;
   position: relative;
+  right: 0;
+  top: 0;
+  width: 40vw;
 }
 
 .modal-content > * {
   position: absolute;
 }
 
-.closeModal {
+.close-modal {
+  cursor: pointer;
+  font-size: 1.5em;
   right: 1vw;
   top: 1vh;
-  font-size: 1.5em;
-  cursor: pointer;
 }
 
 #helpful-commands {
-  top: 5vh;
+  align-items: center;
   bottom: 5vh;
-  left: 0;
-  right: 0;
-  width: 80%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  left: 0;
   margin: 0 auto;
+  right: 0;
+  top: 5vh;
+  width: 80%;
 }
 
 .helpful-command-row {
-  border: 1px solid #000;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  border: 1px solid #000;
+  display: flex;
   flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.helpful-command-row > div {
+  flex: 1;
+  height: 100%;
+  width: 50%;
 }
 
 .helpful-command-row > div:nth-child(1) {
   border-right: 1px solid #000;
-}
-
-.helpful-command-row > div {
-  width: 50%;
-  flex: 1;
-  height: 100%;
 }
 
 .header-text {
@@ -123,14 +123,14 @@
 #helpful-commands-button {
   border: 1px solid #000;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
   left: 5vw;
   padding: 1vw;
   position: absolute;
   text-align: center;
   top: 1vh;
   width: 40%;
-  display: flex;
-  flex-direction: column;
 }
 
 #penguin {

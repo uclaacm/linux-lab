@@ -14,7 +14,7 @@ function Searching(): JSX.Element {
     <>
       <div className={displayModalState ? 'modal' : 'hidden'}>
         <div className="modal-content">
-          <div className="closeModal" onClick={() => setModalState(false)}>
+          <div className="close-modal" onClick={() => setModalState(false)}>
             <MdClose />
           </div>
           <div id="helpful-commands">

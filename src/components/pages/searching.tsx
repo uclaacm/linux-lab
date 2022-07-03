@@ -9,6 +9,8 @@ import './../../styles/searching.scss';
 
 function Searching(): JSX.Element {
   const [displayModalState, setModalState] = useState(false);
+  const [showTask1, setShowTask1] = useState(false);
+  const [showTask2, setShowTask2] = useState(true);
 
   return (
     <>
@@ -99,11 +101,14 @@ function Searching(): JSX.Element {
             <div className="task-header">
               <MdCheckCircleOutline className="complete" />
               <div className="task-name">Task 1</div>
-              <div className="toggle-expand">
-                <MdExpandMore />
+              <div
+                className="toggle-expand"
+                onClick={() => setShowTask1(!showTask1)}
+              >
+                {showTask1 ? <MdExpandLess /> : <MdExpandMore />}
               </div>
             </div>
-            <div className="task-content hidden">
+            <div className={showTask1 ? 'task-content' : 'hidden'}>
               <div>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -118,11 +123,14 @@ function Searching(): JSX.Element {
             <div className="task-header">
               <MdCheckCircleOutline className="incomplete" />
               <div className="task-name">Task 2</div>
-              <div className="toggle-expand">
-                <MdExpandLess />
+              <div
+                className="toggle-expand"
+                onClick={() => setShowTask2(!showTask2)}
+              >
+                {showTask1 ? <MdExpandLess /> : <MdExpandMore />}
               </div>
             </div>
-            <div className="task-content">
+            <div className={showTask2 ? 'task-content' : 'hidden'}>
               <div>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

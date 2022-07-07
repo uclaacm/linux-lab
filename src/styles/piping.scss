@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 @font-face {
-  font-family: 'Westwood Sans', sans-serif;
+  font-family: 'Westwood Sans';
   src: local('Westwood Sans'),
     url('../assets/WestwoodSans-Regular.ttf') format('truetype');
 }
 
 .lesson-container {
-    font-family:'Westwood Sans';
+    font-family:'Westwood Sans', sans-serif;
     font-style: normal;
     font-weight: 400;
     height: 100%;

@@ -1,13 +1,15 @@
+import './../../styles/moving.scss';
+
 function Moving(): JSX.Element {
   return (
     <div>
-      <h1 style={styles.lessonTitle}>Moving Around the File System</h1>
-      <p style={styles.text}>
+      <h1 className="lessonTitle">Moving Around the File System</h1>
+      <p className="text">
         Ok, we can now figure out information about ourselves, from where to who
         we are But what if we want to learn about our surroundings?
       </p>
-      <h2 style={styles.text}>Command</h2>
-      <p style={styles.text}>
+      <h2 className="text">Command</h2>
+      <p className="text">
         The ls command lists the contents of a directory.
         <ul>
           <li>
@@ -33,7 +35,7 @@ function Moving(): JSX.Element {
           </li>
         </ul>
       </p>
-      <p style={styles.text}>
+      <p className="text">
         The cd command lets you change into a directory. Think of this as double
         clicking on a folder to open it on a Windows/MacOS computer.
         <ul>
@@ -50,30 +52,27 @@ function Moving(): JSX.Element {
           </li>
         </ul>
       </p>
-      <p style={styles.text}>
+      <p className="text">
         Something seems amiss in this cave. Is there a secret hiding in plain
         sight?
         <ul>
           <li>`ls -a` to get the hidden file name</li>
         </ul>
       </p>
+      <footer>
+        <a href="stationary">
+          <button type="button" className="back-button">
+            back
+          </button>
+        </a>
+        <a href="creation">
+          <button type="button" className="next-button">
+            next
+          </button>
+        </a>
+      </footer>
     </div>
   );
 }
-
-//CSS styling
-const styles = {
-  lessonTitle: {
-    textAlign: 'left',
-    marginTop: '70px',
-    marginLeft: '70px',
-  },
-
-  text: {
-    textAlign: 'left',
-    marginLeft: '70px',
-    marginRight: '70px',
-  },
-};
 
 export default Moving;

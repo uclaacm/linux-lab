@@ -1,6 +1,5 @@
 // import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-
 import Creation from './pages/creation';
 import Game from './pages/game';
 import Intro from './pages/intro';

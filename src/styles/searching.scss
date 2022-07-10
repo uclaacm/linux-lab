@@ -101,12 +101,6 @@
   width: 20%;
 }
 
-.task-description {
-  display: grid;
-  grid-template-columns: [col-start] 28% [col-start] 20% [col-start] 25%;
-  width: 100%;
-}
-
 #task-description {
   display: flex;
   flex-direction: row;

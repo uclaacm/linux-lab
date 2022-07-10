@@ -34,10 +34,7 @@ function Searching(): JSX.Element {
                 <p> Find a directory under a specified directory</p>
               </div>
               <div>
-                <span>
-                  {' '}
-                  find [directoryToSearch] -type d -name [fileToFind]
-                </span>
+                <span>find [directoryToSearch] -type d -name [fileToFind]</span>
               </div>
             </div>
             <div className="helpful-command-row">
@@ -152,7 +149,7 @@ function Searching(): JSX.Element {
                 className="toggle-expand"
                 onClick={() => setShowTask2(!showTask2)}
               >
-                {showTask1 ? <MdExpandLess /> : <MdExpandMore />}
+                {showTask2 ? <MdExpandLess /> : <MdExpandMore />}
               </div>
             </div>
             <div className={showTask2 ? 'task-content' : 'hidden'}>

@@ -1,6 +1,6 @@
 import { IconContext } from 'react-icons';
 import { AiFillCheckCircle } from 'react-icons/ai';
-import './../../styles/global.scss';
+import './../../styles/Task.scss';
 
 function Task(prop: {
   taskPrompt: string;

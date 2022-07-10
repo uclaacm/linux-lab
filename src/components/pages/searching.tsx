@@ -1,10 +1,8 @@
-import { useState } from 'react';
-import { MdClose } from 'react-icons/md';
+import Modal from '../shared/Modal';
 import Task from './../shared/Task';
 import './../../styles/searching.scss';
 
 function Searching(): JSX.Element {
-  const [displayModalState, setModalState] = useState(false);
   const taskPrompts = [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -18,58 +16,6 @@ function Searching(): JSX.Element {
 
   return (
     <>
-      <div className={displayModalState ? 'modal' : 'hidden'}>
-        <div className="modal-content">
-          <div className="close-modal" onClick={() => setModalState(false)}>
-            <MdClose />
-          </div>
-          <div id="helpful-commands">
-            <div className="helpful-command-row">Helpful Commands</div>
-            <div className="helpful-command-row">
-              <div>
-                <p>Find a file under a specified directory</p>
-              </div>
-              <div>
-                <span>find [directoryToSearch] -name [fileToFind]</span>
-              </div>
-            </div>
-            <div className="helpful-command-row">
-              <div>
-                <p> Find a directory under a specified directory</p>
-              </div>
-              <div>
-                <span>find [directoryToSearch] -type d -name [fileToFind]</span>
-              </div>
-            </div>
-            <div className="helpful-command-row">
-              <div>
-                <p>Find all hidden files</p>
-              </div>
-              <div>
-                <span>
-                  find [directoryToSearch] -type f -name &quot;.* &quot;
-                </span>
-              </div>
-            </div>
-            <div className="helpful-command-row">
-              <div>
-                <p>Find a string in a file</p>
-              </div>
-              <div>
-                <span>grep &quot;[string]&quot; [filename]</span>
-              </div>
-            </div>
-            <div className="helpful-command-row">
-              <div>
-                <p>Find a string in all files of a directory</p>
-              </div>
-              <div>
-                <span>grep -R &quot;[string]&quot; [filename] [directory]</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="container">
         <h2 className="header-text">Lesson Title</h2>
         <p>
@@ -113,12 +59,7 @@ function Searching(): JSX.Element {
             </p>
           </div>
           <div id="task-hint">
-            <div
-              id="helpful-commands-button"
-              onClick={() => setModalState(true)}
-            >
-              Helpful Commands
-            </div>
+            <Modal />
             <div id="penguin">Penguin</div>
           </div>
         </div>

@@ -1,0 +1,43 @@
+.back-button {
+  background-color: white;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  cursor: pointer;
+  float: left;
+  font-size: 15px;
+  margin-left: 67px;
+  padding: 10px 35px;
+  transition-duration: 0.4s;
+}
+
+.back-button:hover {
+  background-color: #e7e7e7;
+}
+
+.next-button {
+  background-color: white;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  cursor: pointer;
+  float: right;
+  font-size: 15px;
+  margin-right: 67px;
+  padding: 10px 35px;
+  transition-duration: 0.4s;
+}
+
+.next-button:hover {
+  background-color: #e7e7e7;
+}
+
+.lesson-title {
+  margin-left: 70px;
+  margin-top: 70px;
+  text-align: left;
+}
+
+.text {
+  margin-left: 70px;
+  margin-right: 70px;
+  text-align: left;
+}

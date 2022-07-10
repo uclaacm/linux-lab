@@ -1,16 +1,20 @@
 import { useState } from 'react';
-import {
-  MdCheckCircleOutline,
-  MdClose,
-  MdExpandLess,
-  MdExpandMore,
-} from 'react-icons/md';
+import { MdClose } from 'react-icons/md';
+import Task from './../shared/Task';
 import './../../styles/searching.scss';
 
 function Searching(): JSX.Element {
   const [displayModalState, setModalState] = useState(false);
-  const [showTask1, setShowTask1] = useState(false);
-  const [showTask2, setShowTask2] = useState(true);
+  const taskPrompts = [
+    `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.`,
+    `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.`,
+  ];
 
   return (
     <>
@@ -119,50 +123,16 @@ function Searching(): JSX.Element {
           </div>
         </div>
         <div id="tasks-container">
-          <div id="task1" className="task">
-            <div className="task-header">
-              <MdCheckCircleOutline className="complete" />
-              <div className="task-name">Task 1</div>
-              <div
-                className="toggle-expand"
-                onClick={() => setShowTask1(!showTask1)}
-              >
-                {showTask1 ? <MdExpandLess /> : <MdExpandMore />}
-              </div>
-            </div>
-            <div className={showTask1 ? 'task-content' : 'hidden'}>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-              <div className="terminal">terminal</div>
-              <div className="submit">submit</div>
-            </div>
-          </div>
-          <div id="task2" className="task">
-            <div className="task-header">
-              <MdCheckCircleOutline className="incomplete" />
-              <div className="task-name">Task 2</div>
-              <div
-                className="toggle-expand"
-                onClick={() => setShowTask2(!showTask2)}
-              >
-                {showTask2 ? <MdExpandLess /> : <MdExpandMore />}
-              </div>
-            </div>
-            <div className={showTask2 ? 'task-content' : 'hidden'}>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-              <div className="terminal">terminal</div>
-              <div className="submit">submit</div>
-            </div>
-          </div>
+          <Task
+            taskPrompt={taskPrompts[0]}
+            taskName="Task 1"
+            completed={true}
+          />
+          <Task
+            taskPrompt={taskPrompts[1]}
+            taskName="Task 2"
+            completed={false}
+          />
         </div>
       </div>
     </>

@@ -1,0 +1,71 @@
+#progress {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+#progress-bar {
+  background: rgb(192, 201, 200);
+  height: 5px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  width: 0%;
+}
+
+#progress-num {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#progress-num::before {
+  background-color: lightgray;
+  content: '';
+  height: 5px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  z-index: -1;
+}
+
+#progress-num .step {
+  background-color: lightgray;
+  border: 3px solid lightgray;
+  border-radius: 100%;
+  color: black;
+  font-family: sans-serif;
+  font-size: 20px;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  text-align: center;
+  width: 50px;
+  z-index: 1;
+}
+
+#progress-num .step.active {
+  background-color: rgb(71, 195, 236);
+  border-color: rgb(71, 195, 236);
+  color: #fff;
+}
+
+/*MIT License
+  Copyright (c) 2021 w3collective
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.*/

@@ -3,7 +3,7 @@ import '../../styles/piping.scss';
 function Piping(): JSX.Element {
   return (
     <div className="lesson-container">
-      <div className="lesson-title">Lesson Title</div>
+      <h1>Lesson Title</h1>
       <div className="section">
         <p className="lesson-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -15,21 +15,21 @@ function Piping(): JSX.Element {
         </p>
         <div className="content-container">
           <div className="content-box">
-            <div className="content-header">standard input</div>
+            <p className="content-header">standard input</p>
             <p className="lesson-text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
           </div>
           <div className="content-box">
-            <div className="content-header">standard output</div>
+            <p className="content-header">standard output</p>
             <p className="lesson-text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
           </div>
           <div className="content-box">
-            <div className="content-header">standard error</div>
+            <p className="content-header">standard error</p>
             <p className="lesson-text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -38,7 +38,7 @@ function Piping(): JSX.Element {
         </div>
       </div>
       <div className="section">
-        <div className="lesson-subheading">Command</div>
+        <h2 className="lesson-subheading">Command</h2>
         <p className="lesson-text">
           Lorem <span className="command-highlight">ipsum</span>
           dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -70,9 +70,9 @@ function Piping(): JSX.Element {
         </p>
       </div>
       <div className="section">
-        <div className="sub-subheading">
+        <h3 className="sub-subheading">
           Try Out <span className="command-highlight">Command</span>
-        </div>
+        </h3>
         <p className="lesson-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

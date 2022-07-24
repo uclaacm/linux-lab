@@ -1,23 +1,22 @@
-
 .intro-container {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Westwood Sans', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    height: 100%;
-    margin: 2%;
-    text-align: left;
-    width: 95%;
-  }
-  
-.image-box{
-    margin-top: 5vh;
-    display: flex;
-    width: 50vw;
-    height: 10vw;
-    border: 1px solid black;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Westwood Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  height: 100%;
+  margin: 2%;
+  text-align: left;
+  width: 95%;
+}
+
+.image-box {
+  align-items: center;
+  align-self: center;
+  border: 1px solid black;
+  display: flex;
+  height: 10vw;
+  justify-content: center;
+  margin-top: 5vh;
+  width: 50vw;
 }

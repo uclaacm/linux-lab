@@ -1,24 +1,88 @@
-import { HeaderSections } from '../globalTypes';
+import './../../../styles/sideNav.scss';
+import { useState } from 'react';
+import { slide as Menu } from 'react-burger-menu';
+import { Link, useLocation } from 'react-router-dom';
 
-/**
- * We can use our enum as the specified type that our HeaderProps recieves
- * Type our React Element with an interface
- */
-export interface HeaderProps {
-  section: HeaderSections;
+interface stringMapping {
+  [key: string]: string;
 }
 
-export default function Header(props: HeaderProps): JSX.Element {
+export default function Header(): JSX.Element {
+  const [open, setOpen] = useState(false);
+  const pathToTitleMapping: stringMapping = {
+    '/': 'Home',
+    '/stationary': 'Stationary',
+    '/moving': 'Moving',
+    '/creation': 'Creation',
+    '/piping': 'Piping',
+    '/searching': 'Searching',
+    '/permissions': 'Permissions',
+    '/game': 'Game',
+  };
+  const location = useLocation();
+
   return (
-    <div id="header">
-      <nav>
-        <div>TODO: This is A Header Example! </div>
-        <div>
-          Text Displayed is:
-          {props.section}
+    <nav>
+      <nav id="navContainer">
+        <Menu
+          isOpen={open}
+          onStateChange={(state: { isOpen: boolean }) => {
+            setOpen(state.isOpen);
+          }}
+        >
+          <Link onClick={() => setOpen(false)} className="menuLink" to="/">
+            Home
+          </Link>
+          <Link
+            onClick={() => setOpen(false)}
+            className="menuLink"
+            to="/stationary"
+          >
+            Stationary
+          </Link>
+          <Link
+            onClick={() => setOpen(false)}
+            className="menuLink"
+            to="/moving"
+          >
+            Moving
+          </Link>
+          <Link
+            onClick={() => setOpen(false)}
+            className="menuLink"
+            to="/creation"
+          >
+            Creation
+          </Link>
+          <Link
+            onClick={() => setOpen(false)}
+            className="menuLink"
+            to="/piping"
+          >
+            Piping
+          </Link>
+          <Link
+            onClick={() => setOpen(false)}
+            className="menuLink"
+            to="/searching"
+          >
+            Searching
+          </Link>
+          <Link
+            onClick={() => setOpen(false)}
+            className="menuLink"
+            to="/permissions"
+          >
+            Permissions
+          </Link>
+          <Link onClick={() => setOpen(false)} className="menuLink" to="/game">
+            Game
+          </Link>
+        </Menu>
+        <div id="navHeader">
+          <h3>{pathToTitleMapping[location.pathname]}</h3>
         </div>
-        {/* This is an example of using interfaces and enums! */}
       </nav>
-    </div>
+    </nav>
   );
 }

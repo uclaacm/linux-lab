@@ -1,18 +1,18 @@
 header {
-    background-color: #6588CB;
-    height: 6vh;
-    line-height: 1em;
-    position: relative;
-    width: 100vw;
+  background-color: #6588cb;
+  height: 6vh;
+  line-height: 1em;
+  position: relative;
+  width: 100vw;
 }
 
 #nav-header {
-    bottom: 0;
-    color: white;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
+  bottom: 0;
+  color: white;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 /* Position and sizing of burger button */
@@ -56,7 +56,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: #6588CB;
+  background: #6588cb;
   font-size: 1.15em;
   overflow-y: hidden !important;
   padding: 2.5em 1.5em 0;
@@ -64,7 +64,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: #6588CB;
+  fill: #6588cb;
 }
 
 /* Wrapper for item list */
@@ -84,12 +84,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .menu-link {
-    color: white;
-    padding: 0.5em;
-    text-decoration: none;
+  color: white;
+  padding: 0.5em;
+  text-decoration: none;
 }
 
 .menu-link:hover {
-    cursor: pointer;
-    font-size: larger;
+  cursor: pointer;
+  font-size: larger;
 }

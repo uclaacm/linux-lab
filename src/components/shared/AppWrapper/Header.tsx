@@ -22,67 +22,57 @@ export default function Header(): JSX.Element {
   const location = useLocation();
 
   return (
-    <nav>
-      <nav id="navContainer">
-        <Menu
-          isOpen={open}
-          onStateChange={(state: { isOpen: boolean }) => {
-            setOpen(state.isOpen);
-          }}
+    <header id="nav-container">
+      <Menu
+        isOpen={open}
+        onStateChange={(state: { isOpen: boolean }) => {
+          setOpen(state.isOpen);
+        }}
+      >
+        <Link onClick={() => setOpen(false)} className="menu-link" to="/">
+          Home
+        </Link>
+        <Link
+          onClick={() => setOpen(false)}
+          className="menu-link"
+          to="/stationary"
         >
-          <Link onClick={() => setOpen(false)} className="menuLink" to="/">
-            Home
-          </Link>
-          <Link
-            onClick={() => setOpen(false)}
-            className="menuLink"
-            to="/stationary"
-          >
-            Stationary
-          </Link>
-          <Link
-            onClick={() => setOpen(false)}
-            className="menuLink"
-            to="/moving"
-          >
-            Moving
-          </Link>
-          <Link
-            onClick={() => setOpen(false)}
-            className="menuLink"
-            to="/creation"
-          >
-            Creation
-          </Link>
-          <Link
-            onClick={() => setOpen(false)}
-            className="menuLink"
-            to="/piping"
-          >
-            Piping
-          </Link>
-          <Link
-            onClick={() => setOpen(false)}
-            className="menuLink"
-            to="/searching"
-          >
-            Searching
-          </Link>
-          <Link
-            onClick={() => setOpen(false)}
-            className="menuLink"
-            to="/permissions"
-          >
-            Permissions
-          </Link>
-          <Link onClick={() => setOpen(false)} className="menuLink" to="/game">
-            Game
-          </Link>
-        </Menu>
-        <div id="navHeader">
-          <h3>{pathToTitleMapping[location.pathname]}</h3>
-        </div>
-      </nav>
-    </nav>
+          Stationary
+        </Link>
+        <Link onClick={() => setOpen(false)} className="menu-link" to="/moving">
+          Moving
+        </Link>
+        <Link
+          onClick={() => setOpen(false)}
+          className="menu-link"
+          to="/creation"
+        >
+          Creation
+        </Link>
+        <Link onClick={() => setOpen(false)} className="menu-link" to="/piping">
+          Piping
+        </Link>
+        <Link
+          onClick={() => setOpen(false)}
+          className="menu-link"
+          to="/searching"
+        >
+          Searching
+        </Link>
+        <Link
+          onClick={() => setOpen(false)}
+          className="menu-link"
+          to="/permissions"
+        >
+          Permissions
+        </Link>
+        <Link onClick={() => setOpen(false)} className="menu-link" to="/game">
+          Game
+        </Link>
+      </Menu>
+      <div id="nav-header">
+        <h3>{pathToTitleMapping[location.pathname]}</h3>
+      </div>
+    </header>
   );
 }

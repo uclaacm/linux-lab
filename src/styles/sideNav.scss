@@ -1,27 +1,27 @@
-#navContainer {
-    width: 100vw;
-    height: 6vh;
+header {
     background-color: #6588CB;
+    height: 6vh;
     line-height: 1em;
     position: relative;
+    width: 100vw;
 }
 
-#navHeader {
+#nav-header {
+    bottom: 0;
     color: white;
+    left: 0;
     position: absolute;
     right: 0;
-    left: 0;
     top: 0;
-    bottom: 0;
 }
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-  position: fixed;
-  width: 18px;
   height: 1em;
   left: 18px;
+  position: fixed;
   top: 18px;
+  width: 18px;
 }
 
 /* Color/shape of burger icon bars */
@@ -50,16 +50,16 @@ Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
 .bm-menu-wrap {
-  position: fixed;
   height: 100%;
+  position: fixed;
 }
 
 /* General sidebar styles */
 .bm-menu {
   background: #6588CB;
-  padding: 2.5em 1.5em 0;
   font-size: 1.15em;
   overflow-y: hidden !important;
+  padding: 2.5em 1.5em 0;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -83,13 +83,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background: rgba(0, 0, 0, 0.3);
 }
 
-.menuLink {
+.menu-link {
     color: white;
-    text-decoration: none;
     padding: 0.5em;
+    text-decoration: none;
 }
 
-.menuLink:hover {
+.menu-link:hover {
     cursor: pointer;
     font-size: larger;
 }

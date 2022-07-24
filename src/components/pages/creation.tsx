@@ -1,6 +1,6 @@
 import '../../styles/PageStyling.scss';
 
-function Creation1(): JSX.Element {
+function Creation(): JSX.Element {
   return (
     <div>
       <h1 className="lesson-title">Creation and Deletion</h1>
@@ -120,4 +120,4 @@ function Creation1(): JSX.Element {
   );
 }
 
-export default Creation1;
+export default Creation;

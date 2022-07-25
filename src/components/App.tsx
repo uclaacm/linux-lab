@@ -20,7 +20,10 @@ function App(): JSX.Element {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/stationary">About</Link>
+              <Link to="/intro">About</Link>
+            </li>
+            <li>
+              <Link to="/stationary">Stationary</Link>
             </li>
             <li>
               <Link to="/moving">Moving</Link>

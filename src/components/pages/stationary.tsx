@@ -14,7 +14,6 @@ function Stationary(): JSX.Element {
         system in a similar way, though these “folders” are called directories
         in Linux.
       </p>
-      <br />
       <p>
         Let&#39;s say you have a file called CS35L.pdf in a subfolder. Windows
         users might see a file path like C:\Documents\Notes\CS35L.pdf, whereas
@@ -22,7 +21,6 @@ function Stationary(): JSX.Element {
         navigate to the Notes folder, you&#39;d have to go relative from the
         folder you are currently in.
       </p>
-      <br />
       <p>
         So how do you determine what directory you are in in Linux? The pwd
         command lists the present working directory.

@@ -2,24 +2,11 @@ import './../../../styles/sideNav.scss';
 import { useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import { Link, useLocation } from 'react-router-dom';
-
-interface stringMapping {
-  [key: string]: string;
-}
+import { PageMapping } from './../globalTypes';
 
 export default function Header(): JSX.Element {
   const [open, setOpen] = useState(false);
-  const pathToTitleMapping: stringMapping = {
-    '/': 'Home',
-    '/stationary': 'Stationary',
-    '/moving': 'Moving',
-    '/creation': 'Creation',
-    '/piping': 'Piping',
-    '/searching': 'Searching',
-    '/permissions': 'Permissions',
-    '/game': 'Game',
-  };
-  const location = useLocation();
+  const currPath = useLocation().pathname;
 
   return (
     <header id="nav-container">
@@ -29,49 +16,19 @@ export default function Header(): JSX.Element {
           setOpen(state.isOpen);
         }}
       >
-        <Link onClick={() => setOpen(false)} className="menu-link" to="/">
-          Home
-        </Link>
-        <Link
-          onClick={() => setOpen(false)}
-          className="menu-link"
-          to="/stationary"
-        >
-          Stationary
-        </Link>
-        <Link onClick={() => setOpen(false)} className="menu-link" to="/moving">
-          Moving
-        </Link>
-        <Link
-          onClick={() => setOpen(false)}
-          className="menu-link"
-          to="/creation"
-        >
-          Creation
-        </Link>
-        <Link onClick={() => setOpen(false)} className="menu-link" to="/piping">
-          Piping
-        </Link>
-        <Link
-          onClick={() => setOpen(false)}
-          className="menu-link"
-          to="/searching"
-        >
-          Searching
-        </Link>
-        <Link
-          onClick={() => setOpen(false)}
-          className="menu-link"
-          to="/permissions"
-        >
-          Permissions
-        </Link>
-        <Link onClick={() => setOpen(false)} className="menu-link" to="/game">
-          Game
-        </Link>
+        {Array.from(PageMapping.keys()).map((path) => (
+          <Link
+            key={path}
+            onClick={() => setOpen(false)}
+            className="menu-link"
+            to={path}
+          >
+            {PageMapping.get(path)}
+          </Link>
+        ))}
       </Menu>
       <div id="nav-header">
-        <h3>{pathToTitleMapping[location.pathname]}</h3>
+        <h3>{PageMapping.get(currPath)}</h3>
       </div>
     </header>
   );

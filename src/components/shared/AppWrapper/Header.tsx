@@ -23,12 +23,12 @@ export default function Header(): JSX.Element {
             className="menu-link"
             to={path}
           >
-            {PageMapping.get(path)}
+            {PageMapping.get(path)?.pageName}
           </Link>
         ))}
       </Menu>
       <div id="nav-header">
-        <h3>{PageMapping.get(currPath)}</h3>
+        <h3>{PageMapping.get(currPath)?.pageName}</h3>
       </div>
     </header>
   );

@@ -9,15 +9,15 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@types/react": "^18.0.8",
+    "@types/react": "^18.0.15",
     "@types/react-dom": "^17.0.10",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.5.1",
-    "react": "^17.0.2",
+    "react": "^18.2.0",
     "react-burger-menu": "^3.0.8",
-    "react-dom": "^17.0.2",
+    "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "stylelint-config-prettier": "^9.0.3",

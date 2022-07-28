@@ -1,4 +1,4 @@
-import '../../styles/PageStyling.scss';
+import '../../styles/global.scss';
 import Bar from '../shared/progressbar';
 
 function Creation(): JSX.Element {
@@ -117,6 +117,7 @@ function Creation(): JSX.Element {
         moves file1 and file2 to directoryPath, with the timestamps remaining
         unchanged.
       </p>
+      <br />
       <Bar totalsteps={6} currentstep={1} />
     </div>
   );

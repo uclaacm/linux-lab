@@ -17,11 +17,12 @@ const Bar: React.FC<Props> = ({ totalsteps, currentstep }: Props) => {
           <div
             id="progress-num2"
             style={{
-              width: `calc(100% * ${(currentstep - 1) / (totalsteps - 1)})`,
+              width: `calc(100% * ${currentstep / (totalsteps - 1)})`,
             }}
           ></div>
           {arr.map((title) => {
-            if (title < currentstep) return <li className="step active">{}</li>;
+            if (title <= currentstep)
+              return <li className="step active">{}</li>;
             else return <li className="step">{}</li>;
           })}
         </div>

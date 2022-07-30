@@ -1,3 +1,5 @@
+import tuxBehindIgloo from '../../assets/images/tux-behind-igloo.svg';
+
 function Stationary(): JSX.Element {
   return (
     <div>
@@ -7,6 +9,7 @@ function Stationary(): JSX.Element {
         you&#39;ve ever used a Windows or MacOS computer, there are actually
         quite a few similarities!
       </p>
+      <img src={tuxBehindIgloo} alt="tux the penguin behind an igloo" />
       <h2>The pwd Command</h2>
       <p>
         For example, just as you can make nested folders on Windows/MacOS and

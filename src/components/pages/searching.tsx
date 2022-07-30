@@ -1,3 +1,4 @@
+import tuxPointing from '../../assets/images/tux-pointing.svg';
 import Modal from '../shared/Modal';
 import Task from './../shared/Task';
 import './../../styles/searching.scss';
@@ -60,7 +61,11 @@ function Searching(): JSX.Element {
           </div>
           <div id="task-hint">
             <Modal />
-            <div id="penguin">Penguin</div>
+            <img
+              src={tuxPointing}
+              alt="tux pointing to the 'helpful commands' button"
+              id="penguin"
+            />
           </div>
         </div>
         <div id="tasks-container">

@@ -18,7 +18,7 @@ function Terminal(): JSX.Element {
     return (
         <div className="terminal">
             <div>
-                {commands.map((command: string, key: number) => {
+                {commands.map((command: string) => {
                     return <p className="command">{command}</p>;
                 })}
             </div>

@@ -1,36 +1,36 @@
 import React, { useState } from 'react';
-import '../../styles/Terminal.scss'
+import '../../styles/Terminal.scss';
 
 function Terminal(): JSX.Element {
-    const [commands, setCommands] = useState<string[]>([])
-    const [input, setInput] = useState('$ ')
+    const [commands, setCommands] = useState<string[]>([]);
+    const [input, setInput] = useState('$ ');
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-        setInput(e.currentTarget.value)
-    }
-    
+        setInput(e.currentTarget.value);
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        setCommands([...commands, input])
-        setInput('$ ')
-    }
+        e.preventDefault();
+        setCommands([...commands, input]);
+        setInput('$ ');
+    };
 
     return (
         <div className="terminal">
             <div>
                 {commands.map((command: string, key: number) => {
-                    return <p className="command">{command}</p>
+                    return <p className="command">{command}</p>;
                 })}
             </div>
             <form onSubmit={handleSubmit} id="input-form">
-                <input type="text" 
+                <input type="text"
                     className="command"
-                    value={input} 
+                    value={input}
                     onChange={handleChange}
                 />
             </form>
         </div>
     );
   }
-  
+
   export default Terminal;

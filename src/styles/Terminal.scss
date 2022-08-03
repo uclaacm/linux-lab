@@ -1,29 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 .terminal {
-    background-color: black;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Fira Code', sans-serif;
-    height: 100%;
-    margin: 5vh auto;
-    padding: 2vh;
-    width: 80%;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Fira Code', sans-serif;
+  height: 100%;
+  margin: 5vh auto;
+  padding: 2vh;
+  width: 80%;
 }
 
 .command {
-    background-color: black;
-    border: 0;
-    border-radius: 0;
-    color: white;
-    font-size: 1rem;
-    margin: 0;
-    outline: none;
-    padding: 0;
-    vertical-align: middle;
-    width: 100%;
+  background-color: black;
+  border: 0;
+  border-radius: 0;
+  color: white;
+  font-size: 1rem;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  vertical-align: middle;
+  width: 100%;
 }
-
-
-

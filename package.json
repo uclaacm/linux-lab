@@ -14,7 +14,7 @@
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.5.1",
+    "prettier": "^2.7.1",
     "react": "^17.0.2",
     "react-burger-menu": "^3.0.8",
     "react-dom": "^17.0.2",

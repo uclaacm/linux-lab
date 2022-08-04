@@ -1,5 +1,5 @@
-import Header from '../shared/AppWrapper/Header';
 import tuxBehindIgloo from '../../assets/images/tux-behind-igloo.svg';
+import Header from '../shared/AppWrapper/Header';
 
 function Stationary(): JSX.Element {
   return (

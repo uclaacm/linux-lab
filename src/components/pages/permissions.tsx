@@ -1,5 +1,5 @@
-import Header from '../shared/AppWrapper/Header';
 import tuxHoldingEgg from '../../assets/images/tux-egg-flippers-raised.svg';
+import Header from '../shared/AppWrapper/Header';
 
 function Permissions(): JSX.Element {
   return (

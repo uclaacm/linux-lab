@@ -1,5 +1,5 @@
-import Header from '../shared/AppWrapper/Header';
 import tuxHoldingEgg from '../../assets/images/tux-hugging-egg.svg';
+import Header from '../shared/AppWrapper/Header';
 
 function Moving(): JSX.Element {
   return (

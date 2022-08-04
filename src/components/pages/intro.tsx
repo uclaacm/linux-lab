@@ -1,5 +1,5 @@
-import Header from '../shared/AppWrapper/Header';
 import tuxSittingImage from '../../assets/images/tux-sitting.svg';
+import Header from '../shared/AppWrapper/Header';
 
 function Intro(): JSX.Element {
   return (

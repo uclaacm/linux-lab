@@ -1,5 +1,5 @@
-import Header from '../shared/AppWrapper/Header';
 import tuxPointing from '../../assets/images/tux-pointing.svg';
+import Header from '../shared/AppWrapper/Header';
 import Modal from '../shared/Modal';
 import Task from './../shared/Task';
 import './../../styles/searching.scss';

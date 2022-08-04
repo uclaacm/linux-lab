@@ -1,13 +1,13 @@
 function Moving(): JSX.Element {
   return (
     <div>
-      <h1 style={styles.lessonTitle}>Moving Around the File System</h1>
-      <p style={styles.text}>
+      <h1>Moving Around the File System</h1>
+      <p>
         Ok, we can now figure out information about ourselves, from where to who
         we are But what if we want to learn about our surroundings?
       </p>
-      <h2 style={styles.text}>Command</h2>
-      <p style={styles.text}>
+      <h2>Command</h2>
+      <p>
         The ls command lists the contents of a directory.
         <ul>
           <li>
@@ -33,7 +33,7 @@ function Moving(): JSX.Element {
           </li>
         </ul>
       </p>
-      <p style={styles.text}>
+      <p>
         The cd command lets you change into a directory. Think of this as double
         clicking on a folder to open it on a Windows/MacOS computer.
         <ul>
@@ -50,7 +50,7 @@ function Moving(): JSX.Element {
           </li>
         </ul>
       </p>
-      <p style={styles.text}>
+      <p>
         Something seems amiss in this cave. Is there a secret hiding in plain
         sight?
         <ul>
@@ -60,20 +60,5 @@ function Moving(): JSX.Element {
     </div>
   );
 }
-
-//CSS styling
-const styles = {
-  lessonTitle: {
-    textAlign: 'left',
-    marginTop: '70px',
-    marginLeft: '70px',
-  },
-
-  text: {
-    textAlign: 'left',
-    marginLeft: '70px',
-    marginRight: '70px',
-  },
-};
 
 export default Moving;

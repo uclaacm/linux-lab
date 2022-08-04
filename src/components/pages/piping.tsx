@@ -1,4 +1,5 @@
 import '../../styles/piping.scss';
+import tuxHoldingEgg from '../../assets/images/tux-holding-egg.svg';
 
 function Piping(): JSX.Element {
   return (
@@ -13,6 +14,7 @@ function Piping(): JSX.Element {
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur.
         </p>
+        <img src={tuxHoldingEgg} alt="tux holding up an egg" />
         <div className="content-container">
           <div className="content-box">
             <p className="content-header">standard input</p>

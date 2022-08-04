@@ -1,9 +1,11 @@
 import '../../styles/global.scss';
+import Header from '../shared/AppWrapper/Header';
 import Bar from '../shared/progressbar';
 
 function Creation(): JSX.Element {
   return (
     <div>
+      <Header />
       <h1 className="lesson-title">Creation and Deletion</h1>
       <p className="body">
         At the heart of any project is the ability to create and delete things.

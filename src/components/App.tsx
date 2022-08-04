@@ -1,13 +1,12 @@
 // import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Landing from './pages/landing';
 
-import Header from './shared/AppWrapper/Header';
 import { PageMapping } from './shared/globalTypes';
 
 function App(): JSX.Element {
   return (
     <Router>
-      <Header />
       <Routes>
         {Array.from(PageMapping.keys()).map((path) => {
           return (
@@ -18,6 +17,7 @@ function App(): JSX.Element {
             />
           );
         })}
+        <Route path="/" element={<Landing />} />
       </Routes>
     </Router>
   );

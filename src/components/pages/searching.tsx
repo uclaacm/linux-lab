@@ -1,3 +1,4 @@
+import Header from '../shared/AppWrapper/Header';
 import Modal from '../shared/Modal';
 import Task from './../shared/Task';
 import './../../styles/searching.scss';
@@ -16,6 +17,7 @@ function Searching(): JSX.Element {
 
   return (
     <>
+      <Header />
       <div className="container">
         <h2 className="header-text">Lesson Title</h2>
         <p>

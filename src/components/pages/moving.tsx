@@ -1,5 +1,12 @@
+import Header from '../shared/AppWrapper/Header';
+
 function Moving(): JSX.Element {
-  return <div>Moving</div>;
+  return (
+    <div>
+      <Header />
+      Moving
+    </div>
+  );
 }
 
 export default Moving;

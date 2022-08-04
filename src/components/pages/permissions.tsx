@@ -1,5 +1,12 @@
+import Header from '../shared/AppWrapper/Header';
+
 function Permissions(): JSX.Element {
-  return <div>Permissions</div>;
+  return (
+    <div>
+      <Header />
+      Permissions
+    </div>
+  );
 }
 
 export default Permissions;

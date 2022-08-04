@@ -1,3 +1,5 @@
+import tuxHoldingEgg from '../../assets/images/tux-hugging-egg.svg';
+
 function Moving(): JSX.Element {
   return (
     <div>
@@ -6,6 +8,7 @@ function Moving(): JSX.Element {
         Ok, we can now figure out information about ourselves, from where to who
         we are But what if we want to learn about our surroundings?
       </p>
+      <img src={tuxHoldingEgg} alt="tux hugging a pink egg" />
       <h2>Command</h2>
       <p>
         The ls command lists the contents of a directory.

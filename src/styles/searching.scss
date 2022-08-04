@@ -1,0 +1,93 @@
+.container {
+  font-weight: 400;
+  margin: 0 auto;
+  text-align: left;
+  width: 95%;
+}
+
+#helpful-commands {
+  align-items: center;
+  bottom: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  margin: 0 auto;
+  right: 0;
+  top: 5vh;
+  width: 80%;
+}
+
+.helpful-command-row {
+  align-items: center;
+  border: 1px solid #000;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.helpful-command-row > div {
+  flex: 1;
+  height: 100%;
+  width: 50%;
+}
+
+.helpful-command-row > div:nth-child(1) {
+  border-right: 1px solid #000;
+}
+
+.header-text {
+  font-weight: 400;
+}
+
+#lesson-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+#lesson-content > div {
+  background-color: #d9d9d9;
+  margin-left: 4vw;
+  margin-right: 4vw;
+  padding: 1em;
+  padding-bottom: 5vh;
+  text-align: center;
+  width: 20%;
+}
+
+#task-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#task-description > div {
+  position: relative;
+  width: 40%;
+}
+
+#helpful-commands-button {
+  border: 1px solid #000;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  left: 5vw;
+  padding: 1vw;
+  position: absolute;
+  text-align: center;
+  top: 1vh;
+  width: 40%;
+}
+
+#penguin {
+  background-color: #d9d9d9;
+  height: 100%;
+  position: absolute;
+  right: 1vw;
+  width: 30%;
+}

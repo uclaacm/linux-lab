@@ -11,7 +11,7 @@ function Creation(): JSX.Element {
       </p>
       <br />
       <h2 className="heading-1">
-        The <span className="command">touch</span> Command
+        The <span className="command-in-heading">touch</span> Command
       </h2>
       <p className="body">
         The <span className="try-out-command">touch</span> command makes a new
@@ -24,7 +24,7 @@ function Creation(): JSX.Element {
         notice how nothing is printed because the file has no contents!
       </p>
       <h2 className="heading-1">
-        The <span className="command">mkdir</span> Command
+        The <span className="command-in-heading">mkdir</span> Command
       </h2>
       <p className="body">
         <span className="try-out-command">The mkdir</span> command makes a new
@@ -41,7 +41,7 @@ function Creation(): JSX.Element {
         what the command does!).
       </p>
       <h2 className="heading-1">
-        The <span className="command">rm</span> Command
+        The <span className="command-in-heading">rm</span> Command
       </h2>
       <p className="body">
         The <span className="try-out-command">rm</span> command removes an
@@ -60,7 +60,7 @@ function Creation(): JSX.Element {
         The terminal also printed an error message: rm: DIRNAME: is a directory
       </p>
       <h2 className="heading-1">
-        The <span className="command">rmdir</span> Command
+        The <span className="command-in-heading">rmdir</span> Command
       </h2>
       <p className="body">
         The rmdir command removes an existing empty directory.
@@ -81,7 +81,7 @@ function Creation(): JSX.Element {
         removes all files within the nonemptyDir directory.
       </p>
       <h2 className="heading-1">
-        The <span className="command">cp</span> Command
+        The <span className="command-in-heading">cp</span> Command
       </h2>
       <p className="body">
         The cp command copies one file to another.
@@ -103,7 +103,7 @@ function Creation(): JSX.Element {
         original files.
       </p>
       <h2 className="heading-1">
-        The <span className="command">mv</span> Command
+        The <span className="command-in-heading">mv</span> Command
       </h2>
       <p className="body">
         The mv command moves/renames files.

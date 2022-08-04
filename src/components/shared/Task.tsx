@@ -1,6 +1,7 @@
 import { IconContext } from 'react-icons';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import './../../styles/Task.scss';
+import Terminal from './Terminal';
 
 function Task(prop: {
   taskPrompt: string;
@@ -22,7 +23,7 @@ function Task(prop: {
       </span>
       <p>{prop.taskPrompt}</p>
       <div className="task-content">
-        <div className="terminal">terminal</div>
+        <Terminal />
       </div>
     </div>
   );

@@ -6458,7 +6458,7 @@
     "prop-types" "^15.7.2"
     "snapsvg-cjs" "0.0.6"
 
-"react-dom@^17.0.2", "react-dom@>=0.14.0", "react-dom@>=16.8":
+"react-dom@^16.8 || 17.x", "react-dom@^17.0.2", "react-dom@>=0.14.0", "react-dom@>=16.8":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -6466,6 +6466,11 @@
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
     "scheduler" "^0.20.2"
+
+"react-fast-compare@^3.2.0":
+  "integrity" "sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA=="
+  "resolved" "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.0.tgz"
+  "version" "3.2.0"
 
 "react-icons@^4.4.0":
   "integrity" "sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg=="
@@ -6492,7 +6497,14 @@
   dependencies:
     "history" "^5.2.0"
 
-"react@*", "react@^17.0.2", "react@>=0.14.0", "react@>=16.8", "react@17.0.2":
+"react-snowfall@^1.1.2":
+  "integrity" "sha512-dSu4y7YpNE8nybBwbDLSlRBHIZ3N3F3Hbd16f14pd2B5cGsncNf93gb+B8wvGlFMuVQcvoCg5ecq2YAFbsDYdQ=="
+  "resolved" "https://registry.npmjs.org/react-snowfall/-/react-snowfall-1.1.2.tgz"
+  "version" "1.1.2"
+  dependencies:
+    "react-fast-compare" "^3.2.0"
+
+"react@*", "react@^16.8 || 17.x", "react@^17.0.2", "react@>=0.14.0", "react@>=16.8", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

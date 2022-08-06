@@ -1,4 +1,5 @@
 import tuxHoldingEgg from '../../assets/images/tux-hugging-egg.svg';
+import '../../styles/global.scss';
 
 function Moving(): JSX.Element {
   return (

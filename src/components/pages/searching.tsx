@@ -4,7 +4,6 @@ import Task from './../shared/Task';
 import './../../styles/searching.scss';
 import '../../styles/global.scss';
 
-
 function Searching(): JSX.Element {
   const taskPrompts = [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -20,8 +19,8 @@ function Searching(): JSX.Element {
   return (
     <>
       <div className="container">
-        <h2 className="header-text">Lesson Title</h2>
-        <p>
+        <h2 className="lesson-title">Lesson Title</h2>
+        <p className="body">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -45,14 +44,14 @@ function Searching(): JSX.Element {
             </p>
           </div>
         </div>
-        <p>
+        <p className="body">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
-        <h2 className="header-text">Tasks</h2>
+        <h2 className="heading-1">Tasks</h2>
         <div id="task-description">
           <div>
-            <p>
+            <p className="body">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris

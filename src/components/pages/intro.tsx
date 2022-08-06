@@ -7,14 +7,14 @@ function Intro(): JSX.Element {
       <div className='lesson-title'>INTRO TO LINUX</div>
       <p className="body">
       Linux is a family of operating systems. An operating system is a piece of software
-      that acts as an interface between the user and the computer’s resources by providing
+      that acts as an interface between the user and the computer'&apos;'s resources by providing
       resources for applications to build off of.
       </p>
       <p className="body">
       Linux is one of the most widely used operating systems today in part because it is a FOSS
       or free or open source software. Anyone can obtain a copy of the Linux kernel and build
       their own Linux operating system! Understanding Linux is helpful to know because it helps
-       build and run many different kinds of applications today. Whether it's hacking into a
+       build and run many different kinds of applications today. Whether it'&apos;'s hacking into a
        computer or helping to put someone on the moon, Linux can help perform all of these various tasks!
       </p>
       <p className="body">

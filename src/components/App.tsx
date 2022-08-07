@@ -1,6 +1,5 @@
 // import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Landing from './pages/landing';
 import Header from './shared/AppWrapper/Header';
 
 import { PageMapping } from './shared/globalTypes';

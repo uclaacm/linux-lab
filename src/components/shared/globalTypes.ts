@@ -1,3 +1,4 @@
+import Landing from '../pages/landing';
 import Creation from './../pages/creation';
 import Game from './../pages/game';
 import Intro from './../pages/intro';
@@ -21,6 +22,7 @@ export const PageMapping: Map<
   string,
   { component: () => JSX.Element; pageName: string }
 > = new Map([
+  ['/', { component: Landing, pageName: 'Landing' }],
   ['/intro', { component: Intro, pageName: 'Intro to Linux' }],
   ['/stationary', { component: Stationary, pageName: 'Stationary' }],
   ['/moving', { component: Moving, pageName: 'Moving' }],

@@ -1,10 +1,8 @@
 import tuxBehindIgloo from '../../assets/images/tux-behind-igloo.svg';
-import Header from '../shared/AppWrapper/Header';
 
 function Stationary(): JSX.Element {
   return (
     <div>
-      <Header />
       <h1>Stationary Commands</h1>
       <p>
         Linux and the POSIX file system might seem confusing at first, but if

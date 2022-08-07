@@ -1,10 +1,8 @@
 import tuxHoldingEgg from '../../assets/images/tux-hugging-egg.svg';
-import Header from '../shared/AppWrapper/Header';
 
 function Moving(): JSX.Element {
   return (
     <div>
-      <Header />
       <h1>Moving Around the File System</h1>
       <p>
         Ok, we can now figure out information about ourselves, from where to who

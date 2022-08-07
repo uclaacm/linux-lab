@@ -1,11 +1,9 @@
 import tuxHoldingEgg from '../../assets/images/tux-holding-egg.svg';
-import Header from '../shared/AppWrapper/Header';
 import '../../styles/piping.scss';
 
 function Piping(): JSX.Element {
   return (
     <>
-      <Header />
       <div className="lesson-container">
         <h1>Lesson Title</h1>
         <div className="section">

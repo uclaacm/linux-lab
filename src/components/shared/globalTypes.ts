@@ -20,9 +20,9 @@ export enum HeaderSections {
 
 export const PageMapping: Map<
   string,
-  { component: () => JSX.Element; pageName: string }
+  { component: () => JSX.Element; pageName: string; hidden?: boolean }
 > = new Map([
-  ['/', { component: Landing, pageName: 'Landing' }],
+  ['/', { component: Landing, pageName: 'Landing', hidden: true }],
   ['/intro', { component: Intro, pageName: 'Intro to Linux' }],
   ['/stationary', { component: Stationary, pageName: 'Stationary' }],
   ['/moving', { component: Moving, pageName: 'Moving' }],

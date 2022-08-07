@@ -71,8 +71,8 @@ export class FileSystemObject {
 export class File extends FileSystemObject {
   constructor(
     name: string,
-    path = '',
     content = '',
+    path = '',
     parent?: FileSystemObject
   ) {
     super(name, path, false, parent, content, undefined);
@@ -82,9 +82,9 @@ export class File extends FileSystemObject {
 export class Directory extends FileSystemObject {
   constructor(
     name: string,
-    path = '',
     parent?: FileSystemObject,
-    children?: Map<string, FileSystemObject>
+    children?: Map<string, FileSystemObject>,
+    path = '/'
   ) {
     super(name, path, true, parent, undefined, children);
     if (this.children) {
@@ -133,7 +133,6 @@ export class Directory extends FileSystemObject {
 // Example usage:
 const root = new Directory(
   '/',
-  '/',
   undefined,
   new Map([
     ['index.html', new File('index.html', '/index.html', 'Hello World!')],
@@ -141,13 +140,13 @@ const root = new Directory(
 );
 
 // Adding a directory to the root:
-root.addFileSystemObject(new Directory('dir', '/dir', root));
+root.addFileSystemObject(new Directory('dir'));
 const dir = <Directory>root.getChild('dir'); // returns a Directory object
-dir.addFileSystemObject(new File('file.txt', '/dir/file.txt', 'Hello World!'));
+dir.addFileSystemObject(new File('file.txt', 'Hello World!'));
 
 // The path and the parent don't actually matter when doing "addFileSystemObject",
 // since they are automatically set when adding a child to a parent.
-dir.addFileSystemObject(new Directory('.secrets', '/.secrets'));
+dir.addFileSystemObject(new Directory('.secrets'));
 
 // returns all the children of the root directory (ls)
 // console.log(root.getChildren());

@@ -17,7 +17,7 @@ export default function Header(): JSX.Element {
         }}
       >
         {Array.from(PageMapping.keys()).map((path) =>
-          PageMapping.get(path)?.hidden ? null : (
+          PageMapping.get(path)?.hideHeader ? null : (
             <Link
               key={path}
               onClick={() => setOpen(false)}

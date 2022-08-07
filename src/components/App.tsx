@@ -15,7 +15,7 @@ function App(): JSX.Element {
               key={path}
               path={path}
               element={
-                path === '/' ? (
+                PageMapping.get(path)?.hideHeader ? (
                   component
                 ) : (
                   <>

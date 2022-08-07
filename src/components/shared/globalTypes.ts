@@ -145,18 +145,18 @@ root.addFileSystemObject(new Directory('dir', '/dir', root));
 const dir = <Directory>root.getChild('dir'); // returns a Directory object
 dir.addFileSystemObject(new File('file.txt', '/dir/file.txt', 'Hello World!'));
 
-// returns all the children of the root directory, like ls
-console.log(root.getChildren());
-
-dir.rename('newName'); // renames the directory
-
 // The path and the parent don't actually matter when doing "addFileSystemObject",
 // since they are automatically set when adding a child to a parent.
 dir.addFileSystemObject(new Directory('.secrets', '/.secrets'));
 
-console.log(dir.getChildren());
+// returns all the children of the root directory (ls)
+// console.log(root.getChildren());
+
+dir.rename('newName'); // renames the directory
+
 const file = <File>dir.getChild('file.txt');
 file.content = 'Changed content!';
-console.log(dir.getChildren(true)); // show hidden files/directories (ls -a)
+
+// console.log(dir.getChildren(true)); // show hidden files/directories (ls -a)
 dir.removeFileSystemObject('file.txt'); // remove a file (rm)
-console.log(dir.getChildren(true));
+// console.log(dir.getChildren(true));

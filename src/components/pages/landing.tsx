@@ -4,7 +4,11 @@ import img from '../../assets/landing.svg';
 
 function Landing(): JSX.Element {
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
+      <img src={img}></img>
+      <a href="intro">
+        <button className="startbutton">START</button>
+      </a>
       <Snowfall
         color="white"
         snowflakeCount={200}
@@ -12,10 +16,6 @@ function Landing(): JSX.Element {
         speed={[1.0, 5.0]}
         wind={[-0.5, 2.5]}
       />
-      <img style={{ width: '100vw' }} src={img}></img>
-      <a href="intro">
-        <button className="startbutton">START</button>
-      </a>
     </div>
   );
 }

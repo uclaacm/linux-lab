@@ -15,7 +15,7 @@ function Searching(): JSX.Element {
     <>
       <div className="container">
         <h2 className="lesson-title">Searching</h2>
-        <p className='body'>
+        <p className="body">
           Manually looking through all the file names in a directory or all the
           text in a file to find a specific string often takes forever. But
           Linux provides two commands that simplify this process:{' '}
@@ -23,14 +23,14 @@ function Searching(): JSX.Element {
         </p>
         <div id="lesson-content">
           <div>
-            <span className='try-out-command'>find</span>
+            <span className="try-out-command">find</span>
             <p>
               recursively travels down the file hierarchy tree and, based on
               user-specified options, finds specific files or directories.
             </p>
           </div>
           <div>
-            <span className='try-out-command'>grep</span>
+            <span className="try-out-command">grep</span>
             <p>
               (short for “global/regular expression/print”) command searches for
               a specific string pattern in a file.
@@ -41,7 +41,7 @@ function Searching(): JSX.Element {
         <h2 className="heading-1">Commands in Action</h2>
         <div id="task-description">
           <div>
-            <p className='body'>
+            <p className="body">
               Let&#39;s see these commands in action! Click on the Helpful
               Commands button for hints.
             </p>

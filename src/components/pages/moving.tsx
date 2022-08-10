@@ -37,18 +37,19 @@ function Moving(): JSX.Element {
         The <span className="command-in-heading">cd</span> Command
       </h2>
       <p className="body">
-        The <span className='try-out-command'>cd</span>  command lets you change into a directory. Think of this as double
-        clicking on a folder to open it on a Windows/MacOS computer.
+        The <span className="try-out-command">cd</span> command lets you change
+        into a directory. Think of this as double clicking on a folder to open
+        it on a Windows/MacOS computer.
       </p>
       <p className="body">
-        For example, if there is a Notes subdirectory in my current 
-        directory, <span className='try-out-command'>cd Notes</span> lets 
-        me move into Notes, making Notes my new current
-        directory.
+        For example, if there is a Notes subdirectory in my current directory,{' '}
+        <span className="try-out-command">cd Notes</span> lets me move into
+        Notes, making Notes my new current directory.
       </p>
       <p className="body">
-        TASK: Try running <span className="try-out-command">pwd</span> before 
-        and after <span className='try-out-command'>cd-ing</span>  into a directory. What do you notice?
+        TASK: Try running <span className="try-out-command">pwd</span> before
+        and after <span className="try-out-command">cd-ing</span> into a
+        directory. What do you notice?
       </p>
       <p className="body">
         Something seems amiss in this cave. Is there a secret hiding in plain

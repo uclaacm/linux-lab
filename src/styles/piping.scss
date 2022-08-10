@@ -5,6 +5,10 @@
   src: local('Westwood Sans'),
     url('../assets/WestwoodSans-Regular.ttf') format('truetype');
 }
+.first-paragraph{
+  display: flex;
+  margin-right: 10%;
+}
 
 .lesson-container {
   font-family: 'Westwood Sans', sans-serif;

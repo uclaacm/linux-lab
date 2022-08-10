@@ -6,58 +6,44 @@ import '../../styles/global.scss';
 
 function Searching(): JSX.Element {
   const taskPrompts = [
-    `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.`,
-    `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.`,
+    "Tux's friend Ruby lost her glasses.txt. Can you find where she left them?",
+    `Ruby was so impressed by your work that she recommended you to Bob. Bob was packing for a trip and couldn't find where he placed his “camera”. Can you find what box (i.e., file) he placed a “camera” in?
+`,
   ];
 
   return (
     <>
       <div className="container">
-        <h2 className="lesson-title">Lesson Title</h2>
-        <p className="body">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
+        <h2 className="header-text">Searching</h2>
+        <p>
+          Manually looking through all the file names in a directory or all the
+          text in a file to find a specific string often takes forever. But
+          Linux provides two commands that simplify this process:{' '}
+          <span>find</span> and <span>grep</span>
         </p>
         <div id="lesson-content">
           <div>
             <p>find</p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              recursively travels down the file hierarchy tree and, based on
+              user-specified options, finds specific files or directories.
             </p>
           </div>
           <div>
             <p>grep</p>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              (short for “global/regular expression/print”) command searches for
+              a specific string pattern in a file.
             </p>
           </div>
         </div>
-        <p className="body">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        <h2 className="heading-1">Tasks</h2>
+
+        <h2 className="header-text">Commands in Action</h2>
         <div id="task-description">
           <div>
-            <p className="body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+            <p>
+              Let&#39;s see these commands in action! Click on the Helpful
+              Commands button for hints.
             </p>
           </div>
           <div id="task-hint">

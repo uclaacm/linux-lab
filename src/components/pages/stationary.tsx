@@ -13,7 +13,7 @@ function Stationary(): JSX.Element {
       <img src={tuxBehindIgloo} alt="tux the penguin behind an igloo" />
 
       <h2 className="heading-1">
-        The <span className="command">pwd</span> Command
+        The <span className="command-in-heading">pwd</span> Command
       </h2>
       <p className="body">
         For example, just as you can make nested folders on Windows/MacOS and
@@ -39,7 +39,7 @@ function Stationary(): JSX.Element {
       <p className="body">Try it out in the terminal! Where is Tux?</p>
 
       <h2 className="heading-1">
-        The <span className="command">whoami</span> Command
+        The <span className="command-in-heading">whoami</span> Command
       </h2>
       <p className="body">
         We now know how to answer the question of where?, but what about who?
@@ -51,7 +51,7 @@ function Stationary(): JSX.Element {
       <p className="body">Can you figure out Tux&#39; s username?</p>
 
       <h2 className="heading-1">
-        The <span className="command">man</span> command
+        The <span className="command-in-heading">man</span> command
       </h2>
       <p className="body">
         We&#39;ve seen two commands so far—pwd and whoami—but there are hundreds

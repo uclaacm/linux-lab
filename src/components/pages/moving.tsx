@@ -11,7 +11,7 @@ function Moving(): JSX.Element {
       </p>
       <img src={tuxHoldingEgg} alt="tux hugging a pink egg" />
       <h2 className="heading-1">
-        The <span className="command">ls</span> Command
+        The <span className="command-in-heading">ls</span> Command
       </h2>
       <p className="body">The ls command lists the contents of a directory.</p>
       <p className="body">
@@ -34,20 +34,21 @@ function Moving(): JSX.Element {
         file last modified, and the pathname.
       </p>
       <h2 className="heading-1">
-        The <span className="command">cd</span> Command
+        The <span className="command-in-heading">cd</span> Command
       </h2>
       <p className="body">
-        The cd command lets you change into a directory. Think of this as double
+        The <span className='try-out-command'>cd</span>  command lets you change into a directory. Think of this as double
         clicking on a folder to open it on a Windows/MacOS computer.
       </p>
       <p className="body">
-        For example, if there is a Notes subdirectory in my current directory,
-        `cd Notes` lets me move into Notes, making Notes my new current
+        For example, if there is a Notes subdirectory in my current 
+        directory, <span className='try-out-command'>cd Notes</span> lets 
+        me move into Notes, making Notes my new current
         directory.
       </p>
       <p className="body">
-        TASK: Try running `pwd` before and after cd-ing into a directory. What
-        do you notice?
+        TASK: Try running <span className="try-out-command">pwd</span> before 
+        and after <span className='try-out-command'>cd-ing</span>  into a directory. What do you notice?
       </p>
       <p className="body">
         Something seems amiss in this cave. Is there a secret hiding in plain

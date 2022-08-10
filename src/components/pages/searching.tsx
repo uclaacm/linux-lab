@@ -19,7 +19,8 @@ function Searching(): JSX.Element {
           Manually looking through all the file names in a directory or all the
           text in a file to find a specific string often takes forever. But
           Linux provides two commands that simplify this process:{' '}
-          <span>find</span> and <span>grep</span>
+          <span className="try-out-command">find</span> and{' '}
+          <span className="try-out-command">grep</span>
         </p>
         <div id="lesson-content">
           <div>

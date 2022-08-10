@@ -15,21 +15,21 @@ function Moving(): JSX.Element {
       </h2>
       <p className="body">The ls command lists the contents of a directory.</p>
       <p className="body">
-        You can provide over 40 options/flags to ls to customize exactly
+        You can provide over 40 <b>options/flags</b> to ls to customize exactly
         customize exactly how information is displayed. Two particularly
-        important options are -a and -l, which can be used separately or
-        combined into -al or -la.
+        important options are <b>-a</b> and <b>-l</b>, which can be used
+        separately or combined into <b>-al</b> or <b>-la</b>.
       </p>
       <span className="try-out-command">ls -a</span>
       <p className="body">
-        lists normal AND hidden files, or directory entries whose names begin
-        with a dot that are not displayed with the bare ls command alone.
+        lists normal AND <b>hidden files</b>, or directory entries whose names
+        begin with a dot that are not displayed with the bare ls command alone.
       </p>
       <span className="try-out-command">ls -l</span>
       <p className="body">
-        lists files in the long format. Rather than just listing file name, the
-        following information is provided: file mode, number of links, owner
-        name, group name, number of bytes in the file, abbreviated month,
+        lists files in the <b>long format</b>. Rather than just listing file
+        name, the following information is provided: file mode, number of links,
+        owner name, group name, number of bytes in the file, abbreviated month,
         day-of-month file was last modified, hour file last modified, minute
         file last modified, and the pathname.
       </p>
@@ -46,11 +46,13 @@ function Moving(): JSX.Element {
         <span className="try-out-command">cd Notes</span> lets me move into
         Notes, making Notes my new current directory.
       </p>
+      <h2 className="heading-1">Task 1</h2>
       <p className="body">
-        TASK: Try running <span className="try-out-command">pwd</span> before
-        and after <span className="try-out-command">cd-ing</span> into a
-        directory. What do you notice?
+        Try running <span className="try-out-command">pwd</span> before and
+        after <span className="try-out-command">cd-ing</span> into a directory.
+        What do you notice?
       </p>
+      <h2 className="heading-1">Task 2</h2>
       <p className="body">
         Something seems amiss in this cave. Is there a secret hiding in plain
         sight?

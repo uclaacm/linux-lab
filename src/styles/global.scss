@@ -13,34 +13,33 @@ body {
 }
 
 .back-button {
-    background-color: white;
-    border: 1px solid #000;
-    box-sizing: border-box;
-    cursor: pointer;
-    float: left;
-    font-size: 15px;
-    margin-left: 67px;
-    padding: 10px 35px;
-    transition-duration: 0.4s;
+  background-color: white;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  cursor: pointer;
+  float: left;
+  font-size: 15px;
+  margin-left: 67px;
+  padding: 10px 35px;
+  transition-duration: 0.4s;
 }
 
 .back-button:hover {
-    background-color: #e7e7e7;
+  background-color: #e7e7e7;
 }
 
 .next-button {
-    background-color: white;
-    border: 1px solid #000;
-    box-sizing: border-box;
-    cursor: pointer;
-    float: right;
-    font-size: 15px;
-    margin-right: 67px;
-    padding: 10px 35px;
-    transition-duration: 0.4s;
+  background-color: white;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  cursor: pointer;
+  float: right;
+  font-size: 15px;
+  margin-right: 67px;
+  padding: 10px 35px;
+  transition-duration: 0.4s;
 }
 
 .next-button:hover {
-    background-color: #e7e7e7;
+  background-color: #e7e7e7;
 }
-

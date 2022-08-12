@@ -1,5 +1,3 @@
-import './../../styles/piping.scss';
-
 function Piping(): JSX.Element {
   return (
     <div>

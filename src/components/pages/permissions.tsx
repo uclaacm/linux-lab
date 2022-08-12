@@ -1,5 +1,3 @@
-import './../../styles/intro.scss';
-
 function Permissions(): JSX.Element {
   return (
     <div>

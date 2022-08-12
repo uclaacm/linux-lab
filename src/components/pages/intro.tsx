@@ -1,5 +1,3 @@
-import './../../styles/intro.scss';
-
 function Intro(): JSX.Element {
   return (
     <div>

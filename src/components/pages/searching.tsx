@@ -1,5 +1,3 @@
-import './../../styles/searching.scss';
-
 function Searching(): JSX.Element {
   return (
     <div>

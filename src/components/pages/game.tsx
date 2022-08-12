@@ -1,5 +1,3 @@
-import './../../styles/game.scss';
-
 function Game(): JSX.Element {
   return (
     <div>

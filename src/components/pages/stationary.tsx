@@ -1,5 +1,3 @@
-import './../../styles/stationary.scss';
-
 function Stationary(): JSX.Element {
   return (
     <div>

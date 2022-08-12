@@ -1,5 +1,3 @@
-import './../../styles/creation.scss';
-
 function Creation(): JSX.Element {
   return (
     <div>

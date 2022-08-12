@@ -15,16 +15,16 @@ function Moving(): JSX.Element {
           <li>
             You can provide over 40 options/flags to ls to customize exactly
             customize exactly how information is displayed. Two particularly
-            important options are -a and -l, which can be used separately or
-            combined into -al or -la.
+            important options are <span className = "codeSnippet">-a</span> and <span className = "codeSnippet">-l</span>, which can be used separately or
+            combined into <span className = "codeSnippet">-al</span> or <span className = "codeSnippet">-la</span>.
             <ul>
               <li>
-                `ls -a` lists normal AND hidden files, or directory entries
+                <span className = "codeSnippet">ls -a</span> lists normal AND hidden files, or directory entries
                 whose names begin with a dot that are not displayed with the
                 bare ls command alone.
               </li>
               <li>
-                `ls -l` lists files in the long format. Rather than just listing
+                <span className = "codeSnippet">ls -l</span> lists files in the long format. Rather than just listing
                 file name, the following information is provided: file mode,
                 number of links, owner name, group name, number of bytes in the
                 file, abbreviated month, day-of-month file was last modified,
@@ -36,16 +36,16 @@ function Moving(): JSX.Element {
         </ul>
       </p>
       <p className="text">
-        The cd command lets you change into a directory. Think of this as double
+        The <span className = "codeSnippet">cd</span> command lets you change into a directory. Think of this as double
         clicking on a folder to open it on a Windows/MacOS computer.
         <ul>
           <li>
             For example, if there is a Notes subdirectory in my current
-            directory, `cd Notes` lets me move into Notes, making Notes my new
+            directory, 'cd Notes' lets me move into Notes, making Notes my new
             current directory.
             <ul>
               <li>
-                TASK: Try running `pwd` before and after cd-ing into a
+                TASK: Try running 'pwd' before and after cd-ing into a
                 directory. What do you notice?
               </li>
             </ul>
@@ -56,7 +56,7 @@ function Moving(): JSX.Element {
         Something seems amiss in this cave. Is there a secret hiding in plain
         sight?
         <ul>
-          <li>`ls -a` to get the hidden file name</li>
+          <li>'ls -a' to get the hidden file name</li>
         </ul>
       </p>
       <footer>

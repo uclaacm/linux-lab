@@ -6,6 +6,6 @@
     "\\src\\components\\pages",
     "\\src\\styles"
   ],
-  "SelectedNode": "\\src\\styles\\stationary.scss",
+  "SelectedNode": "\\src\\components\\pages\\creation.tsx",
   "PreviewInSolutionExplorer": false
 }

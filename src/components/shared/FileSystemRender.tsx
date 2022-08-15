@@ -1,22 +1,24 @@
+import { useMemo } from 'react';
 import Tree from 'react-d3-tree';
 import { RawNodeDatum } from 'react-d3-tree/lib/types/common';
 import { FileSystemObject } from './globalTypes';
 import './../../styles/FileSystemRender.scss';
-import { useMemo } from 'react';
 
 function FileSystemRender(prop: {
   data: FileSystemObject;
   renderWidth: number;
 }): JSX.Element {
-  function getD3TreeFromFSObject(FSObject: FileSystemObject): RawNodeDatum {
-    const { name } = FSObject;
+  const FSObject = useMemo(() => getD3TreeFromFSObject(prop.data), [prop.data]);
+
+  function getD3TreeFromFSObject(fsObject: FileSystemObject): RawNodeDatum {
+    const { name } = fsObject;
     const rawNodeDatum: RawNodeDatum = {
-      ...FSObject,
+      ...fsObject,
       name,
       children: [],
     };
-    if (FSObject.isDirectory && FSObject.children) {
-      rawNodeDatum.children = Array.from(FSObject.children!.values()).map(
+    if (fsObject.isDirectory && fsObject.children) {
+      rawNodeDatum.children = Array.from(fsObject.children!.values()).map(
         getD3TreeFromFSObject
       );
     }
@@ -26,7 +28,7 @@ function FileSystemRender(prop: {
   return (
     <div id="tree-wrapper">
       <Tree
-        data={getD3TreeFromFSObject(prop.data)}
+        data={FSObject}
         rootNodeClassName="node-root"
         branchNodeClassName="node-branch"
         leafNodeClassName="node-leaf"

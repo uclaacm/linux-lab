@@ -1,5 +1,5 @@
-import '../../styles/piping.scss';
 import tuxHoldingEgg from '../../assets/images/tux-holding-egg.svg';
+import '../../styles/piping.scss';
 
 function Piping(): JSX.Element {
   return (

@@ -16,16 +16,18 @@ export default function Header(): JSX.Element {
           setOpen(state.isOpen);
         }}
       >
-        {Array.from(PageMapping.keys()).map((path) => (
-          <Link
-            key={path}
-            onClick={() => setOpen(false)}
-            className="menu-link"
-            to={path}
-          >
-            {PageMapping.get(path)?.pageName}
-          </Link>
-        ))}
+        {Array.from(PageMapping.keys()).map((path) =>
+          PageMapping.get(path)?.hideHeader ? null : (
+            <Link
+              key={path}
+              onClick={() => setOpen(false)}
+              className="menu-link"
+              to={path}
+            >
+              {PageMapping.get(path)?.pageName}
+            </Link>
+          )
+        )}
       </Menu>
       <div id="nav-header">
         <h3>{PageMapping.get(currPath)?.pageName}</h3>

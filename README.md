@@ -10,6 +10,7 @@
 Linux Learning Lab is a collaboration between [ACM Teach LA 🌱](https://teachla.uclaacm.com/) and [ACM Cyber 🔐](https://acmcyber.com/). ACM Cyber uses this app to train members in the basics of Linux navigation—a crucial tool for cybersecurity professionals and often used in Capture-the-Flag competitions. This app is also great for COMSCI 35L students and anyone wanting to learn the basics of Linux!
 
 ## Table of Contents
+
 - [Overview](https://github.com/uclaacm/linux-lab/#overview)
 - [About the Tech](https://github.com/uclaacm/linux-lab/#about-the-tech)
 - [Setup / Running the App](https://github.com/uclaacm/linux-lab/#setup)
@@ -19,7 +20,9 @@ Linux Learning Lab is a collaboration between [ACM Teach LA 🌱](https://teachl
 - [Licensing and Attributions](https://github.com/uclaacm/linux-lab/#licensing-and-attributions)
 
 ## About the Tech 🔎
+
 This React micro-app:
+
 - has GitHub Actions automatically set up for testing and linting builds
 - has a default Dependabot config for `yarn` (with monthly audits)
 - has Netlify redirects set up for multi-route SPAs
@@ -109,10 +112,9 @@ git push
 
 7. If your code passes code review, then we can **squash and merge** it into `main`. Congratulations! If you'd like, it's now safe to delete your branch/fork.
 
-
 ## Helpful Commands and Tools 🛠
 
-- By running `yarn lint-fix` we can use the linter that we set-up to format our code the way that passes our style checks! Before you commit your changes and submit a pull request, make sure to run ```yarn lint-fix```.
+- By running `yarn lint-fix` we can use the linter that we set-up to format our code the way that passes our style checks! Before you commit your changes and submit a pull request, make sure to run `yarn lint-fix`.
   - With Husky, we run `yarn lint-staged` automatically before you commit! If you want to lint before commiting, you can run `yarn lint-fix`.
 - Preloading Images - if rendering images gets annoying because it's slow: [Link Example here](https://github.com/uclaacm/Playnet/blob/c2414e7d1179eb11af6b4a49047ab3d8fb9aed66/src/components/shared/Preload.tsx)
 
@@ -205,7 +207,6 @@ Take a look at `<YOUR_PROJECT_PATH>/asset-manifest.json`. [Like this!](https://t
 ## Licensing and Attribution 🪪
 
 This project and its code are licensed under the MIT License. You're free to use them however you wish, though we'd love to hear from you if you found this useful!
-
 
 # TODO ‼️(delete this section when complete)‼️
 

@@ -1,24 +1,37 @@
-import { HeaderSections } from '../globalTypes';
+import './../../../styles/sideNav.scss';
+import { useState } from 'react';
+import { slide as Menu } from 'react-burger-menu';
+import { Link, useLocation } from 'react-router-dom';
+import { PageMapping } from './../globalTypes';
 
-/**
- * We can use our enum as the specified type that our HeaderProps recieves
- * Type our React Element with an interface
- */
-export interface HeaderProps {
-  section: HeaderSections;
-}
+export default function Header(): JSX.Element {
+  const [open, setOpen] = useState(false);
+  const currPath = useLocation().pathname;
 
-export default function Header(props: HeaderProps): JSX.Element {
   return (
-    <div id="header">
-      <nav>
-        <div>TODO: This is A Header Example! </div>
-        <div>
-          Text Displayed is:
-          {props.section}
-        </div>
-        {/* This is an example of using interfaces and enums! */}
-      </nav>
-    </div>
+    <header id="nav-container">
+      <Menu
+        isOpen={open}
+        onStateChange={(state: { isOpen: boolean }) => {
+          setOpen(state.isOpen);
+        }}
+      >
+        {Array.from(PageMapping.keys()).map((path) =>
+          PageMapping.get(path)?.hideHeader ? null : (
+            <Link
+              key={path}
+              onClick={() => setOpen(false)}
+              className="menu-link"
+              to={path}
+            >
+              {PageMapping.get(path)?.pageName}
+            </Link>
+          )
+        )}
+      </Menu>
+      <div id="nav-header">
+        <h3>{PageMapping.get(currPath)?.pageName}</h3>
+      </div>
+    </header>
   );
 }

@@ -5,7 +5,23 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4932fc43-c02a-4724-bfc0-0253ac602219/deploy-status)](https://app.netlify.com/sites/teach-la-ts-react-starter/deploys)
 
-What's this? This is a template repository that sets up a few minor systems for a React micro-app, which is something that we've done frequently at Teach LA. Here's what it does:
+## Overview 🐧
+
+Linux Learning Lab is a collaboration between [ACM Teach LA 🌱](https://teachla.uclaacm.com/) and [ACM Cyber 🔐](https://acmcyber.com/). ACM Cyber uses this app to train members in the basics of Linux navigation—a crucial tool for cybersecurity professionals and often used in Capture-the-Flag competitions. This app is also great for COMSCI 35L students and anyone wanting to learn the basics of Linux!
+
+## Table of Contents
+
+- [Overview](https://github.com/uclaacm/linux-lab/#overview)
+- [About the Tech](https://github.com/uclaacm/linux-lab/#about-the-tech)
+- [Setup / Running the App](https://github.com/uclaacm/linux-lab/#setup)
+- [Contribution Workflow](https://github.com/uclaacm/linux-lab/#contribution-workflow)
+- [Helpful Commands and Tools](https://github.com/uclaacm/linux-lab/#helpful-commands-and-tools)
+- [FAQs](https://github.com/uclaacm/linux-lab/#faqs)
+- [Licensing and Attributions](https://github.com/uclaacm/linux-lab/#licensing-and-attributions)
+
+## About the Tech 🔎
+
+This React micro-app:
 
 - has GitHub Actions automatically set up for testing and linting builds
 - has a default Dependabot config for `yarn` (with monthly audits)
@@ -16,31 +32,8 @@ What's this? This is a template repository that sets up a few minor systems for 
 - StyleLint with SASS guidelines for CSS, SASS, SCSS stylesheets.
 - includes the [Contributor Covenant](https://www.contributor-covenant.org/) in `CODE_OF_CONDUCT.md`
 - has a little bit of documentation for new people!
-- Some extra stuff like changing the app logo to TeachLA's logo and setting up the `src` directory for further development!
 
-## Overview
-
-... explain what your project is here! What technology you used, who made it, and what it was for!
-
-## Things You Should Do (and then delete this section)
-
-Thanks for using our template! We hope this makes your life developing significantly easier.
-
-Things you should do **after using this as a template**:
-
-- [ ] find-and-replace `YOUR_PROJECT_URL_HERE` with your GitHub repo's project name in this README (it's in a few places, so use an editor!)
-- [ ] set up [Netlify](https://www.netlify.com/) for this app - talk to jiin (`@doubleiis02`) if you need access to the Teach LA Netlify team.
-- [ ] turn on "Automatically delete head branches" in GitHub `Settings > Options`
-- [ ] in `Settings > Branches`, create a branch protection rule for `main` that requires PR reviews. Also require status checks, like passing `build`.
-- [ ] _only_ enable squash merging in Github `Settings > Options > Merge Button` (and disable merge commits and rebase merging).
-- [ ] this is a reminder to periodically run accessibility checks & Search Engine Optimization on your project by running `inspect element / developer tools > Lighthouse`
-- [ ] update the README badges for the GitHub Actions and Netlify with the correct links!
-- [ ] update and delete this documentation!
-- [ ] update `public/index.html` to have a description and title
-- [ ] update `public/favicon.svg` and `public/favaicon512.png` as needed
-- [ ] contact Regina Wang (`@reginawang99`), Matthew Nieva (`@matthewcn56`), or Jiin Kim (`@doubleiis02`) with any questions about our quickstarter template set-up.
-
-## Development Setup
+## Setup 🏗
 
 We'll use a really common Node.js project workflow + Yarn!
 First, let's clone our repository, and install all of our yarn dependencies:
@@ -52,13 +45,13 @@ cd linux-lab
 
 The instructions to install Node.js will be different based on which platform you're running. It's heavily advised to install your Node.js using NVM (Node Version Manager) because it's easy to manage a standardized version and update it as needed.
 
-### macOS or Linux
+### macOS or Linux 🍎
 
 Instructions for installing NVM on macOS and Linux (including WSL) are [here](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 At this point you can run `nvm install`. Assuming you've already `cd`ed into the correct directory as mentioned earlier, this will download the LTS (Long-Term Support) version of Node.js for you. Then, run `nvm use` to make sure you've switched to the right version; if it tells you `Now using Node v16.13.2` or something similar, you're good to go!
 
-### Windows
+### Windows 🪟
 
 If you're on Windows, you can use NVM for Windows, a separate version manager whose installation instructions can be found [here](https://github.com/coreybutler/nvm-windows#installation--upgrades). Once you've done that, you can run `nvm install 16.13.2` to install the LTS version of Node.js, and `nvm use 16.13.2` to switch to it.
 
@@ -90,7 +83,7 @@ And to build our project for production (with CRA and Webpack's bundling with al
 yarn run build
 ```
 
-## Contribution Workflow
+## Contribution Workflow 💻
 
 Thanks for your interest in contributing to Linux Learning Lab! ❤️
 
@@ -119,17 +112,13 @@ git push
 
 7. If your code passes code review, then we can **squash and merge** it into `main`. Congratulations! If you'd like, it's now safe to delete your branch/fork.
 
-## Helpful Commands
+## Helpful Commands and Tools 🛠
 
-By running `yarn lint-fix` we can use the linter that we set-up to format our code the way that passes our style checks! Before you commit your changes and submit a pull request, make sure to run
+- By running `yarn lint-fix` we can use the linter that we set-up to format our code the way that passes our style checks! Before you commit your changes and submit a pull request, make sure to run `yarn lint-fix`.
+  - With Husky, we run `yarn lint-staged` automatically before you commit! If you want to lint before commiting, you can run `yarn lint-fix`.
+- Preloading Images - if rendering images gets annoying because it's slow: [Link Example here](https://github.com/uclaacm/Playnet/blob/c2414e7d1179eb11af6b4a49047ab3d8fb9aed66/src/components/shared/Preload.tsx)
 
-```
-yarn lint-fix
-```
-
-With Husky, we run `yarn lint-staged` automatically before you commit! If you want to lint before commiting, you can run `yarn lint-fix`.
-
-## FAQs
+## FAQs 🙋
 
 ### Some lint is unnecessary :( How do I disable it?
 
@@ -215,10 +204,24 @@ declare module '*.<YOUR_ASSET_TYPE>' {
 
 Take a look at `<YOUR_PROJECT_PATH>/asset-manifest.json`. [Like this!](https://teach-la-ts-react-starter.netlify.app/asset-manifest.json)
 
-## Some More Helpful Tools
-
-- Preloading Images - if rendering images gets annoying because it's slow: [Link Example here](https://github.com/uclaacm/Playnet/blob/c2414e7d1179eb11af6b4a49047ab3d8fb9aed66/src/components/shared/Preload.tsx)
-
-## Licensing & Attribution
+## Licensing and Attribution 🪪
 
 This project and its code are licensed under the MIT License. You're free to use them however you wish, though we'd love to hear from you if you found this useful!
+
+# TODO ‼️(delete this section when complete)‼️
+
+Thanks for using our template! We hope this makes your life developing significantly easier.
+
+Things you should do **after using this as a template**:
+
+- [ ] find-and-replace `YOUR_PROJECT_URL_HERE` with your GitHub repo's project name in this README (it's in a few places, so use an editor!)
+- [ ] set up [Netlify](https://www.netlify.com/) for this app - talk to jiin (`@doubleiis02`) if you need access to the Teach LA Netlify team.
+- [ ] turn on "Automatically delete head branches" in GitHub `Settings > Options`
+- [ ] in `Settings > Branches`, create a branch protection rule for `main` that requires PR reviews. Also require status checks, like passing `build`.
+- [ ] _only_ enable squash merging in Github `Settings > Options > Merge Button` (and disable merge commits and rebase merging).
+- [ ] this is a reminder to periodically run accessibility checks & Search Engine Optimization on your project by running `inspect element / developer tools > Lighthouse`
+- [ ] update the README badges for the GitHub Actions and Netlify with the correct links!
+- [ ] update and delete this documentation!
+- [ ] update `public/index.html` to have a description and title
+- [ ] update `public/favicon.svg` and `public/favaicon512.png` as needed
+- [ ] contact Regina Wang (`@reginawang99`), Matthew Nieva (`@matthewcn56`), or Jiin Kim (`@doubleiis02`) with any questions about our quickstarter template set-up.

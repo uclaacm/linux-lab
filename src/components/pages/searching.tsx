@@ -21,7 +21,10 @@ function Searching(): JSX.Element {
         new Directory(
           'dir1',
           undefined,
-          new Map([['dir1-1', new Directory('dir1-1', undefined)]])
+          new Map([
+            ['.dir1-1', new Directory('.dir1-1', undefined)],
+            ['.file1', new File('.file1', undefined)],
+          ])
         ),
       ],
       ['file1.txt', new File('file1.txt', 'file1 contents')],
@@ -36,6 +39,7 @@ function Searching(): JSX.Element {
       const copyFileSystem = Object.assign({}, fileSystem);
       fileSystem.addFileSystemObject(new File('file2.txt', 'file2 contents'));
       fileSystem.removeFileSystemObject('file1.txt');
+      console.log('Changed file system!');
       setFileSystem(copyFileSystem);
     }, 3000);
   }, []);

@@ -13,13 +13,30 @@ function Task(prop: {
   fileSystem?: FileSystemObject;
 }): JSX.Element {
   const ref = useRef(null);
-  const [width, setWidth] = useState(0);
+  const [dimensions, setDimensions] = useState({
+    renderWidth: 0,
+    renderHeight: 0,
+  });
 
   useEffect(() => {
     const handleResize = () => {
-      setWidth(ref.current ? ref.current.offsetWidth : 0);
+      setDimensions(
+        ref.current
+          ? {
+              renderWidth: ref.current.offsetWidth,
+              renderHeight: ref.current.offsetHeight,
+            }
+          : { renderWidth: 0, renderHeight: 0 }
+      );
     };
-    setWidth(ref.current ? ref.current.offsetWidth : 0);
+    setDimensions(
+      ref.current
+        ? {
+            renderWidth: ref.current.offsetWidth,
+            renderHeight: ref.current.offsetHeight,
+          }
+        : { renderWidth: 0, renderHeight: 0 }
+    );
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -42,7 +59,10 @@ function Task(prop: {
       <p>{prop.taskPrompt}</p>
       <div className="task-content" ref={ref}>
         {prop.fileSystem && (
-          <FileSystemRender data={prop.fileSystem} renderWidth={width} />
+          <FileSystemRender
+            data={prop.fileSystem}
+            renderDimensions={dimensions}
+          />
         )}
         <Terminal />
       </div>

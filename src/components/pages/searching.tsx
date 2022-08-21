@@ -10,13 +10,13 @@ import '../../styles/global.scss';
 function Searching(): JSX.Element {
   const taskPrompts = [
     <p key={'search-task-text-1'}>
-      Tux's friend Ruby lost her <strong>glasses.txt</strong>. Can you{' '}
+      Tux&apos;s friend Ruby lost her <strong>glasses.txt</strong>. Can you{' '}
       <i>find</i> where she left them?
     </p>,
     <p key={'search-task-text-2'}>
       Ruby was so impressed by your work that she recommended you to Bob. Bob
-      was packing for a trip and couldn't find where he placed his “camera”. Can
-      you find what box (i.e., file) he placed a “camera” in?
+      was packing for a trip and couldn&apos;t find where he placed his
+      “camera”. Can you find what box (i.e., file) he placed a “camera” in?
     </p>,
   ];
 

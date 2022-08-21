@@ -12,37 +12,38 @@ body {
   text-align: center;
 }
 
-.terminal{
+.terminal {
   background-color: #dfedf8;
   color: white;
   font-family: monospace;
-  text-align: left;
-  padding: 45px 45px;
+  padding: 45px;
   position: relative;
+  text-align: left;
 }
 
 .input-container {
   position: relative;
 }
-.terminal-bottom-icicle{
-    position: absolute;
-    bottom: -50px;
-    left: 45px;
-}
-.terminal-top-icicle{
-    position: absolute;
-    top: -20px;
-    right: -10px;
+
+.terminal-bottom-icicle {
+  bottom: -50px;
+  left: 45px;
+  position: absolute;
 }
 
-.terminal-input{
-  position: relative;
+.terminal-top-icicle {
+  position: absolute;
+  right: -10px;
+  top: -20px;
+}
+
+.terminal-input {
   background-color: black;
+  border-color: black;
+  box-sizing: border-box;
   color: white;
   font-family: monospace;
+  padding: 20px;
+  position: relative;
   width: 100%;
-  padding: 20px 20px;
-  box-sizing: border-box;
-  border-color: black;
 }
-

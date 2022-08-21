@@ -18,16 +18,21 @@ body {
   font-family: monospace;
   text-align: left;
   padding: 45px 45px;
+  position: relative;
+}
+
+.input-container {
+  position: relative;
 }
 .terminal-bottom-icicle{
-    position: relative;
-      top: -28px;
-      left: -277px;
-  }
+    position: absolute;
+    bottom: -50px;
+    left: 45px;
+}
 .terminal-top-icicle{
-    position: relative;
-      top: -207px;
-      left: 338px;
+    position: absolute;
+    top: -20px;
+    right: -10px;
 }
 
 .terminal-input{

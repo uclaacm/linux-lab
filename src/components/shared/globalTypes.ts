@@ -66,6 +66,22 @@ export class FileSystemObject {
   getPathForChild(name: string): string {
     return this.path === '/' ? `/${name}` : `${this.path}/${name}`;
   }
+  getFileSystemObjectFromPath(path: string): FileSystemObject | undefined {
+    const children = path.split('/').slice(1);
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    let currentDirectory = this;
+    if (children[0] === '') {
+      return this;
+    }
+    for (let i = 0; i < children.length; i++) {
+      const child = currentDirectory.getChild(children[i]);
+      if (!child) {
+        return this;
+      }
+      currentDirectory = child;
+    }
+    return currentDirectory;
+  }
 }
 
 export class File extends FileSystemObject {
@@ -84,7 +100,8 @@ export class Directory extends FileSystemObject {
     name: string,
     parent?: FileSystemObject,
     children?: Map<string, FileSystemObject>,
-    path = '/'
+    path = '/',
+    public isCurrentDirectory = false
   ) {
     super(name, path, true, parent, undefined, children);
     if (this.children) {
@@ -92,8 +109,9 @@ export class Directory extends FileSystemObject {
         this.addFileSystemObject(child);
       });
     }
+    this.isCurrentDirectory = isCurrentDirectory;
   }
-  addFileSystemObject(fileSystemObject: FileSystemObject): void {
+  addFileSystemObject(fileSystemObject: FileSystemObject): Directory {
     if (this.children === undefined) {
       this.children = new Map();
     }
@@ -101,12 +119,14 @@ export class Directory extends FileSystemObject {
     fileSystemObject.parent = this;
     fileSystemObject.path = this.getPathForChild(fileSystemObject.name);
     this.children.set(fileSystemObject.name, fileSystemObject);
+    return this;
   }
-  removeFileSystemObject(name: string): void {
+  removeFileSystemObject(name: string): Directory {
     if (this.children === undefined) {
-      return;
+      return this;
     }
     this.children.delete(name);
+    return this;
   }
   getChildren(showHidden = false): Array<Directory | File> {
     if (this.children === undefined) {
@@ -116,6 +136,9 @@ export class Directory extends FileSystemObject {
       (child) => !child.isHidden || showHidden
     );
   }
+  getChildrenNames(showHidden = false): Array<string> {
+    return this.getChildren(showHidden).map((child) => child.name);
+  }
   getChild(name: string): Directory | File | undefined {
     if (this.children === undefined) {
       return undefined;
@@ -124,6 +147,25 @@ export class Directory extends FileSystemObject {
   }
   getParent(): Directory | File | undefined {
     return this.parent;
+  }
+  changeCurrentWorkingDirectory(
+    currentWorkingDirectory: Directory,
+    path: string
+  ): Directory | undefined {
+    currentWorkingDirectory.isCurrentDirectory = false;
+    if (!path.startsWith('/')) {
+      if (currentWorkingDirectory.path === '/') {
+        path = `/${path}`;
+      } else {
+        path = `${this.path}/${path}`;
+      }
+    }
+    const newDirectory = <Directory>this.getFileSystemObjectFromPath(path);
+    if (!newDirectory) {
+      return undefined;
+    }
+    newDirectory.isCurrentDirectory = true;
+    return newDirectory;
   }
   private checkHidden(name: string) {
     return name.startsWith('.');
@@ -159,3 +201,5 @@ file.content = 'Changed content!';
 // console.log(dir.getChildren(true)); // show hidden files/directories (ls -a)
 dir.removeFileSystemObject('file.txt'); // remove a file (rm)
 // console.log(dir.getChildren(true));
+
+// console.log(dir.getChildrenNames(true)); // show hidden files/directories names (ls -a)

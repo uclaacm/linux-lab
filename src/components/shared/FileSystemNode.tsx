@@ -1,9 +1,11 @@
 import file from './../../assets/images/egg.svg';
 import directory from './../../assets/images/igloo.svg';
+import currentDirectory from './../../assets/images/tux-with-igloo.svg';
+import currentHiddenDirectory from './../../assets/images/tux-with-unknown-igloo.svg';
 import hiddenFile from './../../assets/images/unknown-egg.svg';
 import hiddenDirectory from './../../assets/images/unknown-igloo.svg';
 import './../../styles/FileSystemNode.scss';
-import { FileSystemObject } from './globalTypes';
+import { Directory, FileSystemObject } from './globalTypes';
 
 function FileSystemNode({ nodeDatum }: FileSystemObject): JSX.Element {
   const nodeImage = getNodeImage(nodeDatum);
@@ -21,15 +23,24 @@ function FileSystemNode({ nodeDatum }: FileSystemObject): JSX.Element {
   );
 }
 
-const getNodeImage = (node: FileSystemObject) => {
+function getNodeImage(node: FileSystemObject): {
+  src: string;
+  altText: string;
+} {
   if (node.isDirectory) {
-    return node.isHidden
-      ? { src: hiddenDirectory, altText: 'igloo with a question mark' }
-      : { src: directory, altText: 'igloo' };
+    if ((node as Directory).isCurrentDirectory) {
+      return node.isHidden
+        ? { src: currentHiddenDirectory, altText: 'Current Hidden Directory' }
+        : { src: currentDirectory, altText: 'Current Directory' };
+    } else {
+      return node.isHidden
+        ? { src: hiddenDirectory, altText: 'igloo with a question mark' }
+        : { src: directory, altText: 'igloo' };
+    }
   }
   return node.isHidden
     ? { src: hiddenFile, altText: 'egg with a question mark' }
     : { src: file, altText: 'egg' };
-};
+}
 
 export default FileSystemNode;

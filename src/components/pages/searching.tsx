@@ -39,7 +39,7 @@ function Searching(): JSX.Element {
       const copyFileSystem = Object.assign({}, fileSystem);
       fileSystem.addFileSystemObject(new File('file2.txt', 'file2 contents'));
       fileSystem.removeFileSystemObject('file1.txt');
-      console.log('Changed file system!');
+      // console.log('Changed file system!');
       setFileSystem(copyFileSystem);
     }, 3000);
   }, []);

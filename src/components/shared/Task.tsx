@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import { IconContext } from 'react-icons';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import './../../styles/Task.scss';
@@ -18,29 +18,26 @@ function Task(prop: {
     renderHeight: 0,
   });
 
+  function handleResize(
+    currDimensions: RefObject<HTMLInputElement> | RefObject<null> | null
+  ): void {
+    if (currDimensions && currDimensions.current) {
+      setDimensions({
+        renderWidth: currDimensions.current.offsetWidth,
+        renderHeight: currDimensions.current.offsetHeight,
+      });
+    } else {
+      setDimensions({
+        renderWidth: 0,
+        renderHeight: 0,
+      });
+    }
+  }
+
   useEffect(() => {
-    const handleResize = () => {
-      setDimensions(
-        ref.current
-          ? {
-              renderWidth: ref.current.offsetWidth,
-              renderHeight: ref.current.offsetHeight,
-            }
-          : { renderWidth: 0, renderHeight: 0 }
-      );
-    };
-    setDimensions(
-      ref.current
-        ? {
-            renderWidth: ref.current.offsetWidth,
-            renderHeight: ref.current.offsetHeight,
-          }
-        : { renderWidth: 0, renderHeight: 0 }
-    );
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    handleResize(ref);
+    window.addEventListener('resize', () => handleResize(ref));
+    return () => window.removeEventListener('resize', () => handleResize(ref));
   }, [ref]);
 
   return (

@@ -1,0 +1,33 @@
+.node-wrapper {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.node-wrapper > * {
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  right: 0;
+}
+
+.image-wrapper {
+  height: 50%;
+  width: 100%;
+}
+
+.file-system-image {
+  display: block;
+  height: 100%;
+  margin-top: 3%;
+  width: 100%;
+}
+
+.node-label {
+  background-color: white;
+  bottom: 20%;
+  height: 20%;
+  text-align: center;
+  width: 80%;
+}

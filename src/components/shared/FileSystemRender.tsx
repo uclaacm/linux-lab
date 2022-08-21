@@ -3,36 +3,25 @@ import Tree from 'react-d3-tree';
 import {
   CustomNodeElementProps,
   RawNodeDatum,
+  TreeNodeDatum,
 } from 'react-d3-tree/lib/types/common';
-import file from './../../assets/images/egg.svg';
-import directory from './../../assets/images/igloo.svg';
-import hiddenFile from './../../assets/images/unknown-egg.svg';
-import hiddenDirectory from './../../assets/images/unknown-igloo.svg';
+import FileSystemNode from './FileSystemNode';
 import { FileSystemObject } from './globalTypes';
 import './../../styles/FileSystemRender.scss';
 
-const getNodeImage = (node: FileSystemObject) => {
-  if (node.isDirectory) {
-    return node.isHidden ? hiddenDirectory : directory;
-  }
-  return node.isHidden ? hiddenFile : file;
-};
-
-const renderForeignObjectNode = ({ nodeDatum, foreignObjectProps }) => {
+const renderForeignObjectNode = (nodeDatum: TreeNodeDatum) => {
+  const nodeSize = { x: 100, y: 100 };
+  const foreignObjectProps = {
+    width: nodeSize.x,
+    height: nodeSize.y,
+    x: (-1 * nodeSize.x) / 2,
+    y: (-1 * nodeSize.y) / 2,
+  };
   return (
     <g>
       {/* `foreignObject` requires width & height to be explicitly set. */}
       <foreignObject {...foreignObjectProps}>
-        <div className="node-wrapper">
-          <div className="image-wrapper">
-            <img
-              className="file-system-image"
-              src={getNodeImage(nodeDatum)}
-              alt="test"
-            />
-          </div>
-          <div className="node-label">{nodeDatum.name}</div>
-        </div>
+        <FileSystemNode nodeDatum={nodeDatum} />
       </foreignObject>
     </g>
   );
@@ -43,14 +32,6 @@ function FileSystemRender(prop: {
   renderDimensions: { renderWidth: number; renderHeight: number };
 }): JSX.Element {
   const FSObject = useMemo(() => getD3TreeFromFSObject(prop.data), [prop.data]);
-
-  const nodeSize = { x: 100, y: 100 };
-  const foreignObjectProps = {
-    width: nodeSize.x,
-    height: nodeSize.y,
-    x: (-1 * nodeSize.x) / 2,
-    y: (-1 * nodeSize.y) / 2,
-  };
 
   function getD3TreeFromFSObject(fsObject: FileSystemObject): RawNodeDatum {
     const { name } = fsObject;
@@ -80,9 +61,9 @@ function FileSystemRender(prop: {
           x: prop.renderDimensions.renderWidth / 2.8,
           y: prop.renderDimensions.renderHeight / 8,
         }}
-        renderCustomNodeElement={(rd3tProps: CustomNodeElementProps) => {
-          return renderForeignObjectNode({ ...rd3tProps, foreignObjectProps });
-        }}
+        renderCustomNodeElement={(rd3tProps: CustomNodeElementProps) =>
+          renderForeignObjectNode(rd3tProps.nodeDatum)
+        }
         pathFunc={'straight'}
       />
     </div>

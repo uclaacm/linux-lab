@@ -57,6 +57,18 @@ function Moving(): JSX.Element {
         Something seems amiss in this cave. Is there a secret hiding in plain
         sight?
       </p>
+      <footer>
+        <a href="stationary">
+          <button type="button" className="back-button">
+            back
+          </button>
+        </a>
+        <a href="creation">
+          <button type="button" className="next-button">
+            next
+          </button>
+        </a>
+      </footer>
     </div>
   );
 }

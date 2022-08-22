@@ -50,6 +50,18 @@ function Intro(): JSX.Element {
         commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
         velit esse cillum dolore eu fugiat nulla pariatur.
       </p>
+      <footer>
+        <a href="/">
+          <button type="button" className="back-button">
+            back
+          </button>
+        </a>
+        <a href="stationary">
+          <button type="button" className="next-button">
+            next
+          </button>
+        </a>
+      </footer>
     </div>
   );
 }

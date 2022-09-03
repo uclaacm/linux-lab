@@ -35,19 +35,13 @@ function Intro(): JSX.Element {
         standards to allow applications to run across different UNIX based
         operating systems, such as Linux.
       </p>
+
       <p className="body">
-        The POSIX file system system is organized in a tree-like format,
-        branching out from the root directory and into descendent directories
-        containing files and other subdirectories. The POSIX file system also
-        defines a set of operations that can be performed on files and
-        directories, such as open, close, read, and write.
-      </p>
-      <p className="body">
-        The POSIX file system system is organized in a tree-like format,
-        branching out from the root directory and into descendent directories
-        containing files and other subdirectories. The POSIX file system also
-        defines a set of operations that can be performed on files and
-        directories, such as open, close, read, and write.
+        The POSIX file system is organized in a tree-like format, branching out
+        from the root directory and into descendent directories containing files
+        and other subdirectories. The POSIX file system also defines a set of
+        operations that can be performed on files and directories, such as open,
+        close, read, and write.
       </p>
 
       <img
@@ -63,7 +57,7 @@ function Intro(): JSX.Element {
         he was rumored to have contracted &ldquo;penguinitis&rdquo; after being
         bitten by a penguin! Tux&apos;s was designed by Larry Ewing and named by
         James Hughes. His name is meant to stand for &ldquo;(T)orvalds
-        (U)ni(X)&rdquo;, or tuxedo, which a penguin resembles
+        (U)ni(X)&rdquo;, or tuxedo, which a penguin resembles.
       </p>
     </div>
   );

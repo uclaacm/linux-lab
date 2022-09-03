@@ -21,6 +21,14 @@ function Permissions(): JSX.Element {
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur.
         </div>
+        <div
+          style={{
+          background: 'gray',
+          width: 200,
+          height: 50,
+          marginLeft: 'auto',
+          marginRight: 'auto' }}
+        >placeholder</div>
         <div className="heading-1">
           The first letter (red) indicates the file type.
         </div>
@@ -63,12 +71,32 @@ function Permissions(): JSX.Element {
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation
         </p>
+
+        <div
+          style={{
+          background: 'gray',
+          width: 200,
+          height: 50,
+          marginLeft: 'auto',
+          marginRight: 'auto' }}
+        >placeholder</div>
+
         <p className="body">
           Lorem <span className="try-out-command">command</span>
           dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
           quis nostrud exercitation
         </p>
+
+        <div
+          style={{
+          background: 'gray',
+          width: 200,
+          height: 50,
+          marginLeft: 'auto',
+          marginRight: 'auto' }}
+        >placeholder</div>
+        
         <Task
           taskPrompt={taskPrompts[0]}
           taskName={'Task 1'}

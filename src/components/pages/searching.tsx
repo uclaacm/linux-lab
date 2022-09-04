@@ -13,11 +13,9 @@ function Searching(): JSX.Element {
       Tux&apos;s friend Ruby lost her <strong>glasses.txt</strong>. Can you{' '}
       <i>find</i> where she left them?
     </p>,
-    <p key={'search-task-text-2'}>
-      Ruby was so impressed by your work that she recommended you to Bob. Bob
-      was packing for a trip and couldn&apos;t find where he placed his
-      “camera”. Can you find what box (i.e., file) he placed a “camera” in?
-    </p>,
+    `Ruby was so impressed by your work that she recommended you to Bob. Bob
+    was packing for a trip and couldn't find where he placed his
+    "camera”. Can you find what box (i.e., file) he placed a “camera”?`,
   ];
 
   const initFileSystem = new Directory(

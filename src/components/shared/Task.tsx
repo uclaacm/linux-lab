@@ -8,7 +8,7 @@ import Terminal from './Terminal';
 import './../../styles/global.scss';
 
 function Task(prop: {
-  taskPrompt: JSX.Element;
+  taskPrompt: JSX.Element | string;
   taskName: string;
   completed: boolean;
   fileSystem?: FileSystemObject;
@@ -54,7 +54,11 @@ function Task(prop: {
         </IconContext.Provider>
         <h2 className="heading-1 task-name">{prop.taskName}</h2>
       </span>
-      {prop.taskPrompt}
+      {typeof prop.taskPrompt === 'string' ? (
+        <p>{prop.taskPrompt}</p>
+      ) : (
+        prop.taskPrompt
+      )}
       <div className="task-content" ref={ref}>
         {prop.fileSystem && (
           <FileSystemRender

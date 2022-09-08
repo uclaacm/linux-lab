@@ -83,38 +83,3 @@ body {
   text-align: center;
 }
 
-.terminal {
-  background-color: #dfedf8;
-  color: white;
-  font-family: monospace;
-  padding: 45px;
-  position: relative;
-  text-align: left;
-}
-
-.input-container {
-  position: relative;
-}
-
-.terminal-bottom-icicle {
-  bottom: -50px;
-  left: 45px;
-  position: absolute;
-}
-
-.terminal-top-icicle {
-  position: absolute;
-  right: -10px;
-  top: -20px;
-}
-
-.terminal-input {
-  background-color: black;
-  border-color: black;
-  box-sizing: border-box;
-  color: white;
-  font-family: monospace;
-  padding: 20px;
-  position: relative;
-  width: 100%;
-}

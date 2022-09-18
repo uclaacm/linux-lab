@@ -9,9 +9,13 @@ import '../../styles/global.scss';
 
 function Searching(): JSX.Element {
   const taskPrompts = [
-    "Tux's friend Ruby lost her glasses.txt. Can you find where she left them?",
-    `Ruby was so impressed by your work that she recommended you to Bob. Bob was packing for a trip and couldn't find where he placed his “camera”. Can you find what box (i.e., file) he placed a “camera” in?
-`,
+    <p key={'search-task-text-1'}>
+      Tux&apos;s friend Ruby lost her <strong>glasses.txt</strong>. Can you{' '}
+      <i>find</i> where she left them?
+    </p>,
+    `Ruby was so impressed by your work that she recommended you to Bob. Bob
+    was packing for a trip and couldn't find where he placed his
+    "camera”. Can you find what box (i.e., file) he placed a “camera”?`,
   ];
 
   const initFileSystem = new Directory(

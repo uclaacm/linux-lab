@@ -2,8 +2,10 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin-top: 1vh;
-  width: 100%;
+  margin: 1vh auto;
+  margin-bottom: 5vh;
+  position: relative;
+  width: 85%;
 }
 
 .task-header {

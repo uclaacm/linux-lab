@@ -7,7 +7,11 @@ import hiddenDirectory from './../../assets/images/unknown-igloo.svg';
 import './../../styles/FileSystemNode.scss';
 import { Directory, FileSystemObject } from './globalTypes';
 
-function FileSystemNode({ nodeDatum }: FileSystemObject): JSX.Element {
+function FileSystemNode({
+  nodeDatum,
+}: {
+  nodeDatum: FileSystemObject;
+}): JSX.Element {
   const nodeImage = getNodeImage(nodeDatum);
   return (
     <div className="node-wrapper">

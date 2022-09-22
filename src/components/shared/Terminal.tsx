@@ -1,93 +1,147 @@
+import _ from 'lodash';
 import React, { useState } from 'react';
 import '../../styles/Terminal.scss';
 import '../../styles/global.scss';
+import { Directory } from './globalTypes';
 
-function isValid(usertyped: string) {
-  switch (usertyped) {
-    case '$ whoami':
-      console.log('User input ls');
-      break;
-    case '$ pwd':
-      console.log('User input ls');
-      break;
-    case '$ man pwd':
-      console.log('User input ls');
-      break;
-    case '$ man whoami':
-      console.log('User input ls');
-      break;
-    case '$ ls':
-      console.log('User input ls');
-      break;
-    case '$ ls -a':
-      console.log('User input ls');
-      break;
-    case '$ ls -l':
-      console.log('User input ls');
-      break;
-    case '$ ls -la':
-      console.log('User input ls');
-      break;
-    case '$ ls -al':
-      console.log('User input ls');
-      break;
-    case '$ cd':
-      console.log('User input ls');
-      break;
-    case '$ touch':
-      console.log('User input ls');
-      break;
-    case '$ mkdir':
-      console.log('User input ls');
-      break;
-    case '$ rm':
-      console.log('User input ls');
-      break;
-    case '$ rmdir':
-      console.log('User input ls');
-      break;
-    case '$ rm -rf':
-      console.log('User input ls');
-      break;
-    case '$ cp':
-      console.log('User input ls');
-      break;
-    case '$ mv':
-      console.log('User input ls');
-      break;
-    case '$ echo':
-      console.log('User input ls');
-      break;
-    case '$ cat':
-      console.log('User input ls');
-      break;
-    case '$ grep':
-      console.log('User input ls');
-      break;
-    case '$ find':
-      console.log('User input ls');
-      break;
-    case '$ chmod':
-      console.log('User input ls');
-      break;
-    default:
-      console.log('Invalid command. Try again.');
-      break;
-  }
-}
-
-function Terminal(): JSX.Element {
+function Terminal(prop: {
+  fileSystem: Directory;
+  currentWorkingDirectory: Directory;
+  setFileSystem: (fileSystem: Directory) => void;
+  setCurrentWorkingDirectory: (cwd: Directory) => void;
+}): JSX.Element {
   const [commands, setCommands] = useState<string[]>([]);
   const [input, setInput] = useState('$ ');
 
+  function executeList(
+    displayAll = false,
+    longFormat = false,
+    path = ''
+  ): string[] {
+    if (path === '') {
+      return prop.currentWorkingDirectory.getChildrenNames(
+        displayAll,
+        longFormat
+      );
+    } else {
+      const dir = prop.fileSystem.getFileSystemObjectFromPath(
+        path
+      ) as Directory;
+      return dir.getChildrenNames(displayAll, longFormat);
+    }
+  }
+
+  function executeCd(path: string): void {
+    const res = prop.fileSystem.changeCurrentWorkingDirectory(
+      prop.currentWorkingDirectory,
+      path
+    );
+    if (res.length === 2) {
+      const directory = _.cloneDeep(res[0] as Directory);
+      const cwd = _.cloneDeep(res[1] as Directory);
+      prop.setFileSystem(directory);
+      prop.setCurrentWorkingDirectory(cwd);
+    }
+  }
+
+  function isValid(usertyped: string) {
+    const userInput = usertyped.split(' ');
+    const command = input.length > 1 ? userInput.slice(1, 2).join(' ') : '';
+    let output: string[] = [];
+    switch (command) {
+      case 'whoami':
+        console.log('User input ls');
+        break;
+      case 'pwd':
+        console.log('User input ls');
+        break;
+      case 'man pwd':
+        console.log('User input ls');
+        break;
+      case 'man whoami':
+        console.log('User input ls');
+        break;
+      case 'ls':
+        switch (userInput.slice(2).join(' ')) {
+          case '-a':
+            output = executeList(true, false, '');
+            break;
+          case '-l':
+            output = executeList(false, true, '');
+            break;
+          case '-al':
+            output = executeList(true, true, '');
+            break;
+          case '-la':
+            output = executeList(true, true, '');
+            break;
+          default:
+            output = executeList(false, false, userInput.slice(2).join(' '));
+        }
+        console.log('User input ls');
+        break;
+      case 'cd':
+        console.log('User input ls');
+        executeCd(userInput.slice(2).join(' '));
+        break;
+      case 'touch':
+        console.log('User input ls');
+        break;
+      case 'mkdir':
+        console.log('User input ls');
+        break;
+      case 'rm':
+        console.log('User input ls');
+        break;
+      case 'rmdir':
+        console.log('User input ls');
+        break;
+      case 'rm -rf':
+        console.log('User input ls');
+        break;
+      case 'cp':
+        console.log('User input ls');
+        break;
+      case 'mv':
+        console.log('User input ls');
+        break;
+      case 'echo':
+        console.log('User input ls');
+        break;
+      case 'cat':
+        console.log('User input ls');
+        break;
+      case 'grep':
+        console.log('User input ls');
+        break;
+      case 'find':
+        console.log('User input ls');
+        break;
+      case 'chmod':
+        console.log('User input ls');
+        break;
+      default:
+        console.log('Invalid command. Try again.');
+        break;
+    }
+    return output;
+  }
+
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setInput(e.currentTarget.value);
+    const currInput = e.currentTarget.value;
+    // Prevent the user from removing the '$ ' from the input
+    if (currInput.split(' ').length < 2 || currInput.split(' ')[0] !== '$') {
+      setInput('$ ');
+    } else {
+      setInput(e.currentTarget.value);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setCommands([...commands, input]);
-    isValid(input);
+    const output = isValid(input);
+    console.log(output);
+    setCommands([...commands, input, ...output]);
     setInput('$ ');
   };
 

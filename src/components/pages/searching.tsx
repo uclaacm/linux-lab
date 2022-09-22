@@ -1,5 +1,3 @@
-import _ from 'lodash';
-import { useEffect, useState } from 'react';
 import tuxPointing from '../../assets/images/tux-pointing.svg';
 import { Directory, File } from '../shared/globalTypes';
 import Modal from '../shared/Modal';
@@ -27,10 +25,7 @@ function Searching(): JSX.Element {
         new Directory(
           'dir1',
           undefined,
-          new Map([
-            ['.dir1-1', new Directory('.dir1-1', undefined)],
-            ['.file1', new File('.file1', undefined)],
-          ])
+          new Map([['.file1', new File('.file1', '/dir1/.file1')]])
         ),
       ],
       ['file1.txt', new File('file1.txt', 'file1 contents')],
@@ -38,32 +33,10 @@ function Searching(): JSX.Element {
     '/',
     true
   );
-
-  const [fileSystem, setFileSystem] = useState<Directory>(initFileSystem);
-  const [currentWorkingDirectory, setCurrentWorkingDirectory] =
-    useState<Directory>(initFileSystem);
-
-  // This is to test changing the file system! (You can see the change after 3s)
-  useEffect(() => {
-    setTimeout(() => {
-      let copyFileSystem = _.cloneDeep(fileSystem) as Directory;
-      copyFileSystem = copyFileSystem
-        .addFileSystemObject(new File('file2.txt', 'file2 contents'))
-        .removeFileSystemObject('file1.txt');
-
-      const workingDirectoryCopy = copyFileSystem.getFileSystemObjectFromPath(
-        currentWorkingDirectory.path
-      ) as Directory;
-
-      const directory = copyFileSystem.changeCurrentWorkingDirectory(
-        workingDirectoryCopy,
-        '/dir1/.dir1-1'
-      ) as Directory;
-
-      setCurrentWorkingDirectory(directory);
-      setFileSystem(copyFileSystem);
-    }, 3000);
-  }, []);
+  (initFileSystem.getChild('dir1') as Directory).addFileSystemObject(
+    new Directory('.dir2')
+  );
+  const currentWorkingDirectory = initFileSystem;
 
   return (
     <>
@@ -115,7 +88,8 @@ function Searching(): JSX.Element {
             taskPrompt={taskPrompts[0]}
             taskName="Task 1"
             completed={true}
-            fileSystem={fileSystem}
+            fileSystem={initFileSystem}
+            currentWorkingDirectory={currentWorkingDirectory}
           />
           <Task
             taskPrompt={taskPrompts[1]}

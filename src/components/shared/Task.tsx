@@ -3,7 +3,7 @@ import { IconContext } from 'react-icons';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import './../../styles/Task.scss';
 import FileSystemRender from './FileSystemRender';
-import { FileSystemObject } from './globalTypes';
+import { Directory } from './globalTypes';
 import Terminal from './Terminal';
 import './../../styles/global.scss';
 
@@ -11,7 +11,8 @@ function Task(prop: {
   taskPrompt: JSX.Element | string;
   taskName: string;
   completed: boolean;
-  fileSystem?: FileSystemObject;
+  fileSystem?: Directory;
+  currentWorkingDirectory?: Directory;
 }): JSX.Element {
   const ref = useRef(null);
   const [dimensions, setDimensions] = useState({
@@ -34,6 +35,13 @@ function Task(prop: {
       });
     }
   }
+
+  const [fileSystem, setFileSystem] = useState<Directory | undefined>(
+    prop.fileSystem
+  );
+  const [currentWorkingDirectory, setCurrentWorkingDirectory] = useState<
+    Directory | undefined
+  >(prop.fileSystem);
 
   useEffect(() => {
     handleResize(ref);
@@ -60,13 +68,15 @@ function Task(prop: {
         prop.taskPrompt
       )}
       <div className="task-content" ref={ref}>
-        {prop.fileSystem && (
-          <FileSystemRender
-            data={prop.fileSystem}
-            renderDimensions={dimensions}
-          />
+        {fileSystem && (
+          <FileSystemRender data={fileSystem} renderDimensions={dimensions} />
         )}
-        <Terminal />
+        <Terminal
+          fileSystem={fileSystem as Directory}
+          currentWorkingDirectory={currentWorkingDirectory as Directory}
+          setFileSystem={setFileSystem}
+          setCurrentWorkingDirectory={setCurrentWorkingDirectory}
+        />
       </div>
       <div className="terminal-bottom-icicle">
         <svg

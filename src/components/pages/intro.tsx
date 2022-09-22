@@ -59,6 +59,18 @@ function Intro(): JSX.Element {
         James Hughes. His name is meant to stand for &ldquo;(T)orvalds
         (U)ni(X)&rdquo;, or tuxedo, which a penguin resembles.
       </p>
+      <footer>
+        <a href="/">
+          <button type="button" className="back-button">
+            back
+          </button>
+        </a>
+        <a href="stationary">
+          <button type="button" className="next-button">
+            next
+          </button>
+        </a>
+      </footer>
     </div>
   );
 }

@@ -68,30 +68,6 @@ export class FileSystemObject {
   getPathForChild(name: string): string {
     return this.path === '/' ? `/${name}` : `${this.path}/${name}`;
   }
-  getFileSystemObjectFromPath(path: string): FileSystemObject | undefined {
-    const children = path.split('/').slice(1);
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    let currentDirectory = <FileSystemObject>this;
-    if (children[0] === '') {
-      return this;
-    }
-    for (let i = 0; i < children.length; i++) {
-      let child;
-      if (currentDirectory.isDirectory) {
-        child = (currentDirectory as unknown as Directory).getChild(
-          children[i]
-        );
-        if (!child) {
-          return undefined;
-        }
-      }
-      if (!child) {
-        return this;
-      }
-      currentDirectory = child;
-    }
-    return currentDirectory;
-  }
 }
 
 export class File extends FileSystemObject {
@@ -121,6 +97,7 @@ export class Directory extends FileSystemObject {
     }
     this.isCurrentDirectory = isCurrentDirectory;
   }
+
   addFileSystemObject(fileSystemObject: FileSystemObject): Directory {
     if (this.children === undefined) {
       this.children = new Map();
@@ -131,6 +108,7 @@ export class Directory extends FileSystemObject {
     this.children.set(fileSystemObject.name, fileSystemObject);
     return this;
   }
+
   removeFileSystemObject(name: string): Directory {
     if (this.children === undefined) {
       return this;
@@ -138,6 +116,7 @@ export class Directory extends FileSystemObject {
     this.children.delete(name);
     return this;
   }
+
   getChildren(showHidden = false): Array<Directory | File> {
     if (this.children === undefined) {
       return [];
@@ -146,49 +125,77 @@ export class Directory extends FileSystemObject {
       (child) => !child.isHidden || showHidden
     );
   }
+
   getChildrenNames(showHidden = false, longFormat = false): Array<string> {
     if (longFormat) {
       // TODO: implement long format
     }
     return this.getChildren(showHidden).map((child) => child.name);
   }
+
   getChild(name: string): Directory | File | undefined {
+    if (name === '..') {
+      return this.parent;
+    }
+    if (name === '.') {
+      return this;
+    }
     if (this.children === undefined) {
       return undefined;
     }
     return this.children.get(name);
   }
+
   getParent(): Directory | File | undefined {
     return this.parent;
   }
+
   changeCurrentWorkingDirectory(
     currentWorkingDirectory: Directory,
     path: string
-  ): Directory[] {
-    const cwd = <Directory>(
-      this.getFileSystemObjectFromPath(currentWorkingDirectory.path)
-    );
-    cwd.isCurrentDirectory = false;
-    let newDirectory;
-    if (path === '..') {
-      newDirectory = cwd?.parent;
-      console.log(newDirectory);
+  ): Directory | undefined {
+    currentWorkingDirectory.isCurrentDirectory = false;
+    let newCwd: Directory | File | undefined;
+
+    if (!path.startsWith('/')) {
+      newCwd = currentWorkingDirectory.getFileSystemObjectFromPath(path);
     } else {
-      if (!path.startsWith('/')) {
-        if (currentWorkingDirectory.path === '/') {
-          path = `/${path}`;
-        } else {
-          path = currentWorkingDirectory.getPathForChild(path);
-        }
-      }
-      newDirectory = <Directory>this.getFileSystemObjectFromPath(path);
+      newCwd = this.getFileSystemObjectFromPath(path);
     }
-    if (!newDirectory) {
-      return [];
-    }
-    newDirectory.isCurrentDirectory = true;
-    return [this, newDirectory];
+
+    if (!newCwd || !newCwd.isDirectory) return undefined;
+    (newCwd as Directory).isCurrentDirectory = true;
+    return newCwd as Directory;
   }
+
+  getFileSystemObjectFromPath(path: string): Directory | File | undefined {
+    if (path === this.path) return this;
+
+    if (path.charAt(path.length - 1) == '/') {
+      path = path.slice(0, -1);
+    }
+
+    const children = path.includes('/') ? path.split('/').slice(1) : [path];
+    let currentDirectory = <Directory>this;
+    let currentFsObject: Directory | File | undefined;
+    for (let i = 0; i < children.length; i++) {
+      if (currentDirectory.isDirectory) {
+        currentFsObject = currentDirectory.getChild(children[i]);
+        if (!currentFsObject) return undefined;
+      }
+
+      // If the object is a file, we can't go any deeper
+      if (i !== children.length - 1) {
+        if (!currentFsObject?.isDirectory) {
+          console.log('here');
+          return undefined;
+        }
+        currentDirectory = <Directory>currentFsObject;
+      }
+    }
+    return currentFsObject;
+  }
+
   private checkHidden(name: string) {
     return name.startsWith('.');
   }

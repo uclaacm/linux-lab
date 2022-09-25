@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { useState } from 'react';
 import '../../styles/Terminal.scss';
 import '../../styles/global.scss';
-import { Directory } from './globalTypes';
+import { Directory, File } from './globalTypes';
 
 function Terminal(prop: {
   fileSystem: Directory;
@@ -13,118 +13,169 @@ function Terminal(prop: {
   const [commands, setCommands] = useState<string[]>([]);
   const [input, setInput] = useState('$ ');
 
-  function executeList(
-    displayAll = false,
-    longFormat = false,
-    path = ''
-  ): string[] {
-    if (path === '') {
-      return prop.currentWorkingDirectory.getChildrenNames(
-        displayAll,
-        longFormat
-      );
-    } else {
-      const dir = prop.fileSystem.getFileSystemObjectFromPath(
-        path
-      ) as Directory;
-      return dir.getChildrenNames(displayAll, longFormat);
+  function executeList(flags: string, path: string): [string[], string[]] {
+    const displayAll = flags.includes('a');
+    const longFormat = flags.includes('l');
+    const fsObject = path.includes('/')
+      ? prop.fileSystem.getFileSystemObjectFromPath(path)
+      : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
+
+    if (!fsObject) {
+      return [[], [`ls: '${path}': No such file or directory`]];
     }
+    if (!fsObject.isDirectory) {
+      return [[fsObject.name], []];
+    }
+    return [
+      (fsObject as Directory).getChildrenNames(displayAll, longFormat),
+      [],
+    ];
   }
 
-  function executeCd(path: string): void {
-    const res = prop.fileSystem.changeCurrentWorkingDirectory(
-      prop.currentWorkingDirectory,
-      path
+  function executeCd(path: string): string[] {
+    const fileSystemCopy = _.cloneDeep(prop.fileSystem);
+    const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
+      prop.currentWorkingDirectory.path
     );
-    if (res.length === 2) {
-      const directory = _.cloneDeep(res[0] as Directory);
-      const cwd = _.cloneDeep(res[1] as Directory);
-      prop.setFileSystem(directory);
-      prop.setCurrentWorkingDirectory(cwd);
+    const newCwd = fileSystemCopy.changeCurrentWorkingDirectory(cwdCopy, path);
+
+    if (newCwd) {
+      prop.setFileSystem(fileSystemCopy);
+      prop.setCurrentWorkingDirectory(newCwd);
+    } else {
+      // TODO: Add error handling for not a directory
+      return [`cd: '${path}': No such directory`];
     }
+    return [];
+  }
+
+  function executeCat(path: string): [string[], string[]] {
+    const file = path.includes('/')
+      ? prop.fileSystem.getFileSystemObjectFromPath(path)
+      : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
+
+    if (!file) {
+      return [[], [`cat: '${path}': No such file or directory`]];
+    }
+    if (file.isDirectory) {
+      return [[], [`cat: '${path}': Is a directory`]];
+    }
+    return [[(file as File).content || ''], []];
+  }
+
+  function executeTouch(path: string, directory = false): string[] {
+    const fileSystemCopy = _.cloneDeep(prop.fileSystem);
+    const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
+      prop.currentWorkingDirectory.path
+    );
+    let newFileName = '';
+    let dir;
+
+    if (path.includes('/')) {
+      const pathArr = path.split('/');
+      newFileName = pathArr.pop() || '';
+      path = pathArr.join('/');
+      dir = fileSystemCopy.getFileSystemObjectFromPath(path);
+    } else {
+      newFileName = path;
+      dir = cwdCopy;
+    }
+
+    if (!dir) {
+      return [`touch: '${path}': No such file or directory`];
+    } else if (!dir.isDirectory) {
+      return [`touch: '${path}': Not a directory`];
+    }
+
+    if (!dir.getChild(newFileName)) {
+      dir.addFileSystemObject(
+        directory ? new Directory(newFileName) : new File(newFileName)
+      );
+    } else if (directory) {
+      return [`mkdir: '${path}': File exists`];
+    }
+
+    prop.setFileSystem(fileSystemCopy);
+    prop.setCurrentWorkingDirectory(cwdCopy);
+    return [];
+  }
+
+  function executeMkdir(path: string): string[] {
+    return executeTouch(path, true);
   }
 
   function isValid(usertyped: string) {
-    const userInput = usertyped.split(' ');
+    const userInput = usertyped.trim().split(' ');
     const command = input.length > 1 ? userInput.slice(1, 2).join(' ') : '';
+    const args = userInput.slice(2);
+    const flags = args.length > 0 && args[0].startsWith('-') ? args[0] : '';
+    const path =
+      args.length > 0 && args[0].startsWith('-')
+        ? args.slice(1).join(' ')
+        : args.join(' ');
     let output: string[] = [];
+    let error: string[] = [];
+
     switch (command) {
       case 'whoami':
-        console.log('User input ls');
+        console.log('User input whoami');
         break;
       case 'pwd':
-        console.log('User input ls');
+        output = [prop.currentWorkingDirectory.path];
         break;
       case 'man pwd':
-        console.log('User input ls');
+        console.log('User input man pwd');
         break;
       case 'man whoami':
-        console.log('User input ls');
+        console.log('User input man whoami');
         break;
       case 'ls':
-        switch (userInput.slice(2).join(' ')) {
-          case '-a':
-            output = executeList(true, false, '');
-            break;
-          case '-l':
-            output = executeList(false, true, '');
-            break;
-          case '-al':
-            output = executeList(true, true, '');
-            break;
-          case '-la':
-            output = executeList(true, true, '');
-            break;
-          default:
-            output = executeList(false, false, userInput.slice(2).join(' '));
-        }
-        console.log('User input ls');
+        [output, error] = executeList(flags, path === '' ? '.' : path);
         break;
       case 'cd':
-        console.log('User input ls');
-        executeCd(userInput.slice(2).join(' '));
+        error = executeCd(path);
         break;
       case 'touch':
-        console.log('User input ls');
+        error = executeTouch(path === '' ? '.' : path);
         break;
       case 'mkdir':
-        console.log('User input ls');
+        error = executeMkdir(path === '' ? '.' : path);
         break;
       case 'rm':
-        console.log('User input ls');
+        console.log('User input rm');
         break;
       case 'rmdir':
-        console.log('User input ls');
+        console.log('User input rmdir');
         break;
       case 'rm -rf':
-        console.log('User input ls');
+        console.log('User input rm -rf');
         break;
       case 'cp':
-        console.log('User input ls');
+        console.log('User input cp');
         break;
       case 'mv':
-        console.log('User input ls');
+        console.log('User input mv');
         break;
       case 'echo':
-        console.log('User input ls');
+        output = [path];
         break;
       case 'cat':
-        console.log('User input ls');
+        [output, error] = executeCat(path);
         break;
       case 'grep':
-        console.log('User input ls');
+        console.log('User input grep');
         break;
       case 'find':
-        console.log('User input ls');
+        console.log('User input find');
         break;
       case 'chmod':
-        console.log('User input ls');
+        console.log('User input chmod');
         break;
       default:
-        console.log('Invalid command. Try again.');
+        output = ['Invalid command. Try again.'];
         break;
     }
-    return output;
+    return { out: output, err: error };
   }
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -139,9 +190,8 @@ function Terminal(prop: {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const output = isValid(input);
-    console.log(output);
-    setCommands([...commands, input, ...output]);
+    const result = isValid(input);
+    setCommands([...commands, input, ...result.err, ...result.out]);
     setInput('$ ');
   };
 

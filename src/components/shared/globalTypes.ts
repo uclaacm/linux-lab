@@ -187,7 +187,6 @@ export class Directory extends FileSystemObject {
       // If the object is a file, we can't go any deeper
       if (i !== children.length - 1) {
         if (!currentFsObject?.isDirectory) {
-          console.log('here');
           return undefined;
         }
         currentDirectory = <Directory>currentFsObject;

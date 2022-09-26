@@ -33,6 +33,7 @@ function Terminal(prop: {
   }
 
   function executeCd(path: string): string[] {
+    // Make a copy to avoid mutating the original (it's a state variable)
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
       prop.currentWorkingDirectory.path
@@ -64,6 +65,7 @@ function Terminal(prop: {
   }
 
   function executeTouch(path: string, directory = false): string[] {
+    // Make a copy to avoid mutating the original (it's a state variable)
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
       prop.currentWorkingDirectory.path
@@ -71,6 +73,8 @@ function Terminal(prop: {
     let newFileName = '';
     let dir;
 
+    // If the path is absolute, find the directory to create the file in
+    // Otherwise, use the current working directory
     if (path.includes('/')) {
       const pathArr = path.split('/');
       newFileName = pathArr.pop() || '';

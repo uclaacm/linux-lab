@@ -121,6 +121,7 @@ export class Directory extends FileSystemObject {
     if (this.children === undefined) {
       return [];
     }
+    // If we are showing hidden files, we just return all the children
     return Array.from(this.children.values()).filter(
       (child) => !child.isHidden || showHidden
     );
@@ -135,7 +136,8 @@ export class Directory extends FileSystemObject {
 
   getChild(name: string): Directory | File | undefined {
     if (name === '..') {
-      return this.parent;
+      // If we are at the root directory, we can't go up any further
+      return this.parent === undefined ? this : this.parent;
     }
     if (name === '.') {
       return this;
@@ -157,12 +159,14 @@ export class Directory extends FileSystemObject {
     currentWorkingDirectory.isCurrentDirectory = false;
     let newCwd: Directory | File | undefined;
 
+    // If the path is absolute, we start from the root directory and find the new cwd
     if (!path.startsWith('/')) {
       newCwd = currentWorkingDirectory.getFileSystemObjectFromPath(path);
     } else {
       newCwd = this.getFileSystemObjectFromPath(path);
     }
 
+    // If the new cwd is a file or does not exist, we can't cd into it
     if (!newCwd || !newCwd.isDirectory) return undefined;
     (newCwd as Directory).isCurrentDirectory = true;
     return newCwd as Directory;
@@ -171,6 +175,7 @@ export class Directory extends FileSystemObject {
   getFileSystemObjectFromPath(path: string): Directory | File | undefined {
     if (path === this.path) return this;
 
+    // Removes the trailing slash if it exists
     if (path.charAt(path.length - 1) == '/') {
       path = path.slice(0, -1);
     }
@@ -178,6 +183,8 @@ export class Directory extends FileSystemObject {
     const children = path.includes('/') ? path.split('/').slice(1) : [path];
     let currentDirectory = <Directory>this;
     let currentFsObject: Directory | File | undefined;
+
+    // Traverse the path to find the new cwd and return the fs object
     for (let i = 0; i < children.length; i++) {
       if (currentDirectory.isDirectory) {
         currentFsObject = currentDirectory.getChild(children[i]);

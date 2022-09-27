@@ -42,12 +42,11 @@ function Terminal(prop: {
     );
     const newCwd = fileSystemCopy.changeCurrentWorkingDirectory(cwdCopy, path);
 
-    if (newCwd) {
+    if (typeof newCwd === 'object') {
       prop.setFileSystem(fileSystemCopy);
       prop.setCurrentWorkingDirectory(newCwd);
     } else {
-      // TODO: Add error handling for not a directory
-      return [`cd: '${path}': No such directory`];
+      return [newCwd];
     }
     return [];
   }
@@ -109,7 +108,7 @@ function Terminal(prop: {
     return executeTouch(path, true);
   }
 
-  function executeRm(path: string, directory = false): string[] {
+  function executeRm(path: string, flags: string, directory = false): string[] {
     // Make a copy to avoid mutating the original (it's a state variable)
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
@@ -134,9 +133,20 @@ function Terminal(prop: {
       return [`rm: '${path}': No such file or directory`];
     }
 
-    if (!file.isDirectory || directory) {
+    if (
+      (directory && file.isEmpty()) ||
+      !file.isDirectory ||
+      flags.includes('r')
+    ) {
+      if (path === '/') {
+        // TODO: Figure out how to handle this
+        return ["What are you doing? You can't delete the root directory!"];
+      }
       dir.removeFileSystemObject(fileName);
     } else {
+      if (directory && !file.isEmpty()) {
+        return [`rmdir: '${path}': Directory not empty`];
+      }
       return [`rm: '${path}': is a directory`];
     }
 
@@ -145,12 +155,15 @@ function Terminal(prop: {
     return [];
   }
 
-  function executeRmdir(path: string): string[] {
-    return executeRm(path, true);
+  function executeRmdir(path: string, flags: string): string[] {
+    return executeRm(path, flags, true);
   }
 
-  function executeCopy(path: string, destination: string): string[] {
-    console.log(path, destination);
+  function executeCopy(
+    path: string,
+    destination: string,
+    flags: string
+  ): string[] {
     // Make a copy to avoid mutating the original (it's a state variable)
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
@@ -175,14 +188,13 @@ function Terminal(prop: {
 
     if (!file) {
       return [`cp: '${path}': No such file or directory`];
-    } else if (file.isDirectory) {
+    } else if (file.isDirectory && !flags.toLowerCase().includes('r')) {
       return [`cp: '${path}' is a directory (not copied)`];
     } else if (!destDir) {
       return [`cp: '${destination}': No such file or directory`];
     } else if (!destDir.isDirectory) {
       return [`cp: '${destination}': Not a directory`];
     }
-    console.log(file, destDir, newFileName);
     const newFile = _.cloneDeep(file);
     newFile.name = newFileName;
     destDir.addFileSystemObject(newFile);
@@ -191,15 +203,27 @@ function Terminal(prop: {
     return [];
   }
 
+  function executeFind(path: string, flags: string): [string[], string[]] {
+    if (path || flags) {
+      return [[], ['find: Not implemented']];
+    }
+    return [[], []];
+  }
+
   function isValid(usertyped: string) {
     const userInput = usertyped.trim().split(' ');
     const command = input.length > 1 ? userInput.slice(1, 2).join(' ') : '';
     const args = userInput.slice(2);
-    const flags = args.length > 0 && args[0].startsWith('-') ? args[0] : '';
-    let path =
-      args.length > 0 && args[0].startsWith('-')
-        ? args.slice(1).join(' ')
-        : args.join(' ');
+    let flags = '';
+    let i;
+    for (i = 0; i < args.length; i++) {
+      if (args[i].includes('-')) {
+        flags += args[i];
+      } else {
+        break;
+      }
+    }
+    let path = args.slice(i).join(' ');
     path = path === '' ? '.' : path;
     let output: string[] = [];
     let error: string[] = [];
@@ -230,20 +254,17 @@ function Terminal(prop: {
         error = executeMkdir(path);
         break;
       case 'rm':
-        error = executeRm(path);
+        error = executeRm(path, flags);
         break;
       case 'rmdir':
-        error = executeRmdir(path);
-        break;
-      case 'rm -rf':
-        console.log('User input rm -rf');
+        error = executeRmdir(path, flags);
         break;
       case 'cp': {
         const cpArgs = path.split(' ');
-        if (cpArgs.length < 2) {
-          error = ['cp: missing file operand'];
+        if (cpArgs.length !== 2) {
+          error = ['cp: invalid usage'];
         } else {
-          error = executeCopy(cpArgs[0], cpArgs[1]);
+          error = executeCopy(cpArgs[0], cpArgs[1], flags);
         }
         break;
       }
@@ -260,10 +281,13 @@ function Terminal(prop: {
         console.log('User input grep');
         break;
       case 'find':
-        console.log('User input find');
+        [output, error] = executeFind(path, flags);
         break;
       case 'chmod':
         console.log('User input chmod');
+        break;
+      case 'clear':
+        error = ['CLEAR'];
         break;
       default:
         output = ['Invalid command. Try again.'];
@@ -286,7 +310,11 @@ function Terminal(prop: {
     e.preventDefault();
     const result = isValid(input);
     const newHistory = [...inputHistory, input];
-    setCommands([...commands, input, ...result.err, ...result.out]);
+    if (result.err.length > 0 && result.err[0] === 'CLEAR') {
+      setCommands([]);
+    } else {
+      setCommands([...commands, input, ...result.err, ...result.out]);
+    }
     setInputHistory(newHistory);
     setInputHistoryIndex(newHistory.length);
     setInput('$ ');
@@ -305,6 +333,11 @@ function Terminal(prop: {
         console.log(inputHistoryIndex + 1);
         setInputHistoryIndex(inputHistoryIndex + 1);
         setInput(inputHistory[inputHistoryIndex + 1]);
+      } else {
+        setInput('$ ');
+        if (inputHistoryIndex < inputHistory.length) {
+          setInputHistoryIndex(inputHistoryIndex + 1);
+        }
       }
     }
   };

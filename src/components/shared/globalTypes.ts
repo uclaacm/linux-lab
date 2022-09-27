@@ -139,9 +139,10 @@ export class Directory extends FileSystemObject {
       // If we are at the root directory, we can't go up any further
       return this.parent === undefined ? this : this.parent;
     }
-    if (name === '.') {
+    if (name === '.' || name === '') {
       return this;
     }
+
     if (this.children === undefined) {
       return undefined;
     }
@@ -155,7 +156,7 @@ export class Directory extends FileSystemObject {
   changeCurrentWorkingDirectory(
     currentWorkingDirectory: Directory,
     path: string
-  ): Directory | undefined {
+  ): Directory | string {
     currentWorkingDirectory.isCurrentDirectory = false;
     let newCwd: Directory | File | undefined;
 
@@ -167,7 +168,12 @@ export class Directory extends FileSystemObject {
     }
 
     // If the new cwd is a file or does not exist, we can't cd into it
-    if (!newCwd || !newCwd.isDirectory) return undefined;
+    if (!newCwd) {
+      return `cd: '${path}': No such directory`;
+    }
+    if (newCwd instanceof File) {
+      return `cd: '${path}': Not a directory`;
+    }
     (newCwd as Directory).isCurrentDirectory = true;
     return newCwd as Directory;
   }
@@ -200,6 +206,10 @@ export class Directory extends FileSystemObject {
       }
     }
     return currentFsObject;
+  }
+
+  isEmpty(): boolean {
+    return this.children === undefined || this.children.size === 0;
   }
 
   private checkHidden(name: string) {

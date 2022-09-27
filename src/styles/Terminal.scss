@@ -5,10 +5,11 @@
   color: white;
   display: flex;
   flex-direction: column;
-  font-family: 'Fira Code', sans-serif;
+  font-family: 'Fira Code', monospace;
   height: 100%;
   margin: 5vh auto;
   padding: 2vh;
+  position: relative;
   width: 80%;
 }
 
@@ -25,18 +26,9 @@
   width: 100%;
 }
 
-.terminal {
-  background-color: #dfedf8;
-  color: white;
-  font-family: monospace;
-  padding: 45px;
-  position: relative;
-  text-align: left;
-}
-
 .input-container {
-  position: relative;
   padding: 20px;
+  position: relative;
 }
 
 .terminal-bottom-icicle {
@@ -48,18 +40,18 @@
 .terminal-top-icicle {
   position: absolute;
   right: 10px;
-  top: 0px;
+  top: 0;
 }
 
 .ice-glare-left {
-  position: absolute;
   left: -10px;
+  position: absolute;
 }
 
 .ice-glare-right {
+  bottom: -5px;
   position: absolute;
   right: -5px;
-  bottom: -5px;
 }
 
 .terminal-input {
@@ -79,4 +71,3 @@
   flex-direction: column;
   // padding: 20px;
 }
-

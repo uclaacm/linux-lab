@@ -82,3 +82,71 @@ body {
   margin: 0;
   text-align: center;
 }
+
+.terminal {
+  background-color: #dfedf8;
+  color: white;
+  font-family: monospace;
+  padding: 45px;
+  position: relative;
+  text-align: left;
+}
+
+.input-container {
+  position: relative;
+}
+
+.terminal-bottom-icicle {
+  bottom: -50px;
+  left: 0;
+  position: absolute;
+}
+
+.terminal-top-icicle {
+  position: absolute;
+  right: -10px;
+  top: -20px;
+}
+
+.terminal-input {
+  background-color: black;
+  border-color: black;
+  box-sizing: border-box;
+  color: white;
+  font-family: monospace;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+}
+
+.back-button {
+  background-color: white;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  cursor: pointer;
+  float: left;
+  font-size: 15px;
+  margin-left: 67px;
+  padding: 10px 35px;
+  transition-duration: 0.4s;
+}
+
+.back-button:hover {
+  background-color: #e7e7e7;
+}
+
+.next-button {
+  background-color: white;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  cursor: pointer;
+  float: right;
+  font-size: 15px;
+  margin-right: 67px;
+  padding: 10px 35px;
+  transition-duration: 0.4s;
+}
+
+.next-button:hover {
+  background-color: #e7e7e7;
+}

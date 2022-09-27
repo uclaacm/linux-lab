@@ -414,6 +414,18 @@ function Piping(): JSX.Element {
           </div>
         </div>
       </div>
+      <footer>
+        <a href="creation">
+          <button type="button" className="back-button">
+            back
+          </button>
+        </a>
+        <a href="searching">
+          <button type="button" className="next-button">
+            next
+          </button>
+        </a>
+      </footer>
     </div>
   );
 }

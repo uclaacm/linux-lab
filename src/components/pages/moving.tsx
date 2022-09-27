@@ -321,6 +321,18 @@ function Moving(): JSX.Element {
           </svg>
         </div>
       </div>
+      <footer>
+        <a href="stationary">
+          <button type="button" className="back-button">
+            back
+          </button>
+        </a>
+        <a href="creation">
+          <button type="button" className="next-button">
+            next
+          </button>
+        </a>
+      </footer>
     </div>
   );
 }

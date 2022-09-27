@@ -200,6 +200,18 @@ function Stationary(): JSX.Element {
         <span className="try-out-command">man whoami</span> in the terminal.
         What is the output?
       </p>
+      <footer>
+        <a href="intro">
+          <button type="button" className="back-button">
+            back
+          </button>
+        </a>
+        <a href="moving">
+          <button type="button" className="next-button">
+            next
+          </button>
+        </a>
+      </footer>
     </div>
   );
 }

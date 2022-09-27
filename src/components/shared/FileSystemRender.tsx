@@ -77,7 +77,7 @@ function renderForeignObjectNode(nodeDatum: TreeNodeDatum): JSX.Element {
     <g>
       {/* `foreignObject` requires width & height to be explicitly set. */}
       <foreignObject {...foreignObjectProps}>
-        <FileSystemNode nodeDatum={nodeDatum} />
+        <FileSystemNode nodeDatum={nodeDatum as unknown as FileSystemObject} />
       </foreignObject>
     </g>
   );

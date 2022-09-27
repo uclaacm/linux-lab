@@ -161,10 +161,10 @@ export class Directory extends FileSystemObject {
     let newCwd: Directory | File | undefined;
 
     // If the path is absolute, we start from the root directory and find the new cwd
-    if (!path.startsWith('/')) {
-      newCwd = currentWorkingDirectory.getFileSystemObjectFromPath(path);
-    } else {
+    if (path.startsWith('/')) {
       newCwd = this.getFileSystemObjectFromPath(path);
+    } else {
+      newCwd = currentWorkingDirectory.getFileSystemObjectFromPath(path);
     }
 
     // If the new cwd is a file or does not exist, we can't cd into it
@@ -186,7 +186,10 @@ export class Directory extends FileSystemObject {
       path = path.slice(0, -1);
     }
 
-    const children = path.includes('/') ? path.split('/').slice(1) : [path];
+    const children = path.includes('/')
+      ? path.split('/').slice(path.startsWith('/') ? 1 : 0)
+      : [path];
+
     let currentDirectory = <Directory>this;
     let currentFsObject: Directory | File | undefined;
 

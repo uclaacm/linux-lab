@@ -79,7 +79,12 @@ function Terminal(prop: {
     if (path.includes('/')) {
       const pathArr = path.split('/');
       newFileName = pathArr.pop() || '';
-      dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      if (path.startsWith('/')) {
+        dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      } else {
+        console.log(pathArr.join('/'));
+        dir = cwdCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      }
     } else {
       newFileName = path;
       dir = cwdCopy;
@@ -122,7 +127,11 @@ function Terminal(prop: {
     if (path.includes('/')) {
       const pathArr = path.split('/');
       fileName = pathArr.pop() || '';
-      dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      if (path.startsWith('/')) {
+        dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      } else {
+        dir = cwdCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      }
     } else {
       fileName = path;
       dir = cwdCopy;
@@ -180,7 +189,11 @@ function Terminal(prop: {
     if (destination.includes('/')) {
       const pathArr = destination.split('/');
       newFileName = pathArr.pop() || '';
-      destDir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      if (path.startsWith('/')) {
+        destDir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      } else {
+        destDir = cwdCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      }
     } else {
       newFileName = destination;
       destDir = cwdCopy;

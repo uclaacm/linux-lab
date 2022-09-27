@@ -12,6 +12,8 @@ function Terminal(prop: {
 }): JSX.Element {
   const [commands, setCommands] = useState<string[]>([]);
   const [input, setInput] = useState('$ ');
+  const [inputHistory, setInputHistory] = useState<string[]>([]);
+  const [inputHistoryIndex, setInputHistoryIndex] = useState(0);
 
   function executeList(flags: string, path: string): [string[], string[]] {
     const displayAll = flags.includes('a');
@@ -78,8 +80,7 @@ function Terminal(prop: {
     if (path.includes('/')) {
       const pathArr = path.split('/');
       newFileName = pathArr.pop() || '';
-      path = pathArr.join('/');
-      dir = fileSystemCopy.getFileSystemObjectFromPath(path);
+      dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
     } else {
       newFileName = path;
       dir = cwdCopy;
@@ -108,15 +109,98 @@ function Terminal(prop: {
     return executeTouch(path, true);
   }
 
+  function executeRm(path: string, directory = false): string[] {
+    // Make a copy to avoid mutating the original (it's a state variable)
+    const fileSystemCopy = _.cloneDeep(prop.fileSystem);
+    const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
+      prop.currentWorkingDirectory.path
+    );
+    let fileName = '';
+    let dir;
+
+    // If the path is absolute, find the directory to create the file in
+    // Otherwise, use the current working directory
+    if (path.includes('/')) {
+      const pathArr = path.split('/');
+      fileName = pathArr.pop() || '';
+      dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+    } else {
+      fileName = path;
+      dir = cwdCopy;
+    }
+
+    const file = dir?.getChild(fileName);
+    if (!file) {
+      return [`rm: '${path}': No such file or directory`];
+    }
+
+    if (!file.isDirectory || directory) {
+      dir.removeFileSystemObject(fileName);
+    } else {
+      return [`rm: '${path}': is a directory`];
+    }
+
+    prop.setFileSystem(fileSystemCopy);
+    prop.setCurrentWorkingDirectory(cwdCopy);
+    return [];
+  }
+
+  function executeRmdir(path: string): string[] {
+    return executeRm(path, true);
+  }
+
+  function executeCopy(path: string, destination: string): string[] {
+    console.log(path, destination);
+    // Make a copy to avoid mutating the original (it's a state variable)
+    const fileSystemCopy = _.cloneDeep(prop.fileSystem);
+    const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
+      prop.currentWorkingDirectory.path
+    );
+    const file = path.includes('/')
+      ? prop.fileSystem.getFileSystemObjectFromPath(path)
+      : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
+    let destDir;
+    let newFileName;
+
+    // If the path is absolute, find the directory to create the file in
+    // Otherwise, use the current working directory
+    if (destination.includes('/')) {
+      const pathArr = destination.split('/');
+      newFileName = pathArr.pop() || '';
+      destDir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+    } else {
+      newFileName = destination;
+      destDir = cwdCopy;
+    }
+
+    if (!file) {
+      return [`cp: '${path}': No such file or directory`];
+    } else if (file.isDirectory) {
+      return [`cp: '${path}' is a directory (not copied)`];
+    } else if (!destDir) {
+      return [`cp: '${destination}': No such file or directory`];
+    } else if (!destDir.isDirectory) {
+      return [`cp: '${destination}': Not a directory`];
+    }
+    console.log(file, destDir, newFileName);
+    const newFile = _.cloneDeep(file);
+    newFile.name = newFileName;
+    destDir.addFileSystemObject(newFile);
+    prop.setFileSystem(fileSystemCopy);
+    prop.setCurrentWorkingDirectory(cwdCopy);
+    return [];
+  }
+
   function isValid(usertyped: string) {
     const userInput = usertyped.trim().split(' ');
     const command = input.length > 1 ? userInput.slice(1, 2).join(' ') : '';
     const args = userInput.slice(2);
     const flags = args.length > 0 && args[0].startsWith('-') ? args[0] : '';
-    const path =
+    let path =
       args.length > 0 && args[0].startsWith('-')
         ? args.slice(1).join(' ')
         : args.join(' ');
+    path = path === '' ? '.' : path;
     let output: string[] = [];
     let error: string[] = [];
 
@@ -134,29 +218,35 @@ function Terminal(prop: {
         console.log('User input man whoami');
         break;
       case 'ls':
-        [output, error] = executeList(flags, path === '' ? '.' : path);
+        [output, error] = executeList(flags, path);
         break;
       case 'cd':
         error = executeCd(path);
         break;
       case 'touch':
-        error = executeTouch(path === '' ? '.' : path);
+        error = executeTouch(path);
         break;
       case 'mkdir':
-        error = executeMkdir(path === '' ? '.' : path);
+        error = executeMkdir(path);
         break;
       case 'rm':
-        console.log('User input rm');
+        error = executeRm(path);
         break;
       case 'rmdir':
-        console.log('User input rmdir');
+        error = executeRmdir(path);
         break;
       case 'rm -rf':
         console.log('User input rm -rf');
         break;
-      case 'cp':
-        console.log('User input cp');
+      case 'cp': {
+        const cpArgs = path.split(' ');
+        if (cpArgs.length < 2) {
+          error = ['cp: missing file operand'];
+        } else {
+          error = executeCopy(cpArgs[0], cpArgs[1]);
+        }
         break;
+      }
       case 'mv':
         console.log('User input mv');
         break;
@@ -195,8 +285,28 @@ function Terminal(prop: {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const result = isValid(input);
+    const newHistory = [...inputHistory, input];
     setCommands([...commands, input, ...result.err, ...result.out]);
+    setInputHistory(newHistory);
+    setInputHistoryIndex(newHistory.length);
     setInput('$ ');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (inputHistoryIndex > 0) {
+        setInputHistoryIndex(inputHistoryIndex - 1);
+        setInput(inputHistory[inputHistoryIndex - 1]);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (inputHistoryIndex < inputHistory.length - 1) {
+        console.log(inputHistoryIndex + 1);
+        setInputHistoryIndex(inputHistoryIndex + 1);
+        setInput(inputHistory[inputHistoryIndex + 1]);
+      }
+    }
   };
 
   return (
@@ -216,6 +326,7 @@ function Terminal(prop: {
           className="command"
           value={input}
           onChange={handleChange}
+          onKeyDown={(e) => handleKeyDown(e)}
         />
         <div className="terminal-top-icicle">
           <svg

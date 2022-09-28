@@ -219,3 +219,23 @@ export class Directory extends FileSystemObject {
     return name.startsWith('.');
   }
 }
+
+export function getFSObjectHelper(
+  path: string,
+  root: Directory,
+  cwd: Directory,
+  onFileNotFound?: () => string,
+  onIsNotDirectory?: () => string
+): Directory | File | string {
+  const fsObject = path.startsWith('/')
+    ? root.getFileSystemObjectFromPath(path)
+    : cwd.getFileSystemObjectFromPath(path);
+
+  if (fsObject === undefined && onFileNotFound) {
+    return onFileNotFound();
+  } else if (onIsNotDirectory && !fsObject!.isDirectory) {
+    return onIsNotDirectory();
+  } else {
+    return fsObject;
+  }
+}

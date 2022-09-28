@@ -18,7 +18,7 @@ function Terminal(prop: {
   function executeList(flags: string, path: string): [string[], string[]] {
     const displayAll = flags.includes('a');
     const longFormat = flags.includes('l');
-    const fsObject = path.includes('/')
+    const fsObject = path.startsWith('/')
       ? prop.fileSystem.getFileSystemObjectFromPath(path)
       : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
 
@@ -42,7 +42,7 @@ function Terminal(prop: {
     );
     const newCwd = fileSystemCopy.changeCurrentWorkingDirectory(cwdCopy, path);
 
-    if (typeof newCwd === 'object') {
+    if (newCwd instanceof Directory) {
       prop.setFileSystem(fileSystemCopy);
       prop.setCurrentWorkingDirectory(newCwd);
     } else {
@@ -52,7 +52,7 @@ function Terminal(prop: {
   }
 
   function executeCat(path: string): [string[], string[]] {
-    const file = path.includes('/')
+    const file = path.startsWith('/')
       ? prop.fileSystem.getFileSystemObjectFromPath(path)
       : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
 

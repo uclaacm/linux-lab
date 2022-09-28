@@ -2,11 +2,11 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin: 0vh 132px;
+  margin: 0 132px;
   margin-bottom: 10vh;
   position: relative;
-  width: 80%;
   text-align: left;
+  width: 80%;
 }
 
 .task-header {
@@ -47,8 +47,8 @@
 }
 
 .ice-glare-left {
-  left: -10px;
   bottom: -5px;
+  left: -10px;
   position: absolute;
 }
 

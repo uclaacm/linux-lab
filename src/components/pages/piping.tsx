@@ -1,6 +1,7 @@
 import tuxHoldingEgg from '../../assets/images/tux-holding-egg.svg';
 import '../../styles/global.scss';
 import '../../styles/piping.scss';
+import Task from '../shared/Task';
 
 function Piping(): JSX.Element {
   return (
@@ -93,16 +94,18 @@ function Piping(): JSX.Element {
           repeats the provided string by printing it out once to the terminal.
         </p>
       </div>
-      <div className="section">
-        <h3 className="heading-1">Task 1</h3>
-        <p className="body">
-          Try running <span className="try-out-command">echo</span> in the
-          terminal!
-        </p>
-        <div className="try-out-container">
-          <div className="content-box" id="try-out-box"></div>
-        </div>
-      </div>
+      <Task
+        taskPrompt={
+          <p className="body task-prompt">
+            Try running <span className="try-out-command">echo</span> in the
+            terminal!
+          </p>
+        }
+        taskName="Task 1"
+        completed={false}
+        fileSystem={undefined}
+        currentWorkingDirectory={undefined}
+      ></Task>
       <div className="section">
         <h2 className="heading-1">
           The <span className="command-in-heading">cat</span> Command
@@ -130,16 +133,18 @@ function Piping(): JSX.Element {
           Note that listing multiple files will print all the contents out.
         </p>
       </div>
-      <div className="section">
-        <h3 className="heading-1">Task 2</h3>
-        <p className="body">
-          Try running <span className="try-out-command">cat</span> in the
-          terminal!
-        </p>
-        <div className="try-out-container">
-          <div className="content-box" id="try-out-box"></div>
-        </div>
-      </div>
+      <Task
+        taskPrompt={
+          <p className="body task-prompt">
+            Try running <span className="try-out-command">cat</span> in the
+            terminal!
+          </p>
+        }
+        taskName="Task 2"
+        completed={false}
+        fileSystem={undefined}
+        currentWorkingDirectory={undefined}
+      ></Task>
       <footer>
         <a href="creation">
           <button type="button" className="back-button">

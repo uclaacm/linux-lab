@@ -1,5 +1,6 @@
 import tuxHoldingEgg from '../../assets/images/tux-hugging-egg.svg';
 import '../../styles/global.scss';
+import Task from '../shared/Task';
 
 function Moving(): JSX.Element {
   return (
@@ -46,17 +47,31 @@ function Moving(): JSX.Element {
         <span className="try-out-command">cd Notes</span> lets me move into
         Notes, making Notes my new current directory.
       </p>
-      <h2 className="heading-1">Task 1</h2>
-      <p className="body">
-        Try running <span className="try-out-command">pwd</span> before and
-        after <span className="try-out-command">cd-ing</span> into a directory.
-        What do you notice?
-      </p>
-      <h2 className="heading-1">Task 2</h2>
-      <p className="body">
-        Something seems amiss in this cave. Is there a secret hiding in plain
-        sight?
-      </p>
+      <Task
+        taskPrompt={
+          <p className="body task-prompt">
+            Try running <span className="try-out-command">pwd</span> before and
+            after <span className="try-out-command">cd-ing</span> into a
+            directory. What do you notice?
+          </p>
+        }
+        taskName="Task 1"
+        completed={false}
+        fileSystem={undefined}
+        currentWorkingDirectory={undefined}
+      ></Task>
+      <Task
+        taskPrompt={
+          <p className="body task-prompt">
+            Something seems amiss in this cave. Is there a secret hiding in
+            plain sight?
+          </p>
+        }
+        taskName="Task 2"
+        completed={false}
+        fileSystem={undefined}
+        currentWorkingDirectory={undefined}
+      ></Task>
       <footer>
         <a href="stationary">
           <button type="button" className="back-button">

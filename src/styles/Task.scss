@@ -2,10 +2,11 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin: 1vh auto;
-  margin-bottom: 5vh;
+  margin: 0vh 132px;
+  margin-bottom: 10vh;
   position: relative;
-  width: 85%;
+  width: 80%;
+  text-align: left;
 }
 
 .task-header {
@@ -39,10 +40,20 @@
   color: #d9d9d9;
 }
 
-.terminal {
-  align-self: center;
-  background-color: black;
-  height: 15vh;
-  margin: 5vh auto;
-  width: 80%;
+.ice-glare-right {
+  bottom: -5px;
+  position: absolute;
+  right: -5px;
+}
+
+.ice-glare-left {
+  left: -10px;
+  bottom: -5px;
+  position: absolute;
+}
+
+.terminal-bottom-icicle {
+  bottom: -50px;
+  left: 0;
+  position: absolute;
 }

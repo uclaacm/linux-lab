@@ -90,6 +90,7 @@ function Searching(): JSX.Element {
             completed={true}
             fileSystem={initFileSystem}
             currentWorkingDirectory={currentWorkingDirectory}
+            displayFileSystem={true}
           />
           <Task
             taskPrompt={taskPrompts[1]}

@@ -5,14 +5,14 @@
 
   border: 3px solid #9a4d7f;
   border-radius: 5px;
+  bottom: 6em;
   color: #9a4d7f;
   cursor: pointer;
   font-family: Bowlby One SC, sans-serif;
 
   font-size: 20px;
   height: 60px;
-  left: 27%;
+  left: 40%; // TODO: fix positioning of button
   position: absolute;
-  top: 60%;
-  width: 205px;
+  width: 200px;
 }

@@ -1,11 +1,12 @@
 import '../../styles/startButton.scss';
+import '../../styles/intro.scss';
 import Snowfall from 'react-snowfall';
 import img from '../../assets/landing.svg';
 
 function Landing(): JSX.Element {
   return (
-    <div style={{ position: 'relative' }}>
-      <img src={img}></img>
+    <div className="landing">
+      <img className="landing-background" src={img}></img>
       <a href="intro">
         <button className="startbutton">START</button>
       </a>

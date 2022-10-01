@@ -21,7 +21,7 @@
     "react-d3-tree": "^3.3.4",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
-    "react-router-dom": "^6.3.0",
+    "react-router-dom": "^6.4.1",
     "react-snowfall": "^1.1.2",
     "stylelint-config-prettier": "^9.0.3",
     "yarn": "^1.22.19"

@@ -6,7 +6,7 @@
   margin-bottom: 10vh;
   position: relative;
   text-align: left;
-  width: 80%;
+  width: calc(100% - 2 * 132px);
 }
 
 .task-header {

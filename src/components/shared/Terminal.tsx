@@ -114,6 +114,9 @@ function Terminal(prop: {
   }
 
   function executeRm(path: string, flags: string, directory = false): string[] {
+    if (path === '.' || path === '..') {
+      return ['rm: "." and ".." may not be removed'];
+    }
     // Make a copy to avoid mutating the original (it's a state variable)
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
@@ -142,11 +145,10 @@ function Terminal(prop: {
       return [`rm: '${path}': No such file or directory`];
     }
 
-    if (
-      (directory && file.isEmpty()) ||
-      !file.isDirectory ||
-      flags.includes('r')
-    ) {
+    const rmDirAndEmptyDirectory = directory && file.isEmpty();
+    const removeDirectory = rmDirAndEmptyDirectory || flags.includes('r');
+
+    if (!file.isDirectory || removeDirectory) {
       if (path === '/') {
         // TODO: Figure out how to handle this
         return ["What are you doing? You can't delete the root directory!"];
@@ -178,7 +180,7 @@ function Terminal(prop: {
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
       prop.currentWorkingDirectory.path
     );
-    const file = path.includes('/')
+    const file = path.startsWith('/')
       ? prop.fileSystem.getFileSystemObjectFromPath(path)
       : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
     let destDir;
@@ -201,15 +203,22 @@ function Terminal(prop: {
 
     if (!file) {
       return [`cp: '${path}': No such file or directory`];
-    } else if (file.isDirectory && !flags.toLowerCase().includes('r')) {
-      return [`cp: '${path}' is a directory (not copied)`];
-    } else if (!destDir) {
-      return [`cp: '${destination}': No such file or directory`];
-    } else if (!destDir.isDirectory) {
-      return [`cp: '${destination}': Not a directory`];
     }
+    if (file.isDirectory && !flags.toLowerCase().includes('r')) {
+      return [`cp: '${path}' is a directory (not copied)`];
+    }
+    if (!destDir) {
+      return [`cp: '${destination}': No such file or directory`];
+    }
+
+    const childDir = destDir.getChild(newFileName);
     const newFile = _.cloneDeep(file);
-    newFile.name = newFileName;
+    if (childDir && childDir.isDirectory) {
+      destDir = childDir;
+    } else {
+      newFile.name = newFileName;
+    }
+
     destDir.addFileSystemObject(newFile);
     prop.setFileSystem(fileSystemCopy);
     prop.setCurrentWorkingDirectory(cwdCopy);
@@ -309,7 +318,7 @@ function Terminal(prop: {
     return { out: output, err: error };
   }
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+  function handleChange(e: React.FormEvent<HTMLInputElement>) {
     const currInput = e.currentTarget.value;
     // Prevent the user from removing the '$ ' from the input
     if (currInput.split(' ').length < 2 || currInput.split(' ')[0] !== '$') {
@@ -317,9 +326,9 @@ function Terminal(prop: {
     } else {
       setInput(e.currentTarget.value);
     }
-  };
+  }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const result = isValid(input);
     const newHistory = [...inputHistory, input];
@@ -331,9 +340,9 @@ function Terminal(prop: {
     setInputHistory(newHistory);
     setInputHistoryIndex(newHistory.length);
     setInput('$ ');
-  };
+  }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (inputHistoryIndex > 0) {
@@ -353,7 +362,7 @@ function Terminal(prop: {
         }
       }
     }
-  };
+  }
 
   return (
     <div className="terminal">

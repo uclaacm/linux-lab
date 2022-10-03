@@ -182,13 +182,14 @@ export class Directory extends FileSystemObject {
     if (path === this.path) return this;
 
     // Removes the trailing slash if it exists
-    if (path.charAt(path.length - 1) == '/') {
+    if (path.endsWith('/')) {
       path = path.slice(0, -1);
     }
 
-    const children = path.includes('/')
-      ? path.split('/').slice(path.startsWith('/') ? 1 : 0)
-      : [path];
+    // Remove leading slash if it exists
+    const children = path.startsWith('/')
+      ? path.split('/').slice(1)
+      : path.split('/');
 
     let currentDirectory = <Directory>this;
     let currentFsObject: Directory | File | undefined;

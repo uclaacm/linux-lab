@@ -4,7 +4,7 @@ import posixFileSystem from '../../assets/images/posix-file-system.png';
 function Intro(): JSX.Element {
   return (
     <div className="intro-container">
-      <div className="lesson-title">INTRO TO LINUX</div>
+      <h1 className="lesson-title">INTRO TO LINUX</h1>
       <p className="body">
         Linux is a family of operating systems. An operating system is a piece
         of software that acts as an interface between the user and the
@@ -28,7 +28,7 @@ function Intro(): JSX.Element {
         computer to do what you want!
       </p>
 
-      <div className="heading-1">THE POSIX FILE SYSTEM</div>
+      <h2 className="heading-1">THE POSIX FILE SYSTEM</h2>
       <p className="body">
         POSIX (Portable Operating System Interface) standard is one of the
         primary standards adopted by Linux. It was created as part of a set of
@@ -50,7 +50,7 @@ function Intro(): JSX.Element {
         alt="posix file system"
         width="60%"
       />
-      <div className="heading-1">TUX</div>
+      <h2 className="heading-1">TUX</h2>
       <p className="body">
         Tux the penguin is the official brand character of Linux. The creator of
         Linux, Linus Torvalds, wanted their branch character to be a penguin as

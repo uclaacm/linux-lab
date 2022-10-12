@@ -1,5 +1,6 @@
 import '../../styles/intro.scss';
 import posixFileSystem from '../../assets/images/posix-file-system.png';
+import tux from '../..assets/images/Tux.png';
 // import "../../styles/global.scss"
 function Intro(): JSX.Element {
   return (
@@ -59,6 +60,11 @@ function Intro(): JSX.Element {
         James Hughes. His name is meant to stand for &ldquo;(T)orvalds
         (U)ni(X)&rdquo;, or tuxedo, which a penguin resembles.
       </p>
+      <img
+        className="image-box"
+        src={tux}
+        alt="Image of Tux"
+      />
       <footer>
         <a href="/">
           <button type="button" className="back-button">

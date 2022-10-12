@@ -2,10 +2,11 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin: 1vh auto;
-  margin-bottom: 5vh;
+  margin: 0 132px;
+  margin-bottom: 10vh;
   position: relative;
-  width: 85%;
+  text-align: left;
+  width: calc(100% - 2 * 132px);
 }
 
 .task-header {
@@ -24,6 +25,8 @@
 .task-content {
   align-self: center;
   background-color: #e0edf8;
+  padding-bottom: 1%;
+  padding-top: 1%;
   width: 100%;
 }
 
@@ -39,10 +42,20 @@
   color: #d9d9d9;
 }
 
-.terminal {
-  align-self: center;
-  background-color: #dfedf8;
-  height: 15vh;
-  margin: 5vh auto;
-  width: 80%;
+.ice-glare-right {
+  bottom: -5px;
+  position: absolute;
+  right: -5px;
+}
+
+.ice-glare-left {
+  bottom: -5px;
+  left: -10px;
+  position: absolute;
+}
+
+.terminal-bottom-icicle {
+  bottom: -50px;
+  left: 0;
+  position: absolute;
 }

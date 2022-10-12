@@ -35,8 +35,8 @@
 }
 
 .input-container {
-  position: relative;
   padding: 20px;
+  position: relative;
 }
 
 .terminal-bottom-icicle {
@@ -48,18 +48,18 @@
 .terminal-top-icicle {
   position: absolute;
   right: 10px;
-  top: 0px;
+  top: 0;
 }
 
 .ice-glare-left {
-  position: absolute;
   left: -10px;
+  position: absolute;
 }
 
 .ice-glare-right {
+  bottom: -5px;
   position: absolute;
   right: -5px;
-  bottom: -5px;
 }
 
 .terminal-input {

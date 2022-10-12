@@ -33,7 +33,7 @@
 }
 
 .content-box {
-  background: #d9d9d9;
+  background: #E0EDF8;
   font-weight: 400;
   margin: 2% 4%;
   padding: 2%;
@@ -100,6 +100,8 @@
 }
 
 .terminal-container{
+  height: 100px;
+  height: 225px;
   // margin-left: 50px;
   // margin-right: 50px;
   // align-items: left;
@@ -109,8 +111,6 @@
   // line-height: 33px;
   // vertical-align: top;
   margin: 2% 4%;
-  padding: 2%;
-  height: 100px;
   margin: 0.5rem 0;
-  height: 225px;
+  padding: 2%;
 }

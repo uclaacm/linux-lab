@@ -60,18 +60,18 @@ function Moving(): JSX.Element {
             viewBox="0 0 245 189"
             fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 116L125 1H96.7742L0 97V116Z" fill="url(#paint0_linear_0_1)" fill-opacity="0.5" />
-            <path d="M0 188.5L244.5 0H141L0 130.844V188.5Z" fill="url(#paint1_linear_0_1)" fill-opacity="0.5" />
+            <path d="M0 116L125 1H96.7742L0 97V116Z" fill="url(#paint0_linear_0_1)" fillOpacity="0.5" />
+            <path d="M0 188.5L244.5 0H141L0 130.844V188.5Z" fill="url(#paint1_linear_0_1)" fillOpacity="0.5" />
             <defs>
               <linearGradient id="paint0_linear_0_1" x1="37.5" y1="73.5" x2="125" y2="-11" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white" />
-                <stop offset="0.540476" stop-color="white" stop-opacity="0.567708" />
-                <stop offset="1" stop-color="white" stop-opacity="0" />
+                <stop stopColor="white" />
+                <stop offset="0.540476" stopColor="white" stopOpacity="0.567708" />
+                <stop offset="1" stopColor="white" stopOpacity="0" />
               </linearGradient>
               <linearGradient id="paint1_linear_0_1" x1="63.5" y1="111" x2="154.5" y2="20.5" gradientUnits="userSpaceOnUse">
-                <stop offset="0.28125" stop-color="white" stop-opacity="0.8" />
-                <stop offset="0.416667" stop-color="white" stop-opacity="0.583333" />
-                <stop offset="1" stop-color="white" stop-opacity="0" />
+                <stop offset="0.28125" stopColor="white" stopOpacity="0.8" />
+                <stop offset="0.416667" stopColor="white" stopOpacity="0.583333" />
+                <stop offset="1" stopColor="white" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>
@@ -83,12 +83,12 @@ function Moving(): JSX.Element {
             viewBox="0 0 134 114"
             fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <path d="M40.5714 114L134 24V0.5L0 114H40.5714Z" fill="url(#paint0_linear_558_38)" fill-opacity="0.5" />
+            <path d="M40.5714 114L134 24V0.5L0 114H40.5714Z" fill="url(#paint0_linear_558_38)" fillOpacity="0.5" />
             <defs>
               <linearGradient id="paint0_linear_558_38" x1="71.7802" y1="77.2229" x2="131.963" y2="7.38618" gradientUnits="userSpaceOnUse">
-                <stop offset="0.28125" stop-color="white" stop-opacity="0.5" />
-                <stop offset="0.416667" stop-color="white" stop-opacity="0.3" />
-                <stop offset="1" stop-color="white" stop-opacity="0.1" />
+                <stop offset="0.28125" stopColor="white" stopOpacity="0.5" />
+                <stop offset="0.416667" stopColor="white" stopOpacity="0.3" />
+                <stop offset="1" stopColor="white" stopOpacity="0.1" />
               </linearGradient>
             </defs>
           </svg>
@@ -154,18 +154,18 @@ function Moving(): JSX.Element {
             viewBox="0 0 245 189"
             fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 116L125 1H96.7742L0 97V116Z" fill="url(#paint0_linear_0_1)" fill-opacity="0.5" />
-            <path d="M0 188.5L244.5 0H141L0 130.844V188.5Z" fill="url(#paint1_linear_0_1)" fill-opacity="0.5" />
+            <path d="M0 116L125 1H96.7742L0 97V116Z" fill="url(#paint0_linear_0_1)" fillOpacity="0.5" />
+            <path d="M0 188.5L244.5 0H141L0 130.844V188.5Z" fill="url(#paint1_linear_0_1)" fillOpacity="0.5" />
             <defs>
               <linearGradient id="paint0_linear_0_1" x1="37.5" y1="73.5" x2="125" y2="-11" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white" />
-                <stop offset="0.540476" stop-color="white" stop-opacity="0.567708" />
-                <stop offset="1" stop-color="white" stop-opacity="0" />
+                <stop stopColor="white" />
+                <stop offset="0.540476" stopColor="white" stopOpacity="0.567708" />
+                <stop offset="1" stopColor="white" stopOpacity="0" />
               </linearGradient>
               <linearGradient id="paint1_linear_0_1" x1="63.5" y1="111" x2="154.5" y2="20.5" gradientUnits="userSpaceOnUse">
-                <stop offset="0.28125" stop-color="white" stop-opacity="0.8" />
-                <stop offset="0.416667" stop-color="white" stop-opacity="0.583333" />
-                <stop offset="1" stop-color="white" stop-opacity="0" />
+                <stop offset="0.28125" stopColor="white" stopOpacity="0.8" />
+                <stop offset="0.416667" stopColor="white" stopOpacity="0.583333" />
+                <stop offset="1" stopColor="white" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>
@@ -177,12 +177,12 @@ function Moving(): JSX.Element {
             viewBox="0 0 134 114"
             fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <path d="M40.5714 114L134 24V0.5L0 114H40.5714Z" fill="url(#paint0_linear_558_38)" fill-opacity="0.5" />
+            <path d="M40.5714 114L134 24V0.5L0 114H40.5714Z" fill="url(#paint0_linear_558_38)" fillOpacity="0.5" />
             <defs>
               <linearGradient id="paint0_linear_558_38" x1="71.7802" y1="77.2229" x2="131.963" y2="7.38618" gradientUnits="userSpaceOnUse">
-                <stop offset="0.28125" stop-color="white" stop-opacity="0.5" />
-                <stop offset="0.416667" stop-color="white" stop-opacity="0.3" />
-                <stop offset="1" stop-color="white" stop-opacity="0.1" />
+                <stop offset="0.28125" stopColor="white" stopOpacity="0.5" />
+                <stop offset="0.416667" stopColor="white" stopOpacity="0.3" />
+                <stop offset="1" stopColor="white" stopOpacity="0.1" />
               </linearGradient>
             </defs>
           </svg>

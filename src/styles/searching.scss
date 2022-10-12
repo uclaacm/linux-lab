@@ -47,16 +47,17 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  margin-bottom: 100px;
 }
 
 #lesson-content > div {
-  background-color: #d9d9d9;
+  background-image: url('../assets/images/iceberg.png');
   margin-left: 4vw;
   margin-right: 4vw;
   padding: 1em;
-  padding-bottom: 5vh;
   text-align: center;
-  width: 20%;
+  width: 320px;
+  height: 170px ;
 }
 
 #task-description {
@@ -91,3 +92,16 @@
   right: 1vw;
   width: 30%;
 }
+
+.icicle-info-left{
+  position: absolute;
+  right: 52vw;
+
+}
+
+.icicle-info-right{
+  position: absolute;
+  left: 53vw;
+  bottom: 85px;
+}
+

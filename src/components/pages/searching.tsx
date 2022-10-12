@@ -44,7 +44,7 @@ function Searching(): JSX.Element {
   return (
     <>
       <div className="container">
-        <h2 className="lesson-title">Searching</h2>
+        <h1 className="lesson-title">Searching</h1>
         <p className="body">
           Manually looking through all the file names in a directory or all the
           text in a file to find a specific string often takes forever. But

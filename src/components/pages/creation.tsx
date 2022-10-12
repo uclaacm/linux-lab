@@ -16,10 +16,12 @@ function Creation(): JSX.Element {
       <p className="body">
         The <span className="try-out-command">touch</span> command makes a new
         empty file.
-        <br />
+      </p>
+      <p className="body">
         Run <span className="try-out-command">touch emptyFile</span> and see how
         the file system diagram changes.
-        <br />
+      </p>
+      <p className="body">
         If you then run <span className="try-out-command">cat emptyFile</span>,
         notice how nothing is printed because the file has no contents!
       </p>
@@ -27,14 +29,16 @@ function Creation(): JSX.Element {
         The <span className="command-in-heading">mkdir</span> Command
       </h2>
       <p className="body">
-        <span className="try-out-command">The mkdir</span> command makes a new
+        The <span className="try-out-command">mkdir</span> command makes a new
         empty directory.
-        <br />
+      </p>
+      <p className="body">
         Run <span className="try-out-command">mkdir newDir</span> and see how
         the file system diagram changes.
-        <br />
+      </p>
+      <p className="body">
         Notice how you can now change into the newly-created directory with{' '}
-        <span className="try-out-command">cd newDir</span>!
+        <span className="try-out-command">cd newDir</span> !
       </p>
       <p className="body">
         Removing commands are quite similar (plus, the names basically tell you

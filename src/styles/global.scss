@@ -8,12 +8,11 @@
   font-family: Bowlby One SC, sans-serif;
   font-size: 40px;
   font-style: Regular;
-  line-height: 61px;
+  line-height: 61px, 100%;
   margin-left: 132px;
   text-align: left;
   -webkit-text-stroke: 2px #9a4d7f;
   vertical-align: top;
-  width: '4px';
 }
 
 .heading-1 {
@@ -21,7 +20,7 @@
   font-family: Bowlby One SC, sans-serif;
   font-size: 30px;
   font-style: Regular;
-  line-height: 46px;
+  line-height: 46px, 100%;
   margin-left: 132px;
   text-align: left;
   -webkit-text-stroke: 2px #9a4d7f;
@@ -33,7 +32,7 @@
   font-family: Poppins, sans-serif;
   font-size: 20px;
   font-style: Regular;
-  line-height: 45px;
+  line-height: 30px, 100%;
   margin-left: 132px;
   margin-right: 132px;
 
@@ -47,7 +46,7 @@
   color: black;
   font-family: Fira Code, sans-serif;
   font-size: 25px;
-  line-height: 33px;
+  line-height: 33px, 100%;
   padding-left: 20px;
   padding-right: 20px;
   text-align: left;
@@ -62,7 +61,7 @@
   color: black;
   font-family: Fira Code, sans-serif;
   font-size: 20px;
-  line-height: 26px;
+  line-height: 26px, 100%;
   padding-left: 12px;
   padding-right: 12px;
   text-align: left;

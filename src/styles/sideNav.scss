@@ -58,9 +58,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-menu {
   background: #6588cb;
   font-size: 1.15em;
-  text-align: left;
   overflow-y: hidden !important;
   padding: 2.5em 1.5em 0;
+  text-align: left;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -90,7 +90,16 @@ Note: Beware of modifying this element as it can break the animations - you shou
   text-decoration: none;
 }
 
+
 .menu-link:hover {
   cursor: pointer;
   font-size: larger;
+}
+
+.curr-link {
+  color: white;
+  padding: 0.5em;
+  font-size: larger;
+  font-weight: bolder;
+  text-decoration: underline;
 }

@@ -18,10 +18,11 @@ export default function Header(): JSX.Element {
       >
         {Array.from(PageMapping.keys()).map((path) =>
           PageMapping.get(path)?.hideHeader ? null : (
+            // {()=> {if(location.pathname === path) setActive(true);}
             <Link
               key={path}
               onClick={() => setOpen(false)}
-              className="menu-link"
+              className={location.pathname === path ? "curr-link" :"menu-link"}
               to={path}
             >
               {PageMapping.get(path)?.pageName}

@@ -22,7 +22,7 @@ export default function Header(): JSX.Element {
             <Link
               key={path}
               onClick={() => setOpen(false)}
-              className={location.pathname === path ? "curr-link" :"menu-link"}
+              className={location.pathname === path ? 'curr-link' : 'menu-link'}
               to={path}
             >
               {PageMapping.get(path)?.pageName}

@@ -90,7 +90,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
   text-decoration: none;
 }
 
-
 .menu-link:hover {
   cursor: pointer;
   font-size: larger;
@@ -98,8 +97,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .curr-link {
   color: white;
-  padding: 0.5em;
   font-size: larger;
   font-weight: bolder;
+  padding: 0.5em;
   text-decoration: underline;
 }

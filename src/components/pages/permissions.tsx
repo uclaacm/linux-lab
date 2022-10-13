@@ -12,7 +12,7 @@ function Permissions(): JSX.Element {
   return (
     <div>
       <div className="permissionContainer">
-        <h2 className="lesson-title">Permissions</h2>
+        <h1 className="lesson-title">Permissions</h1>
         <div className="body">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -32,36 +32,36 @@ function Permissions(): JSX.Element {
         >
           placeholder
         </div>
-        <div className="heading-1">
+        <h2 className="heading-1">
           The first letter (red) indicates the file type.
-        </div>
+        </h2>
         <div className="body">
           Lorem <span className="try-out-command">d</span> dolor sit amet,
           consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
           labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
           exercitation
         </div>
-        <div className="heading-1">
+        <h2 className="heading-1">
           The first letter (red) indicates the file type.
-        </div>
+        </h2>
         <div className="body">
           Lorem <span className="try-out-command">d</span> dolor sit amet,
           consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
           labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
           exercitation
         </div>
-        <div className="heading-1">
+        <h2 className="heading-1">
           The first letter (red) indicates the file type.
-        </div>
+        </h2>
         <div className="body">
           Lorem <span className="try-out-command">d</span> dolor sit amet,
           consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
           labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
           exercitation
         </div>
-        <div className="heading-1">
+        <h2 className="heading-1">
           The first letter (red) indicates the file type.
-        </div>
+        </h2>
         <div className="body">
           Lorem <span className="try-out-command">d</span> dolor sit amet,
           consectetur adipiscing elit, sed do eiusmod tempor incididunt ut

@@ -7,13 +7,16 @@ import '../../styles/global.scss';
 
 function Searching(): JSX.Element {
   const taskPrompts = [
-    <p key={'search-task-text-1'}>
+    <p className="body task-prompt" key={'search-task-text-1'}>
       Tux&apos;s friend Ruby lost her <strong>glasses.txt</strong>. Can you{' '}
       <i>find</i> where she left them?
     </p>,
-    `Ruby was so impressed by your work that she recommended you to Bob. Bob
-    was packing for a trip and couldn't find where he placed his
-    "camera”. Can you find what box (i.e., file) he placed a “camera”?`,
+    <p className="body task-prompt" key={'search-task-text-2'}>
+      Ruby was so impressed by your work that she recommended you to Bob. Bob
+      was packing for a trip and couldn&apos;t find where he placed his
+      &quot;camera&quot;. Can you find what box (i.e., file) he placed a
+      &quot;camera&quot;?
+    </p>,
   ];
 
   const initFileSystem = new Directory(
@@ -41,7 +44,7 @@ function Searching(): JSX.Element {
   return (
     <>
       <div className="container">
-        <h2 className="lesson-title">Searching</h2>
+        <h1 className="lesson-title">Searching</h1>
         <p className="body">
           Manually looking through all the file names in a directory or all the
           text in a file to find a specific string often takes forever. But
@@ -90,6 +93,7 @@ function Searching(): JSX.Element {
             completed={true}
             fileSystem={initFileSystem}
             currentWorkingDirectory={currentWorkingDirectory}
+            displayFileSystem={true}
           />
           <Task
             taskPrompt={taskPrompts[1]}

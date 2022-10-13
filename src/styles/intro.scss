@@ -17,3 +17,12 @@
   margin-top: 5vh;
   width: 50vw;
 }
+
+.landing-background {
+  width: 100%;
+}
+// TODO: we don't want to be able to scroll vertically at certain wider screen sizes
+.landing {
+  background-color: #739ae7;
+  height: 100vh;
+}

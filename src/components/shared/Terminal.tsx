@@ -12,11 +12,13 @@ function Terminal(prop: {
 }): JSX.Element {
   const [commands, setCommands] = useState<string[]>([]);
   const [input, setInput] = useState('$ ');
+  const [inputHistory, setInputHistory] = useState<string[]>([]);
+  const [inputHistoryIndex, setInputHistoryIndex] = useState(0);
 
   function executeList(flags: string, path: string): [string[], string[]] {
     const displayAll = flags.includes('a');
     const longFormat = flags.includes('l');
-    const fsObject = path.includes('/')
+    const fsObject = path.startsWith('/')
       ? prop.fileSystem.getFileSystemObjectFromPath(path)
       : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
 
@@ -33,24 +35,24 @@ function Terminal(prop: {
   }
 
   function executeCd(path: string): string[] {
+    // Make a copy to avoid mutating the original (it's a state variable)
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
       prop.currentWorkingDirectory.path
     );
     const newCwd = fileSystemCopy.changeCurrentWorkingDirectory(cwdCopy, path);
 
-    if (newCwd) {
+    if (newCwd instanceof Directory) {
       prop.setFileSystem(fileSystemCopy);
       prop.setCurrentWorkingDirectory(newCwd);
     } else {
-      // TODO: Add error handling for not a directory
-      return [`cd: '${path}': No such directory`];
+      return [newCwd];
     }
     return [];
   }
 
   function executeCat(path: string): [string[], string[]] {
-    const file = path.includes('/')
+    const file = path.startsWith('/')
       ? prop.fileSystem.getFileSystemObjectFromPath(path)
       : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
 
@@ -64,6 +66,7 @@ function Terminal(prop: {
   }
 
   function executeTouch(path: string, directory = false): string[] {
+    // Make a copy to avoid mutating the original (it's a state variable)
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
       prop.currentWorkingDirectory.path
@@ -71,11 +74,17 @@ function Terminal(prop: {
     let newFileName = '';
     let dir;
 
+    // If the path is absolute, find the directory to create the file in
+    // Otherwise, use the current working directory
     if (path.includes('/')) {
       const pathArr = path.split('/');
       newFileName = pathArr.pop() || '';
-      path = pathArr.join('/');
-      dir = fileSystemCopy.getFileSystemObjectFromPath(path);
+      if (path.startsWith('/')) {
+        dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      } else {
+        console.log(pathArr.join('/'));
+        dir = cwdCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      }
     } else {
       newFileName = path;
       dir = cwdCopy;
@@ -104,15 +113,140 @@ function Terminal(prop: {
     return executeTouch(path, true);
   }
 
+  function executeRm(path: string, flags: string, directory = false): string[] {
+    if (path === '.' || path === '..') {
+      return ['rm: "." and ".." may not be removed'];
+    }
+    // Make a copy to avoid mutating the original (it's a state variable)
+    const fileSystemCopy = _.cloneDeep(prop.fileSystem);
+    const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
+      prop.currentWorkingDirectory.path
+    );
+    let fileName = '';
+    let dir;
+
+    // If the path is absolute, find the directory to create the file in
+    // Otherwise, use the current working directory
+    if (path.includes('/')) {
+      const pathArr = path.split('/');
+      fileName = pathArr.pop() || '';
+      if (path.startsWith('/')) {
+        dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      } else {
+        dir = cwdCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      }
+    } else {
+      fileName = path;
+      dir = cwdCopy;
+    }
+
+    const file = dir?.getChild(fileName);
+    if (!file) {
+      return [`rm: '${path}': No such file or directory`];
+    }
+
+    const rmDirAndEmptyDirectory = directory && file.isEmpty();
+    const removeDirectory = rmDirAndEmptyDirectory || flags.includes('r');
+
+    if (!file.isDirectory || removeDirectory) {
+      if (path === '/') {
+        // TODO: Figure out how to handle this
+        return ["What are you doing? You can't delete the root directory!"];
+      }
+      dir.removeFileSystemObject(fileName);
+    } else {
+      if (directory && !file.isEmpty()) {
+        return [`rmdir: '${path}': Directory not empty`];
+      }
+      return [`rm: '${path}': is a directory`];
+    }
+
+    prop.setFileSystem(fileSystemCopy);
+    prop.setCurrentWorkingDirectory(cwdCopy);
+    return [];
+  }
+
+  function executeRmdir(path: string, flags: string): string[] {
+    return executeRm(path, flags, true);
+  }
+
+  function executeCopy(
+    path: string,
+    destination: string,
+    flags: string
+  ): string[] {
+    // Make a copy to avoid mutating the original (it's a state variable)
+    const fileSystemCopy = _.cloneDeep(prop.fileSystem);
+    const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
+      prop.currentWorkingDirectory.path
+    );
+    const file = path.startsWith('/')
+      ? prop.fileSystem.getFileSystemObjectFromPath(path)
+      : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
+    let destDir;
+    let newFileName;
+
+    // If the path is absolute, find the directory to create the file in
+    // Otherwise, use the current working directory
+    if (destination.includes('/')) {
+      const pathArr = destination.split('/');
+      newFileName = pathArr.pop() || '';
+      if (path.startsWith('/')) {
+        destDir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      } else {
+        destDir = cwdCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      }
+    } else {
+      newFileName = destination;
+      destDir = cwdCopy;
+    }
+
+    if (!file) {
+      return [`cp: '${path}': No such file or directory`];
+    }
+    if (file.isDirectory && !flags.toLowerCase().includes('r')) {
+      return [`cp: '${path}' is a directory (not copied)`];
+    }
+    if (!destDir) {
+      return [`cp: '${destination}': No such file or directory`];
+    }
+
+    const childDir = destDir.getChild(newFileName);
+    const newFile = _.cloneDeep(file);
+    if (childDir && childDir.isDirectory) {
+      destDir = childDir;
+    } else {
+      newFile.name = newFileName;
+    }
+
+    destDir.addFileSystemObject(newFile);
+    prop.setFileSystem(fileSystemCopy);
+    prop.setCurrentWorkingDirectory(cwdCopy);
+    return [];
+  }
+
+  function executeFind(path: string, flags: string): [string[], string[]] {
+    if (path || flags) {
+      return [[], ['find: Not implemented']];
+    }
+    return [[], []];
+  }
+
   function isValid(usertyped: string) {
     const userInput = usertyped.trim().split(' ');
     const command = input.length > 1 ? userInput.slice(1, 2).join(' ') : '';
     const args = userInput.slice(2);
-    const flags = args.length > 0 && args[0].startsWith('-') ? args[0] : '';
-    const path =
-      args.length > 0 && args[0].startsWith('-')
-        ? args.slice(1).join(' ')
-        : args.join(' ');
+    let flags = '';
+    let i;
+    for (i = 0; i < args.length; i++) {
+      if (args[i].includes('-')) {
+        flags += args[i];
+      } else {
+        break;
+      }
+    }
+    let path = args.slice(i).join(' ');
+    path = path === '' ? '.' : path;
     let output: string[] = [];
     let error: string[] = [];
 
@@ -130,29 +264,32 @@ function Terminal(prop: {
         console.log('User input man whoami');
         break;
       case 'ls':
-        [output, error] = executeList(flags, path === '' ? '.' : path);
+        [output, error] = executeList(flags, path);
         break;
       case 'cd':
         error = executeCd(path);
         break;
       case 'touch':
-        error = executeTouch(path === '' ? '.' : path);
+        error = executeTouch(path);
         break;
       case 'mkdir':
-        error = executeMkdir(path === '' ? '.' : path);
+        error = executeMkdir(path);
         break;
       case 'rm':
-        console.log('User input rm');
+        error = executeRm(path, flags);
         break;
       case 'rmdir':
-        console.log('User input rmdir');
+        error = executeRmdir(path, flags);
         break;
-      case 'rm -rf':
-        console.log('User input rm -rf');
+      case 'cp': {
+        const cpArgs = path.split(' ');
+        if (cpArgs.length !== 2) {
+          error = ['cp: invalid usage'];
+        } else {
+          error = executeCopy(cpArgs[0], cpArgs[1], flags);
+        }
         break;
-      case 'cp':
-        console.log('User input cp');
-        break;
+      }
       case 'mv':
         console.log('User input mv');
         break;
@@ -166,10 +303,13 @@ function Terminal(prop: {
         console.log('User input grep');
         break;
       case 'find':
-        console.log('User input find');
+        [output, error] = executeFind(path, flags);
         break;
       case 'chmod':
         console.log('User input chmod');
+        break;
+      case 'clear':
+        error = ['CLEAR'];
         break;
       default:
         output = ['Invalid command. Try again.'];
@@ -178,7 +318,7 @@ function Terminal(prop: {
     return { out: output, err: error };
   }
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+  function handleChange(e: React.FormEvent<HTMLInputElement>) {
     const currInput = e.currentTarget.value;
     // Prevent the user from removing the '$ ' from the input
     if (currInput.split(' ').length < 2 || currInput.split(' ')[0] !== '$') {
@@ -186,14 +326,43 @@ function Terminal(prop: {
     } else {
       setInput(e.currentTarget.value);
     }
-  };
+  }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const result = isValid(input);
-    setCommands([...commands, input, ...result.err, ...result.out]);
+    const newHistory = [...inputHistory, input];
+    if (result.err.length > 0 && result.err[0] === 'CLEAR') {
+      setCommands([]);
+    } else {
+      setCommands([...commands, input, ...result.err, ...result.out]);
+    }
+    setInputHistory(newHistory);
+    setInputHistoryIndex(newHistory.length);
     setInput('$ ');
-  };
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (inputHistoryIndex > 0) {
+        setInputHistoryIndex(inputHistoryIndex - 1);
+        setInput(inputHistory[inputHistoryIndex - 1]);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (inputHistoryIndex < inputHistory.length - 1) {
+        console.log(inputHistoryIndex + 1);
+        setInputHistoryIndex(inputHistoryIndex + 1);
+        setInput(inputHistory[inputHistoryIndex + 1]);
+      } else {
+        setInput('$ ');
+        if (inputHistoryIndex < inputHistory.length) {
+          setInputHistoryIndex(inputHistoryIndex + 1);
+        }
+      }
+    }
+  }
 
   return (
     <div className="terminal">
@@ -212,6 +381,7 @@ function Terminal(prop: {
           className="command"
           value={input}
           onChange={handleChange}
+          onKeyDown={(e) => handleKeyDown(e)}
         />
         <div className="terminal-top-icicle">
           <svg

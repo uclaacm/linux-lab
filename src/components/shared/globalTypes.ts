@@ -121,6 +121,7 @@ export class Directory extends FileSystemObject {
     if (this.children === undefined) {
       return [];
     }
+    // If we are showing hidden files, we just return all the children
     return Array.from(this.children.values()).filter(
       (child) => !child.isHidden || showHidden
     );
@@ -135,11 +136,13 @@ export class Directory extends FileSystemObject {
 
   getChild(name: string): Directory | File | undefined {
     if (name === '..') {
-      return this.parent;
+      // If we are at the root directory, we can't go up any further
+      return this.parent === undefined ? this : this.parent;
     }
-    if (name === '.') {
+    if (name === '.' || name === '') {
       return this;
     }
+
     if (this.children === undefined) {
       return undefined;
     }
@@ -153,17 +156,24 @@ export class Directory extends FileSystemObject {
   changeCurrentWorkingDirectory(
     currentWorkingDirectory: Directory,
     path: string
-  ): Directory | undefined {
+  ): Directory | string {
     currentWorkingDirectory.isCurrentDirectory = false;
     let newCwd: Directory | File | undefined;
 
-    if (!path.startsWith('/')) {
-      newCwd = currentWorkingDirectory.getFileSystemObjectFromPath(path);
-    } else {
+    // If the path is absolute, we start from the root directory and find the new cwd
+    if (path.startsWith('/')) {
       newCwd = this.getFileSystemObjectFromPath(path);
+    } else {
+      newCwd = currentWorkingDirectory.getFileSystemObjectFromPath(path);
     }
 
-    if (!newCwd || !newCwd.isDirectory) return undefined;
+    // If the new cwd is a file or does not exist, we can't cd into it
+    if (!newCwd) {
+      return `cd: '${path}': No such directory`;
+    }
+    if (newCwd instanceof File) {
+      return `cd: '${path}': Not a directory`;
+    }
     (newCwd as Directory).isCurrentDirectory = true;
     return newCwd as Directory;
   }
@@ -171,13 +181,20 @@ export class Directory extends FileSystemObject {
   getFileSystemObjectFromPath(path: string): Directory | File | undefined {
     if (path === this.path) return this;
 
-    if (path.charAt(path.length - 1) == '/') {
+    // Removes the trailing slash if it exists
+    if (path.endsWith('/')) {
       path = path.slice(0, -1);
     }
 
-    const children = path.includes('/') ? path.split('/').slice(1) : [path];
+    // Remove leading slash if it exists
+    const children = path.startsWith('/')
+      ? path.split('/').slice(1)
+      : path.split('/');
+
     let currentDirectory = <Directory>this;
     let currentFsObject: Directory | File | undefined;
+
+    // Traverse the path to find the new cwd and return the fs object
     for (let i = 0; i < children.length; i++) {
       if (currentDirectory.isDirectory) {
         currentFsObject = currentDirectory.getChild(children[i]);
@@ -195,7 +212,31 @@ export class Directory extends FileSystemObject {
     return currentFsObject;
   }
 
+  isEmpty(): boolean {
+    return this.children === undefined || this.children.size === 0;
+  }
+
   private checkHidden(name: string) {
     return name.startsWith('.');
+  }
+}
+
+export function getFSObjectHelper(
+  path: string,
+  root: Directory,
+  cwd: Directory,
+  onFileNotFound?: () => string,
+  onIsNotDirectory?: () => string
+): Directory | File | string {
+  const fsObject = path.startsWith('/')
+    ? root.getFileSystemObjectFromPath(path)
+    : cwd.getFileSystemObjectFromPath(path);
+
+  if (fsObject === undefined && onFileNotFound) {
+    return onFileNotFound();
+  } else if (onIsNotDirectory && !fsObject!.isDirectory) {
+    return onIsNotDirectory();
+  } else {
+    return fsObject;
   }
 }

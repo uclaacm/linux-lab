@@ -23,7 +23,7 @@ function Piping(): JSX.Element {
         </p>
         <div className="content-container">
           <div className="content-box">
-            <p className="content-header">standard input</p>
+            <p className="heading-2">Standard Input</p>
             <span className="try-out-command">stdin</span>
             <ul>
               <li>
@@ -36,7 +36,7 @@ function Piping(): JSX.Element {
             </ul>
           </div>
           <div className="content-box">
-            <p className="content-header">standard output</p>
+            <p className="heading-2">Standard Output</p>
             <span className="try-out-command">stdout</span>
             <ul>
               <li>
@@ -52,7 +52,7 @@ function Piping(): JSX.Element {
             </ul>
           </div>
           <div className="content-box">
-            <p className="content-header">standard error</p>
+            <p className="heading-2">Standard Error</p>
             <span className="try-out-command">stderr</span>
             <ul>
               <li>

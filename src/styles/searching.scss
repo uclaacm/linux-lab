@@ -51,7 +51,6 @@
 }
 
 #lesson-content > div {
-  background-image: url('../assets/images/iceberg.png');
   margin-left: 4vw;
   margin-right: 4vw;
   padding: 1em;
@@ -105,3 +104,14 @@
   bottom: 85px;
 }
 
+.iceberg-container{
+  position: relative;
+  z-index: -1;
+}
+
+.iceberg-content{
+  z-index: 1;
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}

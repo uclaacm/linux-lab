@@ -46,17 +46,17 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 100%;
   margin-bottom: 100px;
+  width: 100%;
 }
 
 #lesson-content > div {
+  height: 170px;
   margin-left: 4vw;
   margin-right: 4vw;
   padding: 1em;
   text-align: center;
   width: 320px;
-  height: 170px ;
 }
 
 #task-description {
@@ -92,26 +92,25 @@
   width: 30%;
 }
 
-.icicle-info-left{
+.icicle-info-left {
   position: absolute;
   right: 52vw;
-
 }
 
-.icicle-info-right{
-  position: absolute;
-  left: 53vw;
+.icicle-info-right {
   bottom: 85px;
+  left: 53vw;
+  position: absolute;
 }
 
-.iceberg-container{
+.iceberg-container {
   position: relative;
   z-index: -1;
 }
 
-.iceberg-content{
-  z-index: 1;
+.iceberg-content {
+  left: 4rem;
   position: absolute;
   top: 4rem;
-  left: 4rem;
+  z-index: 1;
 }

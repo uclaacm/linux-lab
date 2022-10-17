@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
-import tuxPointing from '../../assets/images/tux-pointing.svg';
 import iceberg from '../../assets/images/iceberg.svg';
+import tuxPointing from '../../assets/images/tux-pointing.svg';
 import { Directory, File } from '../shared/globalTypes';
 import Modal from '../shared/Modal';
 import Task from './../shared/Task';

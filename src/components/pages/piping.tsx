@@ -24,7 +24,9 @@ function Piping(): JSX.Element {
         <div className="content-container">
           <div className="content-box">
             <p className="heading-2">Standard Input</p>
-            <span className="try-out-command">stdin</span>
+            <div className="example-heading">
+              <span className="try-out-command">stdin</span>
+            </div>
             <ul>
               <li>
                 Numbered <b>0</b>
@@ -37,7 +39,9 @@ function Piping(): JSX.Element {
           </div>
           <div className="content-box">
             <p className="heading-2">Standard Output</p>
-            <span className="try-out-command">stdout</span>
+            <div className="example-heading">
+              <span className="try-out-command">stdout</span>
+            </div>
             <ul>
               <li>
                 Numbered <b>1</b>
@@ -53,7 +57,9 @@ function Piping(): JSX.Element {
           </div>
           <div className="content-box">
             <p className="heading-2">Standard Error</p>
-            <span className="try-out-command">stderr</span>
+            <div className="example-heading">
+              <span className="try-out-command">stderr</span>
+            </div>
             <ul>
               <li>
                 Numbered <b>2</b>

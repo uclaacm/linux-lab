@@ -34,10 +34,14 @@
 
 .content-box {
   background: #e0edf8;
-  font-weight: 400;
   font-family: 'Poppins', 'Helvetica Neue', 'Helvetica', sans-serif;
-  margin: 2% 2%;
+  font-weight: 400;
+  margin: 2%;
   padding: 2%;
+}
+
+.example-heading {
+  text-align: center;
 }
 
 .content-header {

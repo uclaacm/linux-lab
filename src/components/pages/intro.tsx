@@ -1,6 +1,6 @@
 import '../../styles/intro.scss';
 import posixFileSystem from '../../assets/images/posix-file-system.png';
-import tux from '../..assets/images/Tux.png';
+import tux from '../../assets/images/Tux.png';
 // import "../../styles/global.scss"
 function Intro(): JSX.Element {
   return (
@@ -52,6 +52,7 @@ function Intro(): JSX.Element {
         width="60%"
       />
       <div className="heading-1">TUX</div>
+      <div className="flex-container" style={{display: "flex", alignItems:"center" }}>
       <p className="body">
         Tux the penguin is the official brand character of Linux. The creator of
         Linux, Linus Torvalds, wanted their branch character to be a penguin as
@@ -61,10 +62,16 @@ function Intro(): JSX.Element {
         (U)ni(X)&rdquo;, or tuxedo, which a penguin resembles.
       </p>
       <img
-        className="image-box"
+    
         src={tux}
         alt="Image of Tux"
+        height="200"
+        width=" 135"
+     
       />
+
+      </div>
+     
       <footer>
         <a href="/">
           <button type="button" className="back-button">

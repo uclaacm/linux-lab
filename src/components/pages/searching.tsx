@@ -99,6 +99,8 @@ function Searching(): JSX.Element {
             taskPrompt={taskPrompts[1]}
             taskName="Task 2"
             completed={false}
+            fileSystem={initFileSystem}
+            currentWorkingDirectory={currentWorkingDirectory}
           />
         </div>
         <footer>

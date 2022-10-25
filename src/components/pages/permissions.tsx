@@ -1,5 +1,6 @@
 import tuxHoldingEgg from '../../assets/images/tux-egg-flippers-raised.svg';
 import '../../styles/global.scss';
+import { Directory, File } from '../shared/globalTypes';
 import Task from './../shared/Task';
 
 function Permissions(): JSX.Element {
@@ -9,6 +10,14 @@ function Permissions(): JSX.Element {
      aliqua. Ut enim ad minim veniam, quis nostrud exercitation\
      ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   ];
+  const initFileSystem = new Directory(
+    '/',
+    undefined,
+    new Map([['mystery.txt', new File('mystery.txt', 'wow, what a mystery')]]),
+    '/',
+    true
+  );
+  const currentWorkingDirectory = initFileSystem;
   return (
     <div>
       <div className="permissionContainer">
@@ -110,6 +119,8 @@ function Permissions(): JSX.Element {
           taskPrompt={taskPrompts[0]}
           taskName={'Task 1'}
           completed={false}
+          fileSystem={initFileSystem}
+          currentWorkingDirectory={currentWorkingDirectory}
         />
         <img
           src={tuxHoldingEgg}

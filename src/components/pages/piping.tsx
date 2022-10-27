@@ -1,9 +1,18 @@
 import tuxHoldingEgg from '../../assets/images/tux-holding-egg.svg';
 import '../../styles/global.scss';
 import '../../styles/piping.scss';
+import { Directory, File } from '../shared/globalTypes';
 import Task from '../shared/Task';
 
 function Piping(): JSX.Element {
+  const initFileSystem = new Directory(
+    '/',
+    undefined,
+    new Map([['mystery.txt', new File('mystery.txt', 'wow, what a mystery')]]),
+    '/',
+    true
+  );
+  const currentWorkingDirectory = initFileSystem;
   return (
     <div className="lesson-container">
       <h1 className="lesson-title">Piping/IO Redirection</h1>
@@ -103,8 +112,8 @@ function Piping(): JSX.Element {
         }
         taskName="Task 1"
         completed={false}
-        fileSystem={undefined}
-        currentWorkingDirectory={undefined}
+        fileSystem={initFileSystem}
+        currentWorkingDirectory={currentWorkingDirectory}
       ></Task>
       <div className="section">
         <h2 className="heading-1">
@@ -142,8 +151,8 @@ function Piping(): JSX.Element {
         }
         taskName="Task 2"
         completed={false}
-        fileSystem={undefined}
-        currentWorkingDirectory={undefined}
+        fileSystem={initFileSystem}
+        currentWorkingDirectory={currentWorkingDirectory}
       ></Task>
       <footer>
         <a href="creation">

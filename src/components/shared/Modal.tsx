@@ -14,14 +14,19 @@ function Modal(): JSX.Element {
           <div className="close-modal" onClick={() => setModalState(false)}>
             <MdClose />
           </div>
+
           <div id="helpful-commands">
-            <div className="helpful-command-row">Helpful Commands</div>
+            <div className="lesson-title" id="modal-title">
+              Helpful Commands
+            </div>
             <div className="helpful-command-row">
               <div>
                 <p>Find a file under a specified directory</p>
               </div>
               <div>
-                <span>find [directoryToSearch] -name [fileToFind]</span>
+                <span className="try-out-command">
+                  find [directoryToSearch] -name [fileToFind]
+                </span>
               </div>
             </div>
             <div className="helpful-command-row">
@@ -29,7 +34,9 @@ function Modal(): JSX.Element {
                 <p> Find a directory under a specified directory</p>
               </div>
               <div>
-                <span>find [directoryToSearch] -type d -name [fileToFind]</span>
+                <span className="try-out-command">
+                  find [directoryToSearch] -type d -name [fileToFind]
+                </span>
               </div>
             </div>
             <div className="helpful-command-row">
@@ -37,7 +44,7 @@ function Modal(): JSX.Element {
                 <p>Find all hidden files</p>
               </div>
               <div>
-                <span>
+                <span className="try-out-command">
                   find [directoryToSearch] -type f -name &quot;.* &quot;
                 </span>
               </div>
@@ -47,7 +54,9 @@ function Modal(): JSX.Element {
                 <p>Find a string in a file</p>
               </div>
               <div>
-                <span>grep &quot;[string]&quot; [filename]</span>
+                <span className="try-out-command">
+                  grep &quot;[string]&quot; [filename]
+                </span>
               </div>
             </div>
             <div className="helpful-command-row">
@@ -55,7 +64,9 @@ function Modal(): JSX.Element {
                 <p>Find a string in all files of a directory</p>
               </div>
               <div>
-                <span>grep -R &quot;[string]&quot; [filename] [directory]</span>
+                <span className="try-out-command">
+                  grep -R &quot;[string]&quot; [filename] [directory]
+                </span>
               </div>
             </div>
           </div>

@@ -39,7 +39,7 @@ function Terminal(prop: {
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
       prop.currentWorkingDirectory.path
-    );
+    ) as Directory;
     const newCwd = fileSystemCopy.changeCurrentWorkingDirectory(cwdCopy, path);
 
     if (newCwd instanceof Directory) {
@@ -62,7 +62,8 @@ function Terminal(prop: {
     if (file.isDirectory) {
       return [[], [`cat: '${path}': Is a directory`]];
     }
-    return [[(file as File).content || ''], []];
+    console.log(((file as File).content ||= '\n'));
+    return [[((file as File).content ||= '\n')], []];
   }
 
   function executeTouch(path: string, directory = false): string[] {
@@ -70,7 +71,7 @@ function Terminal(prop: {
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
       prop.currentWorkingDirectory.path
-    );
+    ) as Directory;
     let newFileName = '';
     let dir;
 
@@ -96,8 +97,8 @@ function Terminal(prop: {
       return [`touch: '${path}': Not a directory`];
     }
 
-    if (!dir.getChild(newFileName)) {
-      dir.addFileSystemObject(
+    if (!(dir as Directory).getChild(newFileName)) {
+      (dir as Directory).addFileSystemObject(
         directory ? new Directory(newFileName) : new File(newFileName)
       );
     } else if (directory) {
@@ -121,7 +122,7 @@ function Terminal(prop: {
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
       prop.currentWorkingDirectory.path
-    );
+    ) as Directory;
     let fileName = '';
     let dir;
 
@@ -140,12 +141,12 @@ function Terminal(prop: {
       dir = cwdCopy;
     }
 
-    const file = dir?.getChild(fileName);
+    const file = (dir as Directory)?.getChild(fileName);
     if (!file) {
       return [`rm: '${path}': No such file or directory`];
     }
 
-    const rmDirAndEmptyDirectory = directory && file.isEmpty();
+    const rmDirAndEmptyDirectory = directory && (file as Directory).isEmpty();
     const removeDirectory = rmDirAndEmptyDirectory || flags.includes('r');
 
     if (!file.isDirectory || removeDirectory) {
@@ -153,9 +154,9 @@ function Terminal(prop: {
         // TODO: Figure out how to handle this
         return ["What are you doing? You can't delete the root directory!"];
       }
-      dir.removeFileSystemObject(fileName);
+      (dir as Directory).removeFileSystemObject(fileName);
     } else {
-      if (directory && !file.isEmpty()) {
+      if (directory && !(file as Directory).isEmpty()) {
         return [`rmdir: '${path}': Directory not empty`];
       }
       return [`rm: '${path}': is a directory`];
@@ -179,7 +180,7 @@ function Terminal(prop: {
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
       prop.currentWorkingDirectory.path
-    );
+    ) as Directory;
     const file = path.startsWith('/')
       ? prop.fileSystem.getFileSystemObjectFromPath(path)
       : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
@@ -211,7 +212,7 @@ function Terminal(prop: {
       return [`cp: '${destination}': No such file or directory`];
     }
 
-    const childDir = destDir.getChild(newFileName);
+    const childDir = (destDir as Directory).getChild(newFileName);
     const newFile = _.cloneDeep(file);
     if (childDir && childDir.isDirectory) {
       destDir = childDir;
@@ -219,7 +220,7 @@ function Terminal(prop: {
       newFile.name = newFileName;
     }
 
-    destDir.addFileSystemObject(newFile);
+    (destDir as Directory).addFileSystemObject(newFile);
     prop.setFileSystem(fileSystemCopy);
     prop.setCurrentWorkingDirectory(cwdCopy);
     return [];
@@ -252,16 +253,13 @@ function Terminal(prop: {
 
     switch (command) {
       case 'whoami':
-        console.log('User input whoami');
+        output = ['tux'];
         break;
       case 'pwd':
         output = [prop.currentWorkingDirectory.path];
         break;
-      case 'man pwd':
-        console.log('User input man pwd');
-        break;
-      case 'man whoami':
-        console.log('User input man whoami');
+      case 'man':
+        output = [`Man page for ${args[0]}`];
         break;
       case 'ls':
         [output, error] = executeList(flags, path);
@@ -352,7 +350,6 @@ function Terminal(prop: {
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
       if (inputHistoryIndex < inputHistory.length - 1) {
-        console.log(inputHistoryIndex + 1);
         setInputHistoryIndex(inputHistoryIndex + 1);
         setInput(inputHistory[inputHistoryIndex + 1]);
       } else {
@@ -368,7 +365,9 @@ function Terminal(prop: {
     <div className="terminal">
       <div>
         {commands.map((command: string, key: number) => {
-          return (
+          return command === '\n' ? (
+            <br key={key} />
+          ) : (
             <p className="command" key={key}>
               {command}
             </p>

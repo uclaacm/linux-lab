@@ -160,7 +160,7 @@ function Piping(): JSX.Element {
             back
           </button>
         </a>
-        <a href="searching">
+        <a href="redirection">
           <button type="button" className="next-button">
             next
           </button>

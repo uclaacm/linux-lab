@@ -1,4 +1,5 @@
 import tuxHoldingEgg from '../../assets/images/tux-holding-egg.svg';
+import iceberg from '../../assets/images/iceberg.svg';
 import '../../styles/global.scss';
 import '../../styles/piping.scss';
 import '../../styles/Terminal.scss';
@@ -21,38 +22,48 @@ function Piping(): JSX.Element {
         <p className="body">
           Linux has three <b>standard streams</b> for data to move along:
         </p>
+        <div>
+        <p> standard input    standard output    standard error</p>
+        </div>
         <div className="content-container">
-          <div className="content-box">
-            <p className="content-header">standard input</p>
-            <span className="try-out-command">stdin</span>
-            <ul>
-              <li>
+            <div className="iceberg-container">
+            <img src={iceberg} alt="iceberg background image" />
+              <div className='iceberg-content'>
+              <span className="try-out-command">stdin</span>
+              <ul>
+                <li>
                 Numbered <b>0</b>
-              </li>
-              <li>
-                Example: when a user sends data to a program by typing on a
-                keyboard
-              </li>
-            </ul>
+                </li>
+                <li>
+                  Example: when a user sends data to a program by typing on a
+                  keyboard
+                </li>
+              </ul>
+              </div>
+        </div>
+            <div className="iceberg-container">
+              <img src={iceberg} alt="iceberg background image" />
+              <div className= 'iceberg-content'>
+              <div className="content-box">
+              <span className="try-out-command">stdout</span>
+              <ul>
+                <li>
+                  Numbered <b>1</b>
+                </li>
+                <li>
+                  <b>Intended</b> output
+                </li>
+                <li>
+                  Example: a program displays the results of a computation on the
+                  terminal
+                </li>
+              </ul>
+              </div>
+              </div>
           </div>
-          <div className="content-header">standard output</div>
-          <div className="content-box">
-            <span className="try-out-command">stdout</span>
-            <ul>
-              <li>
-                Numbered <b>1</b>
-              </li>
-              <li>
-                <b>Intended</b> output
-              </li>
-              <li>
-                Example: a program displays the results of a computation on the
-                terminal
-              </li>
-            </ul>
-          </div>
-          <div className="content-box">
-            <p className="content-header">standard error</p>
+          <div className="iceberg-container">
+          <img src={iceberg} alt="iceberg background image" />
+          <div className= 'iceberg-content'>
             <span className="try-out-command">stderr</span>
             <ul>
               <li>
@@ -68,6 +79,7 @@ function Piping(): JSX.Element {
             </ul>
           </div>
         </div>
+      </div>
       </div>
       <p className="body">Now let`s explore 2 useful commands.</p>
       <div className="section">

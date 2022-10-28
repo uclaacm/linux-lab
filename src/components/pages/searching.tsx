@@ -85,11 +85,16 @@ function Searching(): JSX.Element {
             </div>
           </div>
           <div>
-            <span className="try-out-command">grep</span>
-            <p>
-              (short for “global/regular expression/print”) command searches for
-              a specific string pattern in a file.
-            </p>
+            <div className="iceberg-container">
+              <img src={iceberg} alt="iceberg background image" />
+              <div className='iceberg-content'>
+                <span className="try-out-command">grep</span>
+                <p>
+                (short for “global/regular expression/print”) command searches for
+                a specific string pattern in a file.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 

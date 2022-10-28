@@ -1,0 +1,11 @@
+.iceberg-container {
+    position: relative;
+    z-index: -1;
+  }
+  
+  .iceberg-content {
+    left: 4rem;
+    position: absolute;
+    top: 4rem;
+    z-index: 1;
+  }

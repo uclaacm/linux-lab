@@ -83,9 +83,7 @@ function Permissions(): JSX.Element {
           <h2 className="heading-1">Example</h2>
           <div className="examples-container">
             <div className="example">
-              <div className="blue-text">
-                give group write permission
-              </div>
+              <div className="blue-text">give group write permission</div>
               <div className="terminal">chmod g+w myFile.txt</div>
             </div>
             <div className="example">

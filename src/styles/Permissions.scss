@@ -3,18 +3,15 @@
   justify-content: space-evenly;
   margin-left: 132px;
   width: 80vw;
-  // flex-direction: row;
 }
 
 .examples-container .example {
-    height: auto;
-    // margin: 2% 0;
-    // padding: 2vh 0;
-    // padding: 0;
-  }
+  height: auto;
+
+}
+
 .examples-container .example .terminal {
   height: auto;
   margin: 2vh 0;
   padding: 2vh;
-  // padding: 0;
 }

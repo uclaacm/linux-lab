@@ -1,11 +1,20 @@
-.examples-container{
-    display: flex;
-    justify-content: space-evenly;
-    // flex-direction: row;
+.examples-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 132px;
+  width: 80vw;
+  // flex-direction: row;
 }
-.examples-container .example .terminal{
+
+.examples-container .example {
     height: auto;
-    margin: 2%;
-    padding: 2vh;
+    // margin: 2% 0;
+    // padding: 2vh 0;
     // padding: 0;
+  }
+.examples-container .example .terminal {
+  height: auto;
+  margin: 2vh 0;
+  padding: 2vh;
+  // padding: 0;
 }

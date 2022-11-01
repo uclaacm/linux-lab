@@ -2,6 +2,8 @@ import tuxHoldingEgg from '../../assets/images/tux-egg-flippers-raised.svg';
 import '../../styles/global.scss';
 import { Directory, File } from '../shared/globalTypes';
 import Task from './../shared/Task';
+import '../../styles/Terminal.scss';
+import '../../styles/Permissions.scss';
 
 function Permissions(): JSX.Element {
   const taskPrompts = [
@@ -19,7 +21,7 @@ function Permissions(): JSX.Element {
   );
   const currentWorkingDirectory = initFileSystem;
   return (
-    <div>
+    <><div>
       <div className="permissionContainer">
         <h1 className="lesson-title">Permissions</h1>
         <div className="body">
@@ -77,57 +79,34 @@ function Permissions(): JSX.Element {
           labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
           exercitation
         </div>
-        <h2 className="heading-1">Subsection</h2>
-        <p className="body">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation
-        </p>
-
-        <div
-          style={{
-            background: 'gray',
-            width: 200,
-            height: 50,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-        >
-          placeholder
+        <h2 className="heading-1">Example</h2>
+        <div className='examples-container'>
+          <div className='example'>
+            <div className='blue-text'>give group write permission</div>
+            <div className="terminal">
+              chmod g+w myFile.txt
+            </div>
+          </div>
+          <div className='example'>
+            <div className='blue-text'>Give all three groups execute permission</div>
+            <div className="terminal">
+              chmod +x
+            </div>
+          </div>
         </div>
-
-        <p className="body">
-          Lorem <span className="try-out-command">command</span>
-          dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation
-        </p>
-
-        <div
-          style={{
-            background: 'gray',
-            width: 200,
-            height: 50,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-        >
-          placeholder
-        </div>
-
-        <Task
-          taskPrompt={taskPrompts[0]}
-          taskName={'Task 1'}
-          completed={false}
-          fileSystem={initFileSystem}
-          currentWorkingDirectory={currentWorkingDirectory}
-        />
-        <img
-          src={tuxHoldingEgg}
-          alt="tux raising his flippers while holding an egg"
-        />
       </div>
-      <footer>
+
+
+      <Task
+        taskPrompt={taskPrompts[0]}
+        taskName={'Task 1'}
+        completed={false}
+        fileSystem={initFileSystem}
+        currentWorkingDirectory={currentWorkingDirectory} />
+      <img
+        src={tuxHoldingEgg}
+        alt="tux raising his flippers while holding an egg" />
+    </div><footer>
         <a href="searching">
           <button type="button" className="back-button">
             back
@@ -138,8 +117,7 @@ function Permissions(): JSX.Element {
             next
           </button>
         </a>
-      </footer>
-    </div>
+      </footer></>
   );
 }
 

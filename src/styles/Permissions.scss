@@ -1,0 +1,11 @@
+.examples-container{
+    display: flex;
+    justify-content: space-evenly;
+    // flex-direction: row;
+}
+.examples-container .example .terminal{
+    height: auto;
+    margin: 2%;
+    padding: 2vh;
+    // padding: 0;
+}

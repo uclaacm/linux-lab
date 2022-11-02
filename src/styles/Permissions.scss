@@ -1,0 +1,16 @@
+.examples-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 132px;
+  width: 80vw;
+}
+
+.examples-container .example {
+  height: auto;
+}
+
+.examples-container .example .terminal {
+  height: auto;
+  margin: 2vh 0;
+  padding: 2vh;
+}

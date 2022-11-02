@@ -1,5 +1,5 @@
-import tuxHoldingEgg from '../../assets/images/tux-hugging-egg.svg';
 import iceberg from '../../assets/images/iceberg.svg';
+import tuxHoldingEgg from '../../assets/images/tux-hugging-egg.svg';
 import '../../styles/Moving.scss';
 import '../../styles/global.scss';
 
@@ -22,28 +22,29 @@ function Moving(): JSX.Element {
         important options are <b>-a</b> and <b>-l</b>, which can be used
         separately or combined into <b>-al</b> or <b>-la</b>.
       </p>
-      <div className='iceberg-container'>
+      <div className="iceberg-container">
         <img src={iceberg} alt="iceberg background image" />
-        <div className='iceberg-content'>
-        <span className="try-out-command">ls -a</span>
-        <p className="body">
-          lists normal AND <b>hidden files</b>, or directory entries whose names
-          begin with a dot that are not displayed with the bare ls command alone.
-        </p>
+        <div className="iceberg-content">
+          <span className="try-out-command">ls -a</span>
+          <p className="body">
+            lists normal AND <b>hidden files</b>, or directory entries whose
+            names begin with a dot that are not displayed with the bare ls
+            command alone.
+          </p>
         </div>
-        </div>
-        <div className='iceberg-container'>
-          <img src={iceberg} alt="iceberg background image" />
-          <div className= 'iceberg-content'>
+      </div>
+      <div className="iceberg-container">
+        <img src={iceberg} alt="iceberg background image" />
+        <div className="iceberg-content">
           <span className="try-out-command">ls -l</span>
           <p className="body">
             lists files in the <b>long format</b>. Rather than just listing file
-            name, the following information is provided: file mode, number of links,
-            owner name, group name, number of bytes in the file, abbreviated month,
-            day-of-month file was last modified, hour file last modified, minute
-            file last modified, and the pathname.
+            name, the following information is provided: file mode, number of
+            links, owner name, group name, number of bytes in the file,
+            abbreviated month, day-of-month file was last modified, hour file
+            last modified, minute file last modified, and the pathname.
           </p>
-          </div>
+        </div>
       </div>
       <h2 className="heading-1">
         The <span className="command-in-heading">cd</span> Command

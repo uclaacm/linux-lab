@@ -1,5 +1,5 @@
-import tuxHoldingEgg from '../../assets/images/tux-holding-egg.svg';
 import iceberg from '../../assets/images/iceberg.svg';
+import tuxHoldingEgg from '../../assets/images/tux-holding-egg.svg';
 import '../../styles/global.scss';
 import '../../styles/piping.scss';
 import '../../styles/Terminal.scss';
@@ -23,63 +23,63 @@ function Piping(): JSX.Element {
           Linux has three <b>standard streams</b> for data to move along:
         </p>
         <div>
-        <p> standard input    standard output    standard error</p>
+          <p> standard input standard output standard error</p>
         </div>
         <div className="content-container">
-            <div className="iceberg-container">
+          <div className="iceberg-container">
             <img src={iceberg} alt="iceberg background image" />
-              <div className='iceberg-content'>
+            <div className="iceberg-content">
               <span className="try-out-command">stdin</span>
               <ul>
                 <li>
-                Numbered <b>0</b>
+                  Numbered <b>0</b>
                 </li>
                 <li>
                   Example: when a user sends data to a program by typing on a
                   keyboard
                 </li>
               </ul>
-              </div>
-        </div>
-            <div className="iceberg-container">
-              <img src={iceberg} alt="iceberg background image" />
-              <div className= 'iceberg-content'>
+            </div>
+          </div>
+          <div className="iceberg-container">
+            <img src={iceberg} alt="iceberg background image" />
+            <div className="iceberg-content">
               <div className="content-box">
-              <span className="try-out-command">stdout</span>
+                <span className="try-out-command">stdout</span>
+                <ul>
+                  <li>
+                    Numbered <b>1</b>
+                  </li>
+                  <li>
+                    <b>Intended</b> output
+                  </li>
+                  <li>
+                    Example: a program displays the results of a computation on
+                    the terminal
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="iceberg-container">
+            <img src={iceberg} alt="iceberg background image" />
+            <div className="iceberg-content">
+              <span className="try-out-command">stderr</span>
               <ul>
                 <li>
-                  Numbered <b>1</b>
+                  Numbered <b>2</b>
                 </li>
                 <li>
-                  <b>Intended</b> output
+                  <b>Unintended</b> output
                 </li>
                 <li>
-                  Example: a program displays the results of a computation on the
+                  Example: a program fails and displays an error message on the
                   terminal
                 </li>
               </ul>
-              </div>
-              </div>
-          </div>
-          <div className="iceberg-container">
-          <img src={iceberg} alt="iceberg background image" />
-          <div className= 'iceberg-content'>
-            <span className="try-out-command">stderr</span>
-            <ul>
-              <li>
-                Numbered <b>2</b>
-              </li>
-              <li>
-                <b>Unintended</b> output
-              </li>
-              <li>
-                Example: a program fails and displays an error message on the
-                terminal
-              </li>
-            </ul>
+            </div>
           </div>
         </div>
-      </div>
       </div>
       <p className="body">Now let`s explore 2 useful commands.</p>
       <div className="section">

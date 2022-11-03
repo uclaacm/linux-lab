@@ -1,8 +1,18 @@
 import tuxBehindIgloo from '../../assets/images/tux-behind-igloo.svg';
 import '../../styles/global.scss';
+import { Directory } from '../shared/globalTypes';
 import Task from '../shared/Task';
 
 function Stationary(): JSX.Element {
+  const task1FS = new Directory(
+    '/',
+    undefined,
+    new Map([['igloo', new Directory('igloo', undefined)]]),
+    '/',
+    true
+  );
+  const task1CWD = task1FS.getChild('igloo') as Directory;
+
   return (
     <div>
       <h1 className="lesson-title">Stationary Commands</h1>
@@ -40,9 +50,9 @@ function Stationary(): JSX.Element {
         taskPrompt={'Try it out in the terminal! Where is Tux?'}
         taskName="Task 1"
         completed={false}
-        fileSystem={undefined}
-        currentWorkingDirectory={undefined}
-      ></Task>
+        fileSystem={task1FS}
+        currentWorkingDirectory={task1CWD}
+      />
 
       <h2 className="heading-1">
         The <span className="command-in-heading">whoami</span> Command
@@ -57,9 +67,9 @@ function Stationary(): JSX.Element {
         taskPrompt={"Can you figure out Tux's username?"}
         taskName="Task 2"
         completed={false}
-        fileSystem={undefined}
-        currentWorkingDirectory={undefined}
-      ></Task>
+        fileSystem={task1FS}
+        currentWorkingDirectory={task1CWD}
+      />
       <h2 className="heading-1">
         The <span className="command-in-heading">man</span> command
       </h2>
@@ -80,9 +90,9 @@ function Stationary(): JSX.Element {
         }
         taskName="Task 3"
         completed={false}
-        fileSystem={undefined}
-        currentWorkingDirectory={undefined}
-      ></Task>
+        fileSystem={task1FS}
+        currentWorkingDirectory={task1CWD}
+      />
       <footer>
         <a href="intro">
           <button type="button" className="back-button">

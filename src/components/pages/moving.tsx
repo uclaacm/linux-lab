@@ -1,8 +1,26 @@
 import tuxHoldingEgg from '../../assets/images/tux-hugging-egg.svg';
 import '../../styles/global.scss';
+import { Directory, File } from '../shared/globalTypes';
 import Task from '../shared/Task';
 
 function Moving(): JSX.Element {
+  const task1FS = new Directory(
+    '/',
+    undefined,
+    new Map([['Notes', new Directory('Notes', undefined)]]),
+    '/',
+    true
+  );
+  const task1CWD = task1FS as Directory;
+  const task2FS = new Directory(
+    '/',
+    undefined,
+    new Map([['.secret', new File('.secret', undefined, 'CS35L')]]),
+    '/',
+    true
+  );
+  const task2CWD = task2FS as Directory;
+
   return (
     <div>
       <h1 className="lesson-title">Moving Around the File System</h1>
@@ -57,9 +75,9 @@ function Moving(): JSX.Element {
         }
         taskName="Task 1"
         completed={false}
-        fileSystem={undefined}
-        currentWorkingDirectory={undefined}
-      ></Task>
+        fileSystem={task1FS}
+        currentWorkingDirectory={task1CWD}
+      />
       <Task
         taskPrompt={
           <p className="body task-prompt">
@@ -69,9 +87,10 @@ function Moving(): JSX.Element {
         }
         taskName="Task 2"
         completed={false}
-        fileSystem={undefined}
-        currentWorkingDirectory={undefined}
-      ></Task>
+        fileSystem={task2FS}
+        currentWorkingDirectory={task2CWD}
+        displayFileSystem={true}
+      />
       <footer>
         <a href="stationary">
           <button type="button" className="back-button">

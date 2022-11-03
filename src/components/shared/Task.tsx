@@ -7,14 +7,26 @@ import { Directory } from './globalTypes';
 import Terminal from './Terminal';
 import './../../styles/global.scss';
 
-function Task(prop: {
+const defaultProps = {
+  displayFileSystem: false,
+  completed: false,
+};
+
+type TaskProps = {
   taskPrompt: JSX.Element | string;
-  taskName: string;
-  completed: boolean;
-  fileSystem?: Directory;
-  currentWorkingDirectory?: Directory;
-  displayFileSystem?: boolean;
-}): JSX.Element {
+  taskName: JSX.Element | string;
+  fileSystem: Directory;
+  currentWorkingDirectory: Directory;
+} & typeof defaultProps;
+
+function Task({
+  taskPrompt,
+  taskName,
+  completed,
+  fileSystem,
+  currentWorkingDirectory,
+  displayFileSystem,
+}: TaskProps): JSX.Element {
   const ref = useRef(null);
   const [dimensions, setDimensions] = useState({
     renderWidth: 0,
@@ -37,12 +49,8 @@ function Task(prop: {
     }
   }
 
-  const [fileSystem, setFileSystem] = useState<Directory | undefined>(
-    prop.fileSystem
-  );
-  const [currentWorkingDirectory, setCurrentWorkingDirectory] = useState<
-    Directory | undefined
-  >(prop.fileSystem);
+  const [root, setRoot] = useState<Directory>(fileSystem);
+  const [CWD, setCWD] = useState<Directory>(currentWorkingDirectory);
 
   useEffect(() => {
     handleResize(ref);
@@ -55,28 +63,32 @@ function Task(prop: {
       <span className="task-header">
         <IconContext.Provider
           value={{
-            className: prop.completed ? 'complete' : 'incomplete',
+            className: completed ? 'complete' : 'incomplete',
             size: '1.5em',
           }}
         >
           <AiFillCheckCircle />
         </IconContext.Provider>
-        <h2 className="heading-1 task-name">{prop.taskName}</h2>
+        {typeof taskName === 'string' ? (
+          <h2 className="heading-1 task-name">{taskName}</h2>
+        ) : (
+          taskName
+        )}
       </span>
-      {typeof prop.taskPrompt === 'string' ? (
-        <p className="body task-prompt">{prop.taskPrompt}</p>
+      {typeof taskPrompt === 'string' ? (
+        <p className="body task-prompt">{taskPrompt}</p>
       ) : (
-        prop.taskPrompt
+        taskPrompt
       )}
       <div className="task-content" ref={ref}>
-        {fileSystem && prop.displayFileSystem && (
-          <FileSystemRender data={fileSystem} renderDimensions={dimensions} />
+        {displayFileSystem && (
+          <FileSystemRender data={root} renderDimensions={dimensions} />
         )}
         <Terminal
-          fileSystem={fileSystem as Directory}
-          currentWorkingDirectory={currentWorkingDirectory as Directory}
-          setFileSystem={setFileSystem}
-          setCurrentWorkingDirectory={setCurrentWorkingDirectory}
+          fileSystem={root}
+          currentWorkingDirectory={CWD}
+          setFileSystem={setRoot}
+          setCurrentWorkingDirectory={setCWD}
         />
         {/* TODO: Fix styling for ice-glare-left if displaying the file system render */}
         <div className="ice-glare-left">
@@ -188,5 +200,5 @@ function Task(prop: {
     </div>
   );
 }
-
+Task.defaultProps = defaultProps;
 export default Task;

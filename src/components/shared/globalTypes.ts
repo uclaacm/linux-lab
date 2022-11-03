@@ -5,6 +5,7 @@ import Intro from './../pages/intro';
 import Moving from './../pages/moving';
 import Permissions from './../pages/permissions';
 import Piping from './../pages/piping';
+import Redirection from './../pages/redirection';
 import Searching from './../pages/searching';
 import Stationary from './../pages/stationary';
 
@@ -28,6 +29,7 @@ export const PageMapping: Map<
   ['/moving', { component: Moving, pageName: 'Moving' }],
   ['/creation', { component: Creation, pageName: 'Creation' }],
   ['/piping', { component: Piping, pageName: 'Piping' }],
+  ['/redirection', { component: Redirection, pageName: 'Redirection' }],
   ['/searching', { component: Searching, pageName: 'Searching' }],
   ['/permissions', { component: Permissions, pageName: 'Permissions' }],
   ['/game', { component: Game, pageName: 'Game' }],

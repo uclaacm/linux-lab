@@ -99,10 +99,12 @@ function Searching(): JSX.Element {
             taskPrompt={taskPrompts[1]}
             taskName="Task 2"
             completed={false}
+            fileSystem={initFileSystem}
+            currentWorkingDirectory={currentWorkingDirectory}
           />
         </div>
         <footer>
-          <a href="piping">
+          <a href="redirection">
             <button type="button" className="back-button">
               back
             </button>

@@ -1,18 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
 
 .startbutton {
-  background-color: white;
+  background-color: #9a4d7f;
 
-  border: 3px solid #9a4d7f;
+  border: 3px solid white;
   border-radius: 5px;
   bottom: 6em;
-  color: #9a4d7f;
+  bottom: 48%;
+  bottom: 0;
+  color: white;
   cursor: pointer;
   font-family: Bowlby One SC, sans-serif;
 
-  font-size: 20px;
-  height: 60px;
-  left: 40%; // TODO: fix positioning of button
-  position: absolute;
-  width: 200px;
+  font-size: 2.5vw;
+  left: 42vw;
+  margin-bottom: 5vh;
+  padding: 0.6rem 2.5rem;
+  position: fixed;
+  z-index: 1;
 }

@@ -93,17 +93,13 @@ function Piping(): JSX.Element {
           The <span className="try-out-command">echo</span> command writes
           arguments to the standard output.
         </p>
-        <div className="command-container">
-          <div className="trial-container">
-            <div className="command-box">
-              <p className="body">Example</p>
-              <div className="content-box com-box" id="example-box">
-                <p className="body">tux@tux:~$ echo I&#39;m in a cave!</p>
-                <p className="body">I&#39;m in a cave!</p>
+            <div className="example-container">
+            <p className="blue-text">Example</p>
+              <div className="example-black-box">
+                <p className="example-box-text">tux@tux:~$ echo I&#39;m in a cave!</p>
+                <p className="example-box-text">I&#39;m in a cave!</p>
               </div>
             </div>
-          </div>
-        </div>
         <p className="body">
           Just like how your voice might echo in a cave, <span>echo</span>{' '}
           repeats the provided string by printing it out once to the terminal.
@@ -133,16 +129,12 @@ function Piping(): JSX.Element {
           If you have a file named mystery.txt in your current directory, you
           can display its contents with the following commands.
         </p>
-        <div className="command-container">
-          <div className="trial-container">
-            <div className="command-box">
-              <p className="body">Example</p>
-              <div className="content-box com-box" id="example-box">
-                <p className="body">tux@tux:~$ cat mystery.txt </p>
-                <p className="body">Super secret contents !</p>
+        <div className="example-container">
+              <p className="blue-text">Example</p>
+              <div className="example-black-box">
+                <p className="example-box-text">tux@tux:~$ cat mystery.txt </p>
+                <p className="example-box-text">Super secret contents !</p>
               </div>
-            </div>
-          </div>
         </div>
         <p className="body">
           Note that listing multiple files will print all the contents out.

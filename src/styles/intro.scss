@@ -19,10 +19,68 @@
 }
 
 .landing-background {
+  align-items: center;
+  background: linear-gradient(
+    to top,
+    #88adf6 0%,
+    #88adf6 50%,
+    #bddef6 50%,
+    #bddef6 100%
+  );
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
   width: 100%;
 }
-// TODO: we don't want to be able to scroll vertically at certain wider screen sizes
+
+.igloo {
+  position: fixed;
+  right: 0;
+  width: 40vw;
+}
+
+.left-iceberg {
+  left: 0;
+  position: fixed;
+  width: 50vw;
+}
+
+.tux {
+  bottom: 10vmax;
+  position: fixed;
+  right: 10vw;
+  width: 40vw;
+}
+
+.water-shading {
+  bottom: 0;
+  object-fit: fill;
+  position: fixed;
+  width: 100vw;
+}
+
 .landing {
   background-color: #739ae7;
   height: 100vh;
+}
+
+.title {
+  color: white;
+  font-family: Bowlby One SC, sans-serif;
+  font-size: 4rem;
+  font-style: Regular;
+  font-weight: bold;
+  position: fixed;
+  -webkit-text-stroke: 2px #9a4d7f;
+  top: 0;
+}
+
+.iceberg-text {
+  font-size: 2vw;
+  left: 0;
+  margin-left: 9vw;
+  padding-bottom: 1.8rem;
+  position: fixed;
+  text-align: left;
+  z-index: 1;
 }

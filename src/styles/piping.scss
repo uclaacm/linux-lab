@@ -33,10 +33,15 @@
 }
 
 .content-box {
-  background: #d9d9d9;
+  background: #e0edf8;
+  font-family: 'Poppins', 'Helvetica Neue', 'Helvetica', sans-serif;
   font-weight: 400;
-  margin: 2% 4%;
+  margin: 2%;
   padding: 2%;
+}
+
+.example-heading {
+  text-align: center;
 }
 
 .content-header {

@@ -32,8 +32,10 @@ function Piping(): JSX.Element {
         </p>
         <div className="content-container">
           <div className="content-box">
-            <p className="content-header">standard input</p>
-            <span className="try-out-command">stdin</span>
+            <p className="blue-text">Standard Input</p>
+            <div className="example-heading">
+              <span className="try-out-command">stdin</span>
+            </div>
             <ul>
               <li>
                 Numbered <b>0</b>
@@ -45,8 +47,10 @@ function Piping(): JSX.Element {
             </ul>
           </div>
           <div className="content-box">
-            <p className="content-header">standard output</p>
-            <span className="try-out-command">stdout</span>
+            <p className="blue-text">Standard Output</p>
+            <div className="example-heading">
+              <span className="try-out-command">stdout</span>
+            </div>
             <ul>
               <li>
                 Numbered <b>1</b>
@@ -61,8 +65,10 @@ function Piping(): JSX.Element {
             </ul>
           </div>
           <div className="content-box">
-            <p className="content-header">standard error</p>
-            <span className="try-out-command">stderr</span>
+            <p className="blue-text">Standard Error</p>
+            <div className="example-heading">
+              <span className="try-out-command">stderr</span>
+            </div>
             <ul>
               <li>
                 Numbered <b>2</b>
@@ -87,15 +93,13 @@ function Piping(): JSX.Element {
           The <span className="try-out-command">echo</span> command writes
           arguments to the standard output.
         </p>
-        <div className="command-container">
-          <div className="trial-container">
-            <div className="command-box">
-              <p className="body">Example</p>
-              <div className="content-box com-box" id="example-box">
-                <p className="body">tux@tux:~$ echo I&#39;m in a cave!</p>
-                <p className="body">I&#39;m in a cave!</p>
-              </div>
-            </div>
+        <div className="example-container">
+          <p className="blue-text">Example</p>
+          <div className="example-black-box">
+            <p className="example-box-text">
+              tux@tux:~$ echo I&#39;m in a cave!
+            </p>
+            <p className="example-box-text">I&#39;m in a cave!</p>
           </div>
         </div>
         <p className="body">
@@ -127,15 +131,11 @@ function Piping(): JSX.Element {
           If you have a file named mystery.txt in your current directory, you
           can display its contents with the following commands.
         </p>
-        <div className="command-container">
-          <div className="trial-container">
-            <div className="command-box">
-              <p className="body">Example</p>
-              <div className="content-box com-box" id="example-box">
-                <p className="body">tux@tux:~$ cat mystery.txt </p>
-                <p className="body">Super secret contents !</p>
-              </div>
-            </div>
+        <div className="example-container">
+          <p className="blue-text">Example</p>
+          <div className="example-black-box">
+            <p className="example-box-text">tux@tux:~$ cat mystery.txt </p>
+            <p className="example-box-text">Super secret contents !</p>
           </div>
         </div>
         <p className="body">

@@ -1,64 +1,90 @@
 import '../../styles/intro.scss';
 import posixFileSystem from '../../assets/images/posix-file-system.png';
+import tux from '../../assets/images/intro-tux.png';
 // import "../../styles/global.scss"
 function Intro(): JSX.Element {
   return (
     <div className="intro-container">
       <h1 className="lesson-title">INTRO TO LINUX</h1>
       <p className="body">
-        Linux is a family of operating systems. An operating system is a piece
-        of software that acts as an interface between the user and the
-        computer&apos;s resources by providing resources for applications to
-        build off of.
+        Like Windows and iOS, Linux is an{' '}
+        <span style={{ fontWeight: 'bold' }}>operating system (OS)</span>—a
+        piece of software that manages a computer&apos;s basic functions, from
+        figuring out which key a user presses to storing data. By taking care of
+        these &quot;mundane&quot; tasks, the OS simplifies life for
+        <span style={{ fontWeight: 'bold' }}> applications</span>, which can
+        focus instead on performing specialized tasks on top of the OS.
       </p>
       <p className="body">
-        Linux is one of the most widely used operating systems today in part
-        because it is a FOSS or free or open source software. Anyone can obtain
-        a copy of the Linux kernel and build their own Linux operating system!
-        Understanding Linux is helpful to know because it helps build and run
-        many different kinds of applications today. Whether it&apos;s hacking
-        into a computer or helping to put someone on the moon, Linux can help
-        perform all of these various tasks!
+        Linux is one of the most widely-used operating systems today partly
+        because it is
+        <span style={{ fontWeight: 'bold' }}>
+          {' '}
+          free and open-source software (FOSS)
+        </span>
+        . Anyone can obtain a copy of the Linux kernel and build their own Linux
+        operating system for free. Whether you want to hack (ethically) into a
+        computer or send someone to the moon, Linux can be used to build
+        different applications and perform a variety of tasks.
       </p>
       <p className="body">
-        In this learning lab, you will be learning how to speak the language of
-        Linux or learning basic commands that often apply through a command-line
-        interface (CLI). These commands will not only teach you how to move
-        about the Linux file system but also teach you how to command the
-        computer to do what you want!
+        In this learning lab, you will learn how to speak the language of Linux
+        by learning basic commands that are often used on a
+        <span style={{ fontWeight: 'bold' }}>
+          {' '}
+          command-line interface (CLI)
+        </span>
+        . These commands will not only teach you how to move around the Linux
+        file system but also how to command the computer to do anything you
+        want!
       </p>
 
       <h2 className="heading-1">THE POSIX FILE SYSTEM</h2>
       <p className="body">
-        POSIX (Portable Operating System Interface) standard is one of the
-        primary standards adopted by Linux. It was created as part of a set of
-        standards to allow applications to run across different UNIX based
-        operating systems, such as Linux.
+        <span style={{ fontWeight: 'bold' }}>
+          POSIX (Portable Operating System Interface){' '}
+        </span>
+        is a family of standards that allows applications to run, even when
+        moved across different UNIX-based operating systems, such as Linux.
       </p>
 
       <p className="body">
         The POSIX file system is organized in a tree-like format, branching out
         from the root directory and into descendent directories containing files
-        and other subdirectories. The POSIX file system also defines a set of
-        operations that can be performed on files and directories, such as open,
-        close, read, and write.
+        and other subdirectories. If you&apos;ve ever used Windows or iOS, you
+        can think of directories as folders and files as the documents within
+        them. To interact with these files and directories, there exist numerous
+        operations, such as open, close, read, and write.
       </p>
 
       <img
-        className="image-box"
+        className="posix-image"
         src={posixFileSystem}
-        alt="posix file system"
-        width="60%"
+        alt="POSIX file system"
       />
-      <h2 className="heading-1">TUX</h2>
-      <p className="body">
-        Tux the penguin is the official brand character of Linux. The creator of
-        Linux, Linus Torvalds, wanted their branch character to be a penguin as
-        he was rumored to have contracted &ldquo;penguinitis&rdquo; after being
-        bitten by a penguin! Tux&apos;s was designed by Larry Ewing and named by
-        James Hughes. His name is meant to stand for &ldquo;(T)orvalds
-        (U)ni(X)&rdquo;, or tuxedo, which a penguin resembles.
-      </p>
+      <h2 className="heading-1">WHO&apos;S THE PENGUIN?</h2>
+      <div className="row">
+        <div className="left-column">
+          <p className="body">
+            Tux is the official brand character of Linux. The creator of Linux,
+            Linus Torvalds, wanted a penguin as mascot after he was rumored to
+            have contracted &quot;penguinitis&quot; after being bitten by a
+            penguin! The name Tux is meant to stand for &quot;(T)orvalds
+            (U)ni(X)&quot;, or tuxedo, which a penguin resembles.
+          </p>
+          <p className="body">
+            Tux will also be our guide for the day, so go ahead and click{' '}
+            <em>next</em> when you&apos;re ready to begin!
+          </p>
+        </div>
+        <div className="right-column">
+          <img
+            className="tux-image"
+            src={tux}
+            alt="Tux the penguin"
+          />
+        </div>
+      </div>
       <footer>
         <a href="/">
           <button type="button" className="back-button">

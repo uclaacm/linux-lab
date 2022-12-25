@@ -32,19 +32,26 @@ function Stationary(): JSX.Element {
         system in a similar way, though these “folders” are called{' '}
         <b>directories</b> in Linux.
       </p>
-      <br />
       <p className="body">
-        Let&#39;s say you have a file called <b>CS35L.pdf</b> in a subfolder.
-        Windows users might see a file path like C:\Documents\Notes\CS35L.pdf,
-        whereas Mac users might see /Users/UserName/Documents/Notes/ CS35L.pdf.
-        To navigate to the Notes folder, you&#39;d have to go relative from the
-        folder you are currently in.
+        Let&#39;s say you have a file called{' '}
+        <span className="magenta-text">CS35L.pdf</span> in a subfolder. Windows
+        users might see a <b>file path</b> like{' '}
+        <span className="magenta-text">C:\Documents\Notes\CS35L.pdf</span>,
+        whereas Mac users might see{' '}
+        <span className="magenta-text">
+          /Users/UserName/Documents/Notes/CS35L.pdf
+        </span>
+        . In either case, to navigate to the Notes folder, you&#39;d have to go
+        relative from the folder you are currently in.
       </p>
-      <br />
       <p className="body">
-        So how do you determine what directory you are in in Linux? The{' '}
-        <span className="try-out-command">pwd</span> command lists the present
-        working directory.
+        So how do you determine what directory you are in in Linux?
+        <div className="boxed">
+          <p>
+            The <span className="try-out-command">pwd</span> command lists the
+            present working directory.
+          </p>
+        </div>
       </p>
       <Task
         taskPrompt={'Try it out in the terminal! Where is Tux?'}
@@ -58,10 +65,15 @@ function Stationary(): JSX.Element {
         The <span className="command-in-heading">whoami</span> Command
       </h2>
       <p className="body">
-        We now know how to answer the question of where?, but what about who?
-        How do we figure out, say, which account we are logged in as? The{' '}
-        <span className="try-out-command">whoami</span> command displays the
-        user id.
+        We now know how to answer the question of <em>where?</em>, but what
+        about <em>who?</em> How do we figure out which account we are logged in
+        as?
+        <div className="boxed">
+          <p>
+            The <span className="try-out-command">whoami</span> command displays
+            the user id.
+          </p>
+        </div>
       </p>
       <Task
         taskPrompt={"Can you figure out Tux's username?"}
@@ -76,9 +88,13 @@ function Stationary(): JSX.Element {
       <p className="body">
         We&#39;ve seen two commands so far—pwd and whoami—but there are hundreds
         more. Luckily, you don&#39;t need to memorize what each command does.
-        Instead, the <span className="try-out-command">man</span> command, short
-        for “manual”, displays explanations, options, and examples for specified
-        commands.
+        <div className="boxed">
+          <p>
+            Instead, the <span className="try-out-command">man</span> command,
+            short for “manual”, displays explanations, options, and examples for
+            specified commands.
+          </p>
+        </div>
       </p>
       <Task
         taskPrompt={

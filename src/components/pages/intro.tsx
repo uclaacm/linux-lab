@@ -9,20 +9,20 @@ function Intro(): JSX.Element {
       <h1 className="lesson-title">INTRO TO LINUX</h1>
       <p className="body">
         Like Windows and iOS, Linux is an{' '}
-        <span style={{ fontWeight: 'bold' }}>operating system (OS)</span>—a
+        <b>operating system (OS)</b>—a
         piece of software that manages a computer&apos;s basic functions, from
         figuring out which key a user presses to storing data. By taking care of
         these &quot;mundane&quot; tasks, the OS simplifies life for
-        <span style={{ fontWeight: 'bold' }}> applications</span>, which can
+        <b> applications</b>, which can
         focus instead on performing specialized tasks on top of the OS.
       </p>
       <p className="body">
         Linux is one of the most widely-used operating systems today partly
         because it is
-        <span style={{ fontWeight: 'bold' }}>
+        <b>
           {' '}
           free and open-source software (FOSS)
-        </span>
+        </b>
         . Anyone can obtain a copy of the Linux kernel and build their own Linux
         operating system for free. Whether you want to hack (ethically) into a
         computer or send someone to the moon, Linux can be used to build
@@ -31,10 +31,10 @@ function Intro(): JSX.Element {
       <p className="body">
         In this learning lab, you will learn how to speak the language of Linux
         by learning basic commands that are often used on a
-        <span style={{ fontWeight: 'bold' }}>
+        <b>
           {' '}
           command-line interface (CLI)
-        </span>
+        </b>
         . These commands will not only teach you how to move around the Linux
         file system but also how to command the computer to do anything you
         want!
@@ -42,9 +42,9 @@ function Intro(): JSX.Element {
 
       <h2 className="heading-1">THE POSIX FILE SYSTEM</h2>
       <p className="body">
-        <span style={{ fontWeight: 'bold' }}>
+        <b>
           POSIX (Portable Operating System Interface){' '}
-        </span>
+        </b>
         is a family of standards that allows applications to run, even when
         moved across different UNIX-based operating systems, such as Linux.
       </p>

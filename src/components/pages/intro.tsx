@@ -1,7 +1,8 @@
+import '../../styles/global.scss';
 import '../../styles/intro.scss';
-import posixFileSystem from '../../assets/images/posix-file-system.png';
 import tux from '../../assets/images/intro-tux.png';
-// import "../../styles/global.scss"
+import posixFileSystem from '../../assets/images/posix-file-system.png';
+
 function Intro(): JSX.Element {
   return (
     <div className="intro-container">
@@ -62,7 +63,7 @@ function Intro(): JSX.Element {
         src={posixFileSystem}
         alt="POSIX file system"
       />
-      <h2 className="heading-1">WHO&apos;S THE PENGUIN?</h2>
+      <h2 className="heading-1">ALL ABOUT TUX!</h2>
       <div className="row">
         <div className="left-column">
           <p className="body">
@@ -78,11 +79,7 @@ function Intro(): JSX.Element {
           </p>
         </div>
         <div className="right-column">
-          <img
-            className="tux-image"
-            src={tux}
-            alt="Tux the penguin"
-          />
+          <img className="tux-image" src={tux} alt="Tux the penguin" />
         </div>
       </div>
       <footer>

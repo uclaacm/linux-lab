@@ -113,9 +113,9 @@ function Permissions(): JSX.Element {
             back
           </button>
         </a>
-        <a href="game">
+        <a href="/">
           <button type="button" className="next-button">
-            next
+            Congrats, you&apos;ve reached the end! Click here to start over.
           </button>
         </a>
       </footer>

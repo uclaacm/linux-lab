@@ -1,6 +1,5 @@
 import Landing from '../pages/landing';
 import Creation from './../pages/creation';
-import Game from './../pages/game';
 import Intro from './../pages/intro';
 import Moving from './../pages/moving';
 import Permissions from './../pages/permissions';
@@ -32,7 +31,6 @@ export const PageMapping: Map<
   ['/redirection', { component: Redirection, pageName: 'Redirection' }],
   ['/searching', { component: Searching, pageName: 'Searching' }],
   ['/permissions', { component: Permissions, pageName: 'Permissions' }],
-  ['/game', { component: Game, pageName: 'Game' }],
 ]);
 
 export class FileSystemObject {

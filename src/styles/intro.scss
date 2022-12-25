@@ -94,23 +94,24 @@
   width: 25%;
 }
 
-.row:after {
-  content: "";
-  display: table;
+.row::after {
   clear: both;
+  content: '';
+  display: table;
 }
 
 .tux-image {
-  padding-right: 1rem;
   height: 25vh;
+  padding-right: 1rem;
 }
 
 @media screen and (max-width: 800px) {
   .left-column {
     width: 100%;
   }
+
   .right-column {
-    width: 100%;
     text-align: center;
+    width: 100%;
   }
 }

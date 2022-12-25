@@ -110,7 +110,3 @@ function Stationary(): JSX.Element {
 }
 
 export default Stationary;
-// monospace font
-// left alignment
-// font size
-// input has black background and border

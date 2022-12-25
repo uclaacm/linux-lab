@@ -3,13 +3,14 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 @import url('https://fonts.googleapis.com/css?family=Fira+Code');
 
-h1, h2 {
+h1,
+h2 {
   margin: 0;
 }
 
 p {
-  margin-block-start: 0.7em;
   margin-block-end: 0.7em;
+  margin-block-start: 0.7em;
 }
 
 .lesson-title {
@@ -20,10 +21,10 @@ p {
   line-height: 61px, 100%;
   margin-left: 7rem;
   margin-right: 7rem;
+  padding-top: 0.5rem;
   text-align: left;
   -webkit-text-stroke: 2px #9a4d7f;
   vertical-align: top;
-  padding-top: 0.5rem;
 }
 
 .heading-1 {
@@ -34,11 +35,11 @@ p {
   line-height: 46px, 100%;
   margin-left: 7rem;
   margin-right: 7rem;
+  padding-top: 2rem;
   text-align: left;
   -webkit-text-stroke: 2px #9a4d7f;
   vertical-align: top;
   width: '4px';
-  padding-top: 2rem;
 }
 
 .blue-text {
@@ -105,11 +106,12 @@ body {
 .back-button {
   background-color: white;
   border: 1px solid #000;
+  border-radius: 10px;
   box-sizing: border-box;
   cursor: pointer;
   float: left;
   font-size: 15px;
-  margin-left: 7rem;
+  margin: 3rem 7rem;
   padding: 10px 35px;
   transition-duration: 0.4s;
 }
@@ -121,11 +123,12 @@ body {
 .next-button {
   background-color: white;
   border: 1px solid #000;
+  border-radius: 10px;
   box-sizing: border-box;
   cursor: pointer;
   float: right;
   font-size: 15px;
-  margin-right: 7rem;
+  margin: 3rem 7rem;
   padding: 10px 35px;
   transition-duration: 0.4s;
 }
@@ -158,9 +161,4 @@ body {
   color: white;
   font-family: Fira Code, sans-serif;
   line-height: 8px;
-}
-
-footer {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
 }

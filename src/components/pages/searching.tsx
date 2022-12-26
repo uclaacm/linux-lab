@@ -19,7 +19,7 @@ function Searching(): JSX.Element {
     </p>,
   ];
 
-  const initFileSystem = new Directory(
+  const task1FS = new Directory(
     '/',
     undefined,
     new Map([
@@ -28,7 +28,9 @@ function Searching(): JSX.Element {
         new Directory(
           'dir1',
           undefined,
-          new Map([['.file1', new File('.file1', '/dir1/.file1')]])
+          new Map([
+            ['glasses.txt', new File('glasses.txt', '/dir1/glasses.txt')],
+          ])
         ),
       ],
       ['file1.txt', new File('file1.txt', 'file1 contents')],
@@ -36,35 +38,64 @@ function Searching(): JSX.Element {
     '/',
     true
   );
-  (initFileSystem.getChild('dir1') as Directory).addFileSystemObject(
+  (task1FS.getChild('dir1') as Directory).addFileSystemObject(
     new Directory('.dir2')
   );
-  const currentWorkingDirectory = initFileSystem;
+  const task1CWD = task1FS;
+
+  const task2FS = new Directory(
+    '/',
+    undefined,
+    new Map([
+      [
+        'office',
+        new Directory(
+          'office',
+          undefined,
+          new Map([['desk', new File('desk', 'Just papers and pens...')]])
+        ),
+      ],
+      [
+        'home',
+        new Directory(
+          'home',
+          undefined,
+          new Map([
+            ['attic', new File('attic', 'Nice, you found the camera for Bob!')],
+            ['kitchen', new File('kitchen', 'Nothing but utensils here...')],
+          ])
+        ),
+      ],
+    ]),
+    '/',
+    true
+  );
+  const task2CWD = task2FS as Directory;
 
   return (
     <>
-      <div className="container">
+      <div>
         <h1 className="lesson-title">Searching</h1>
         <p className="body">
           Manually looking through all the file names in a directory or all the
           text in a file to find a specific string often takes forever. But
           Linux provides two commands that simplify this process:{' '}
           <span className="try-out-command">find</span> and{' '}
-          <span className="try-out-command">grep</span>
+          <span className="try-out-command">grep</span>.
         </p>
-        <div id="lesson-content">
-          <div>
+        <div className="iceberg-container">
+          <div className="iceberg-child">
             <span className="try-out-command">find</span>
             <p>
               recursively travels down the file hierarchy tree and, based on
               user-specified options, finds specific files or directories.
             </p>
           </div>
-          <div>
+          <div className="iceberg-child">
             <span className="try-out-command">grep</span>
             <p>
-              (short for “global/regular expression/print”) command searches for
-              a specific string pattern in a file.
+              (short for “global/regular expression/print”) searches for a
+              specific string pattern in a file.
             </p>
           </div>
         </div>
@@ -91,16 +122,17 @@ function Searching(): JSX.Element {
             taskPrompt={taskPrompts[0]}
             taskName="Task 1"
             completed={true}
-            fileSystem={initFileSystem}
-            currentWorkingDirectory={currentWorkingDirectory}
+            fileSystem={task1FS}
+            currentWorkingDirectory={task1CWD}
             displayFileSystem={true}
           />
           <Task
             taskPrompt={taskPrompts[1]}
             taskName="Task 2"
             completed={false}
-            fileSystem={initFileSystem}
-            currentWorkingDirectory={currentWorkingDirectory}
+            fileSystem={task2FS}
+            currentWorkingDirectory={task2CWD}
+            displayFileSystem={true}
           />
         </div>
         <footer>

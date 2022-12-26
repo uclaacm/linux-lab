@@ -10,26 +10,3 @@
   display: flex;
   margin-right: 10%;
 }
-
-.content-container {
-  display: flex;
-  margin: 0 5rem;
-  text-align: left;
-}
-
-.content-box {
-  background: #e0edf8;
-  margin: 0 2rem 2rem;
-  padding: 2rem;
-}
-
-@media screen and (max-width: 950px) {
-  .content-container {
-    flex-wrap: wrap;
-  }
-
-  .content-box {
-    margin-bottom: 1rem;
-    width: 100%;
-  }
-}

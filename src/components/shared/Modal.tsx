@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { MdClose } from 'react-icons/md';
 import './../../styles/Modal.scss';
+import Menu from '../../assets/images/menu.svg';
 
 function Modal(): JSX.Element {
   const [displayModalState, setModalState] = useState(false);
   return (
     <>
       <div id="helpful-commands-button" onClick={() => setModalState(true)}>
-        Helpful Commands
+        <img className="commands-menu" src={Menu} /> Helpful Commands
       </div>
       <div className={displayModalState ? 'modal' : 'hidden'}>
         <div className="modal-content">
@@ -61,11 +62,14 @@ function Modal(): JSX.Element {
             </div>
             <div className="helpful-command-row">
               <div>
-                <p>Find a string in all files of a directory</p>
+                <p>
+                  Find a string in all files of a directory and its
+                  subdirectories
+                </p>
               </div>
               <div>
                 <span className="try-out-command">
-                  grep -R &quot;[string]&quot; [filename] [directory]
+                  grep -R &quot;[string]&quot; [directory]
                 </span>
               </div>
             </div>

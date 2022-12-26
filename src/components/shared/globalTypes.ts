@@ -28,7 +28,7 @@ export const PageMapping: Map<
   ['/moving', { component: Moving, pageName: 'Moving' }],
   ['/creation', { component: Creation, pageName: 'Creation and Deletion' }],
   ['/piping', { component: Piping, pageName: 'Piping' }],
-  ['/redirection', { component: Redirection, pageName: 'Redirection' }],
+  ['/redirection', { component: Redirection, pageName: 'I/O Redirection' }],
   ['/searching', { component: Searching, pageName: 'Searching' }],
   ['/permissions', { component: Permissions, pageName: 'Permissions' }],
 ]);

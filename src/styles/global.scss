@@ -119,7 +119,7 @@ body {
 .back-button {
   background-color: white;
   border: 1px solid #000;
-  border-radius: 10px;
+  border-radius: 6px;
   box-sizing: border-box;
   cursor: pointer;
   float: left;
@@ -136,7 +136,7 @@ body {
 .next-button {
   background-color: white;
   border: 1px solid #000;
-  border-radius: 10px;
+  border-radius: 6px;
   box-sizing: border-box;
   cursor: pointer;
   float: right;
@@ -162,11 +162,12 @@ body {
 }
 
 .example-container {
-  margin: 1rem 17rem;
+  margin: 1rem 14rem;
 }
 
 .example-black-box {
   background-color: #000;
+  line-height: 1rem;
   padding: 0.5rem 1rem;
   text-align: left;
 }
@@ -174,5 +175,4 @@ body {
 .example-box-text {
   color: white;
   font-family: Fira Code, sans-serif;
-  line-height: 8px;
 }

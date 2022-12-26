@@ -1,6 +1,6 @@
 import '../../styles/global.scss';
 import { Directory, File } from '../shared/globalTypes';
-import Bar from '../shared/progressbar';
+// import Bar from '../shared/progressbar';
 import Task from '../shared/Task';
 
 function Creation(): JSX.Element {
@@ -272,7 +272,7 @@ function Creation(): JSX.Element {
       <br />
 
       {/* TODO: subpages and bar */}
-      <Bar totalsteps={6} currentstep={1} />
+      {/* <Bar totalsteps={6} currentstep={1} /> */}
       <footer>
         <a href="moving">
           <button type="button" className="back-button">

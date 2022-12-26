@@ -26,7 +26,7 @@ export const PageMapping: Map<
   ['/intro', { component: Intro, pageName: 'Intro to Linux' }],
   ['/stationary', { component: Stationary, pageName: 'Stationary' }],
   ['/moving', { component: Moving, pageName: 'Moving' }],
-  ['/creation', { component: Creation, pageName: 'Creation' }],
+  ['/creation', { component: Creation, pageName: 'Creation and Deletion' }],
   ['/piping', { component: Piping, pageName: 'Piping' }],
   ['/redirection', { component: Redirection, pageName: 'Redirection' }],
   ['/searching', { component: Searching, pageName: 'Searching' }],

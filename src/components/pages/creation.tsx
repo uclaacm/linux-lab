@@ -13,21 +13,59 @@ function Creation(): JSX.Element {
     new Map([
       ['file1', new File('file1')],
       ['file2', new File('file2')],
-      ['file3', new File('file3')],
-      ['dir', new Directory('dir')],
-      ['dir2', new Directory('dir2')],
+      ['emptyDir', new Directory('emptyDir')],
+      [
+        'nonemptyDir',
+        new Directory(
+          'nonemptyDir',
+          undefined,
+          new Map([['file3', new File('file3')]])
+        ),
+      ],
     ]),
     '/',
     true
   );
   const task2CWD = task2FS as Directory;
 
+  const task3FS = new Directory(
+    '/',
+    undefined,
+    new Map([
+      ['sourceFile', new File('sourceFile', 'This is the source.')],
+      [
+        'destinationFile',
+        new File('destinationFile', 'This is the destination.'),
+      ],
+      ['file1', new File('file1', 'Super cool secret info')],
+      ['file2', new File('file2', 'You should join Cyber PBR :)')],
+      ['directoryPath', new Directory('directoryPath')],
+    ]),
+    '/',
+    true
+  );
+  const task3CWD = task3FS as Directory;
+
+  const task4FS = new Directory(
+    '/',
+    undefined,
+    new Map([
+      ['oldName', new File('oldName')],
+      ['file1', new File('file1')],
+      ['file2', new File('file2')],
+      ['directoryPath', new Directory('directoryPath')],
+    ]),
+    '/',
+    true
+  );
+  const task4CWD = task4FS as Directory;
+
   return (
     <div>
       <h1 className="lesson-title">Creation and Deletion</h1>
       <p className="body">
         At the heart of any project is the ability to create and delete things.
-        So let’s start with making commands.
+        So let&apos;s start with commands that let us make things.
       </p>
       <br />
       <Task
@@ -39,7 +77,7 @@ function Creation(): JSX.Element {
             </p>
             <p className="body task-prompt">
               Run <span className="try-out-command">touch emptyFile</span> and
-              see how the file system diagram changes.
+              see how the file system below changes.
             </p>
             <p className="body task-prompt">
               If you then run{' '}
@@ -73,10 +111,6 @@ function Creation(): JSX.Element {
               Notice how you can now change into the newly-created directory
               with <span className="try-out-command">cd newDir</span> !
             </p>
-            <p className="body task-prompt">
-              Removing commands are quite similar (plus, the names basically
-              tell you what the command does!).
-            </p>
           </>
         }
         taskName={
@@ -89,26 +123,31 @@ function Creation(): JSX.Element {
         currentWorkingDirectory={task1CWD}
         displayFileSystem={true}
       />
-
+      <p className="body">
+        Awesome, so now you know how to create files and directories. As you
+        will learn below, commands for deletion are quite similar (plus, the
+        names basically tell you what the command does!).
+      </p>
       <Task
         taskPrompt={
           <>
             <p className="body task-prompt">
               The <span className="try-out-command">rm</span> command removes an
               existing file.
-              <br />
-              Looks like we have three files in the current directory.
-              <br />
-              Go ahead and remove one of them with the command{' '}
-              <span className="try-out-command">rm fileName</span>.
-              <br />
-              Can rm be used to remove a directory? Give it a try.
-              <br />
-              Notice how the file system diagram remains unchanged because rm
-              cannot be used to remove directories.
-              <br />
-              The terminal also printed an error message: rm: DIRNAME: is a
-              directory
+              <p className="body task-prompt">
+                Looks like we have three files in the current directory. Go
+                ahead and remove one with the command{' '}
+                <span className="try-out-command">rm</span> followed by the file
+                name.
+              </p>
+              Can <span className="try-out-command">rm</span> be used to remove
+              a directory? Give it a try.
+              <p className="body task-prompt">
+                The terminal printed an error message! Notice how the file
+                system diagram remains unchanged because rm cannot be used to
+                remove directories. To remove a directory, we need to learn
+                another command: <span className="try-out-command">rmdir</span>.
+              </p>
             </p>
           </>
         }
@@ -126,23 +165,26 @@ function Creation(): JSX.Element {
         taskPrompt={
           <>
             <p className="body task-prompt">
-              The rmdir command removes an existing empty directory.
-              <br />
+              The <span className="try-out-command">rmdir</span> command removes
+              an existing empty directory.
+            </p>
+            <p className="body task-prompt">
               Try running{' '}
               <span className="try-out-command">rmdir nonemptyDir</span>.
-              <br />
-              Notice how the terminal prints the error message: rmdir:
-              nonemptyDir: Directory not empty
-              <br />
-              We could manually rm all the files in a directory one by one, but
-              there’s an easier way: the -rf options combination.
-              <br />
-              For example,
-              <br />
+            </p>
+            <p className="body task-prompt">
+              Uh oh! The terminal printed an error message. Looks like the
+              directory must be empty before we can use{' '}
+              <span className="try-out-command">rmdir</span>. Now, we could
+              manually rm all the files in a directory one by one, but
+              there&apos;s an easier way: the -rf options combination.
+            </p>
+            <p className="body task-prompt">
+              For example,{' '}
               <span className="try-out-command">rm -rf nonemptyDir</span>{' '}
               recursively and forcefully (i.e., does not ask for confirmation)
-              <br />
-              removes all files within the nonemptyDir directory.
+              removes all files within the nonemptyDir directory before also
+              deleting the directory.
             </p>
           </>
         }
@@ -156,27 +198,33 @@ function Creation(): JSX.Element {
         currentWorkingDirectory={task2CWD}
         displayFileSystem={true}
       />
+      <p className="body">
+        Congrats! You&apos;ve learned the basic commands needed to create and
+        delete things. Two more related commands are{' '}
+        <span className="try-out-command">cp</span> and{' '}
+        <span className="try-out-command">mv</span>.
+      </p>
       <Task
         taskPrompt={
           <>
             <p className="body task-prompt">
-              The cp command copies one file to another.
-              <br />
+              The <span className="try-out-command">cp</span> command copies one
+              file to another.
+            </p>
+            <p className="body task-prompt">
               <span className="try-out-command">
                 cp sourceFile destinationFile
               </span>{' '}
-              copies the contents of sourceFile into destinationFile,
-              <br />
-              though the two will have different timestamps.
-              <br />
+              copies the contents of sourceFile into destinationFile, though the
+              two will have different timestamps.
+            </p>
+            <p className="body task-prompt">
               <span className="try-out-command">
                 cp file1 file2 directoryPath
               </span>{' '}
               copies the contents of file1 and file2 to two new files in the
-              directoryPath directory,
-              <br />
-              though the two new files will have different timestamps from the
-              two original files.
+              directoryPath directory, though the two new files will have
+              different timestamps from the two original files.
             </p>
           </>
         }
@@ -186,20 +234,23 @@ function Creation(): JSX.Element {
           </h2>
         }
         completed={false}
-        fileSystem={task2FS}
-        currentWorkingDirectory={task2CWD}
+        fileSystem={task3FS}
+        currentWorkingDirectory={task3CWD}
         displayFileSystem={true}
       />
       <Task
         taskPrompt={
           <>
             <p className="body task-prompt">
-              The mv command moves/renames files.
-              <br />
+              The <span className="try-out-command">mv</span> command
+              moves/renames files.
+            </p>
+            <p className="body task-prompt">
               <span className="try-out-command">mv oldName newName</span>{' '}
               renames a file called oldName to newName, with the timestamp
               remaining unchanged.
-              <br />
+            </p>
+            <p className="body task-prompt">
               <span className="try-out-command">
                 mv file1 file2 directoryPath
               </span>{' '}
@@ -214,11 +265,13 @@ function Creation(): JSX.Element {
           </h2>
         }
         completed={false}
-        fileSystem={task2FS}
-        currentWorkingDirectory={task2CWD}
+        fileSystem={task4FS}
+        currentWorkingDirectory={task4CWD}
         displayFileSystem={true}
       />
       <br />
+
+      {/* TODO: subpages and bar */}
       <Bar totalsteps={6} currentstep={1} />
       <footer>
         <a href="moving">

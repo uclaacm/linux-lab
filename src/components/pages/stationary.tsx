@@ -54,7 +54,7 @@ function Stationary(): JSX.Element {
         </div>
       </p>
       <Task
-        taskPrompt={'Try it out in the terminal! Where is Tux?'}
+        taskPrompt={"Type 'pwd' in the terminal and press enter. Where is Tux?"}
         taskName="Task 1"
         completed={false}
         fileSystem={task1FS}

@@ -8,43 +8,33 @@ function Intro(): JSX.Element {
     <div className="intro-container">
       <h1 className="lesson-title">INTRO TO LINUX</h1>
       <p className="body">
-        Like Windows and iOS, Linux is an{' '}
-        <b>operating system (OS)</b>—a
-        piece of software that manages a computer&apos;s basic functions, from
+        Like Windows and iOS, Linux is an <b>operating system (OS)</b>—a piece
+        of software that manages a computer&apos;s basic functions, from
         figuring out which key a user presses to storing data. By taking care of
         these &quot;mundane&quot; tasks, the OS simplifies life for
-        <b> applications</b>, which can
-        focus instead on performing specialized tasks on top of the OS.
+        <b> applications</b>, which can focus instead on performing specialized
+        tasks on top of the OS.
       </p>
       <p className="body">
         Linux is one of the most widely-used operating systems today partly
         because it is
-        <b>
-          {' '}
-          free and open-source software (FOSS)
-        </b>
-        . Anyone can obtain a copy of the Linux kernel and build their own Linux
-        operating system for free. Whether you want to hack (ethically) into a
-        computer or send someone to the moon, Linux can be used to build
-        different applications and perform a variety of tasks.
+        <b> free and open-source software (FOSS)</b>. Anyone can obtain a copy
+        of the Linux kernel and build their own Linux operating system for free.
+        Whether you want to hack (ethically) into a computer or send someone to
+        the moon, Linux can be used to build different applications and perform
+        a variety of tasks.
       </p>
       <p className="body">
         In this learning lab, you will learn how to speak the language of Linux
         by learning basic commands that are often used on a
-        <b>
-          {' '}
-          command-line interface (CLI)
-        </b>
-        . These commands will not only teach you how to move around the Linux
-        file system but also how to command the computer to do anything you
-        want!
+        <b> command-line interface (CLI)</b>. These commands will not only teach
+        you how to move around the Linux file system but also how to command the
+        computer to do anything you want!
       </p>
 
       <h2 className="heading-1">THE POSIX FILE SYSTEM</h2>
       <p className="body">
-        <b>
-          POSIX (Portable Operating System Interface){' '}
-        </b>
+        <b>POSIX (Portable Operating System Interface) </b>
         is a family of standards that allows applications to run, even when
         moved across different UNIX-based operating systems, such as Linux.
       </p>

@@ -108,9 +108,9 @@ body {
 }
 
 .boxed {
-  border-style: solid;
-  border-radius: 8px;
   border-color: #6588cb;
+  border-radius: 8px;
+  border-style: solid;
   border-width: 2px;
   padding: 0 1rem;
   text-align: center;
@@ -124,7 +124,7 @@ body {
   cursor: pointer;
   float: left;
   font-size: 15px;
-  margin: 1.5rem 7rem 3rem 7rem;
+  margin: 1.5rem 0 3rem 7rem;
   padding: 10px 35px;
   transition-duration: 0.4s;
 }
@@ -141,7 +141,7 @@ body {
   cursor: pointer;
   float: right;
   font-size: 15px;
-  margin: 1.5rem 7rem 3rem 7rem;
+  margin: 1.5rem 7rem 3rem 0;
   padding: 10px 35px;
   transition-duration: 0.4s;
 }

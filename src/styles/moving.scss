@@ -1,0 +1,30 @@
+.iceberg-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.iceberg-child {
+  background-color: #e0edf8;
+  flex: 1;
+  padding-top: 1rem;
+}
+
+.iceberg-child:first-child {
+  margin-left: 11rem;
+  margin-right: 4rem;
+}
+
+.iceberg-child:not(:first-child) {
+  margin-left: 4rem;
+  margin-right: 11rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .iceberg-child:first-child {
+    margin: 0;
+  }
+
+  .iceberg-child:not(:first-child) {
+    margin: 0;
+  }
+}

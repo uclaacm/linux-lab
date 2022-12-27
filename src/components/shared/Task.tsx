@@ -7,6 +7,8 @@ import { Directory } from './globalTypes';
 import Terminal from './Terminal';
 import './../../styles/global.scss';
 
+import { useReward } from 'react-rewards';
+
 const defaultProps = {
   displayFileSystem: false,
   completed: false,
@@ -33,6 +35,8 @@ function Task({
     renderHeight: 0,
   });
 
+  const { reward, isAnimating } = useReward('rewardId', 'confetti');
+
   function handleResize(
     currDimensions: RefObject<HTMLInputElement> | RefObject<null> | null
   ): void {
@@ -58,8 +62,13 @@ function Task({
     return () => window.removeEventListener('resize', () => handleResize(ref));
   }, [ref]);
 
+  useEffect(() => {
+    if (completed && !isAnimating) reward();
+  }, [completed]);
+
   return (
     <div className="task">
+      <div id="rewardId" />
       <span className="task-header">
         <IconContext.Provider
           value={{

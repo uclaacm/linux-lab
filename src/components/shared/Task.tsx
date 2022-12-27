@@ -11,12 +11,12 @@ import { useReward } from 'react-rewards';
 
 const defaultProps = {
   displayFileSystem: false,
-  completed: false,
 };
 
 type TaskProps = {
   taskPrompt: JSX.Element | string;
   taskName: JSX.Element | string;
+  solutions: Array<string>;
   fileSystem: Directory;
   currentWorkingDirectory: Directory;
 } & typeof defaultProps;
@@ -24,7 +24,7 @@ type TaskProps = {
 function Task({
   taskPrompt,
   taskName,
-  completed,
+  solutions,
   fileSystem,
   currentWorkingDirectory,
   displayFileSystem,
@@ -55,6 +55,18 @@ function Task({
 
   const [root, setRoot] = useState<Directory>(fileSystem);
   const [CWD, setCWD] = useState<Directory>(currentWorkingDirectory);
+
+  const [completed, setCompleted] = useState<boolean>(false);
+  const [lastCommand, setLastCommand] = useState<string>('');
+
+  useEffect(() => {
+    solutions.forEach((solution) => {
+      if (lastCommand === solution) {
+        setCompleted(true);
+        return;
+      }
+    });
+  }, [lastCommand]);
 
   useEffect(() => {
     handleResize(ref);
@@ -98,6 +110,7 @@ function Task({
           currentWorkingDirectory={CWD}
           setFileSystem={setRoot}
           setCurrentWorkingDirectory={setCWD}
+          getLastCommand={setLastCommand}
         />
         {/* TODO: Fix styling for ice-glare-left if displaying the file system render */}
         <div className="ice-glare-left">

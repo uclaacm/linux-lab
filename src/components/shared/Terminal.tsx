@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import '../../styles/Terminal.scss';
 import '../../styles/global.scss';
 import { Directory, File, FileSystemObject } from './globalTypes';
@@ -9,6 +9,7 @@ function Terminal(prop: {
   currentWorkingDirectory: Directory;
   setFileSystem: (fileSystem: Directory) => void;
   setCurrentWorkingDirectory: (cwd: Directory) => void;
+  getLastCommand: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const [commands, setCommands] = useState<string[]>([]);
   const [input, setInput] = useState('$ ');
@@ -526,6 +527,7 @@ function Terminal(prop: {
     } else {
       setCommands([...commands, input, ...result.err, ...result.out]);
     }
+    prop.getLastCommand(input);
     setInputHistory(newHistory);
     setInputHistoryIndex(newHistory.length);
     setInput('$ ');

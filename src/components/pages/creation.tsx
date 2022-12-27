@@ -91,7 +91,7 @@ function Creation(): JSX.Element {
             The <span className="command-in-heading">touch</span> Command
           </h2>
         }
-        completed={false}
+        solutions={['touch emptyFile']}
         fileSystem={task1FS}
         currentWorkingDirectory={task1CWD}
         displayFileSystem={true}
@@ -118,7 +118,7 @@ function Creation(): JSX.Element {
             The <span className="command-in-heading">mkdir</span> Command
           </h2>
         }
-        completed={false}
+        solutions={['mkdir newDir']}
         fileSystem={task1FS}
         currentWorkingDirectory={task1CWD}
         displayFileSystem={true}
@@ -156,7 +156,7 @@ function Creation(): JSX.Element {
             The <span className="command-in-heading">rm</span> Command
           </h2>
         }
-        completed={false}
+        solutions={['rm file1', 'rm file2', 'rm nonemptyDir/file3']}
         fileSystem={task2FS}
         currentWorkingDirectory={task2CWD}
         displayFileSystem={true}
@@ -193,7 +193,7 @@ function Creation(): JSX.Element {
             The <span className="command-in-heading">rmdir</span> Command
           </h2>
         }
-        completed={false}
+        solutions={['rm -rf nonemptyDir']}
         fileSystem={task2FS}
         currentWorkingDirectory={task2CWD}
         displayFileSystem={true}
@@ -233,7 +233,10 @@ function Creation(): JSX.Element {
             The <span className="command-in-heading">cp</span> Command
           </h2>
         }
-        completed={false}
+        solutions={[
+          'cp sourceFile destinationFile',
+          'cp file1 file2 directoryPath',
+        ]}
         fileSystem={task3FS}
         currentWorkingDirectory={task3CWD}
         displayFileSystem={true}
@@ -264,7 +267,7 @@ function Creation(): JSX.Element {
             The <span className="command-in-heading">mv</span> Command
           </h2>
         }
-        completed={false}
+        solutions={['mv oldName newName', 'mv file1 file2 directoryPath']}
         fileSystem={task4FS}
         currentWorkingDirectory={task4CWD}
         displayFileSystem={true}

@@ -2,21 +2,20 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 import { IconContext } from 'react-icons';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import './../../styles/Task.scss';
+import { useReward } from 'react-rewards';
 import FileSystemRender from './FileSystemRender';
 import { Directory } from './globalTypes';
 import Terminal from './Terminal';
 import './../../styles/global.scss';
 
-import { useReward } from 'react-rewards';
-
 const defaultProps = {
   displayFileSystem: false,
-  completed: false,
 };
 
 type TaskProps = {
   taskPrompt: JSX.Element | string;
   taskName: JSX.Element | string;
+  solutions: Array<string>;
   fileSystem: Directory;
   currentWorkingDirectory: Directory;
 } & typeof defaultProps;
@@ -24,7 +23,7 @@ type TaskProps = {
 function Task({
   taskPrompt,
   taskName,
-  completed,
+  solutions,
   fileSystem,
   currentWorkingDirectory,
   displayFileSystem,
@@ -56,15 +55,34 @@ function Task({
   const [root, setRoot] = useState<Directory>(fileSystem);
   const [CWD, setCWD] = useState<Directory>(currentWorkingDirectory);
 
+  const taskId =
+    String(window.location.pathname.substring(1)) +
+    String(taskName).replace(/\s/g, '');
+  const [completed, setCompleted] = useState<boolean>(
+    Boolean(window.localStorage.getItem(taskId)) ?? false
+  );
+  const [lastCommand, setLastCommand] = useState<string>('');
+
+  useEffect(() => {
+    solutions.forEach((solution) => {
+      if (
+        lastCommand.substring(2) === solution &&
+        !isAnimating &&
+        window.localStorage.getItem(taskId) !== 'true'
+      ) {
+        setCompleted(true);
+        reward();
+        window.localStorage.setItem(taskId, String(true));
+        return;
+      }
+    });
+  }, [lastCommand]);
+
   useEffect(() => {
     handleResize(ref);
     window.addEventListener('resize', () => handleResize(ref));
     return () => window.removeEventListener('resize', () => handleResize(ref));
   }, [ref]);
-
-  useEffect(() => {
-    if (completed && !isAnimating) reward();
-  }, [completed]);
 
   return (
     <div className="task">
@@ -98,6 +116,7 @@ function Task({
           currentWorkingDirectory={CWD}
           setFileSystem={setRoot}
           setCurrentWorkingDirectory={setCWD}
+          getLastCommand={setLastCommand}
         />
         {/* TODO: Fix styling for ice-glare-left if displaying the file system render */}
         <div className="ice-glare-left">

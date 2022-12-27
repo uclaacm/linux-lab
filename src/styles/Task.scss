@@ -2,11 +2,11 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin: 0 132px;
+  margin: 0 7rem;
   margin-bottom: 10vh;
   position: relative;
   text-align: left;
-  width: calc(100% - 2 * 132px);
+  width: calc(100% - 2 * 7rem);
 }
 
 .task-header {
@@ -14,7 +14,9 @@
   display: flex;
   height: 3vh;
   line-height: 3em;
+  margin-bottom: 1rem;
   margin-top: 1vh;
+  padding-bottom: 1rem;
   width: 100%;
 }
 

@@ -1,0 +1,42 @@
+.iceberg-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.iceberg-child {
+  background-color: #e0edf8;
+  flex: 1;
+  padding-top: 1rem;
+}
+
+.iceberg-child:first-child {
+  margin-left: 11rem;
+  margin-right: 4rem;
+}
+
+.iceberg-child:not(:first-child) {
+  margin-left: 4rem;
+  margin-right: 11rem;
+}
+
+@media screen and (max-width: 1300px) {
+  .iceberg-child:first-child {
+    margin: 0 1rem 0 9rem;
+  }
+
+  .iceberg-child:not(:first-child) {
+    margin: 0 9rem 0 1rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .iceberg-child:first-child {
+    border: 0;
+    margin: 0 7rem;
+  }
+
+  .iceberg-child:not(:first-child) {
+    border: 0;
+    margin: 1rem 7rem;
+  }
+}

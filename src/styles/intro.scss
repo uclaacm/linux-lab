@@ -1,21 +1,18 @@
-.intro-container {
-  display: flex;
-  flex-direction: column;
-  font-family: 'Westwood Sans', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  height: 100%;
-  margin: 2%;
-  text-align: left;
-  width: 95%;
-}
+// .intro-container {
+//   display: flex;
+//   flex-direction: column;
+//   font-family: 'Westwood Sans', sans-serif;
+//   font-style: normal;
+//   font-weight: 400;
+//   height: 100%;
+//   text-align: left;
+// }
 
-.image-box {
-  align-items: center;
-  align-self: center;
-  display: flex;
-  margin-top: 5vh;
-  width: 50vw;
+.posix-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .landing-background {
@@ -83,4 +80,36 @@
   position: fixed;
   text-align: left;
   z-index: 1;
+}
+
+.left-column {
+  float: left;
+  width: 75%;
+}
+
+.right-column {
+  float: left;
+  width: 25%;
+}
+
+.row::after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.tux-image {
+  height: 25vh;
+  padding-right: 1rem;
+}
+
+@media screen and (max-width: 800px) {
+  .left-column {
+    width: 100%;
+  }
+
+  .right-column {
+    text-align: center;
+    width: 100%;
+  }
 }

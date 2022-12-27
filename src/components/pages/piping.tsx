@@ -14,28 +14,31 @@ function Piping(): JSX.Element {
   );
   const currentWorkingDirectory = initFileSystem;
   return (
-    <div className="lesson-container">
-      <h1 className="lesson-title">Piping/IO Redirection</h1>
+    <div>
+      <h1 className="lesson-title">Piping</h1>
       <div className="first-paragraph">
         <p className="body">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco
+          If we want to perform a complicated task, typing one command at a time
+          is often quite inefficient. Instead, we can take advantage of piping
+          and input/output redirection in Linux. Think of it as chaining a bunch
+          of info together!
         </p>
-        <img src={tuxHoldingEgg} alt="tux holding up an egg" />
+        <img
+          className="tux-egg"
+          src={tuxHoldingEgg}
+          alt="tux holding up an egg"
+        />
       </div>
-
-      <div className="section">
+      <div>
         <h2 className="heading-1">Standard Streams</h2>
         <p className="body">
           Linux has three <b>standard streams</b> for data to move along:
         </p>
         <div className="content-container">
           <div className="content-box">
-            <p className="blue-text">Standard Input</p>
-            <div className="example-heading">
-              <span className="try-out-command">stdin</span>
-            </div>
+            <p className="blue-text">
+              Standard Input (<span className="try-out-command">stdin</span>)
+            </p>
             <ul>
               <li>
                 Numbered <b>0</b>
@@ -47,10 +50,9 @@ function Piping(): JSX.Element {
             </ul>
           </div>
           <div className="content-box">
-            <p className="blue-text">Standard Output</p>
-            <div className="example-heading">
-              <span className="try-out-command">stdout</span>
-            </div>
+            <p className="blue-text">
+              Standard Output (<span className="try-out-command">stdout</span>)
+            </p>
             <ul>
               <li>
                 Numbered <b>1</b>
@@ -65,10 +67,9 @@ function Piping(): JSX.Element {
             </ul>
           </div>
           <div className="content-box">
-            <p className="blue-text">Standard Error</p>
-            <div className="example-heading">
-              <span className="try-out-command">stderr</span>
-            </div>
+            <p className="blue-text">
+              Standard Error (<span className="try-out-command">stderr</span>)
+            </p>
             <ul>
               <li>
                 Numbered <b>2</b>
@@ -84,7 +85,10 @@ function Piping(): JSX.Element {
           </div>
         </div>
       </div>
-      <p className="body">Now let`s explore 2 useful commands.</p>
+      <p className="body">
+        Now let&apos;s explore 2 commands often used for piping and IO
+        redirection.
+      </p>
       <div className="section">
         <h2 className="heading-1">
           The <span className="command-in-heading">echo</span> Command
@@ -96,15 +100,14 @@ function Piping(): JSX.Element {
         <div className="example-container">
           <p className="blue-text">Example</p>
           <div className="example-black-box">
-            <p className="example-box-text">
-              tux@tux:~$ echo I&#39;m in a cave!
-            </p>
-            <p className="example-box-text">I&#39;m in a cave!</p>
+            <p className="example-box-text">tux@tux:~$ echo I am in a cave!</p>
+            <p className="example-box-text">I am in a cave!</p>
           </div>
         </div>
         <p className="body">
-          Just like how your voice might echo in a cave, <span>echo</span>{' '}
-          repeats the provided string by printing it out once to the terminal.
+          Just like how your voice might echo in a cave,{' '}
+          <span className="try-out-command">echo</span> repeats the provided
+          string by printing it out once to the terminal.
         </p>
       </div>
       <Task
@@ -134,8 +137,8 @@ function Piping(): JSX.Element {
         <div className="example-container">
           <p className="blue-text">Example</p>
           <div className="example-black-box">
-            <p className="example-box-text">tux@tux:~$ cat mystery.txt </p>
-            <p className="example-box-text">Super secret contents !</p>
+            <p className="example-box-text">tux@tux:~$ cat confidential.txt </p>
+            <p className="example-box-text">Super secret contents!</p>
           </div>
         </div>
         <p className="body">
@@ -145,8 +148,8 @@ function Piping(): JSX.Element {
       <Task
         taskPrompt={
           <p className="body task-prompt">
-            Try running <span className="try-out-command">cat</span> in the
-            terminal!
+            Try running <span className="try-out-command">cat</span> on the file
+            in the terminal!
           </p>
         }
         taskName="Task 2"

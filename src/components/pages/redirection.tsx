@@ -13,7 +13,7 @@ function Redirection(): JSX.Element {
   const currentWorkingDirectory = initFileSystem;
   return (
     <div>
-      <h1 className="lesson-title">Redirection</h1>
+      <h1 className="lesson-title">Input/Output Redirection</h1>
       <p className="body">
         There are many ways to redirect the three data streams, but{' '}
         <span className="try-out-command">{'>'}</span> and{' '}
@@ -22,7 +22,7 @@ function Redirection(): JSX.Element {
       </p>
 
       <h1 className="lesson-title">
-        The <span className="try-out-command">{'>'}</span> Command
+        The <span className="command-in-heading">{'>'}</span> Command
       </h1>
       <p className="body">
         <span className="try-out-command">{'>'}</span> is used to redirect
@@ -38,12 +38,11 @@ function Redirection(): JSX.Element {
         </div>
       </div>
       <p className="body">
-        This command writes the string “Like putting something into a box” to
-        destinationFile. If destinationFile already exists, its contents will be
-        cleared and overwritten. Otherwise, a new file named destinationFile
+        The command above writes the string “Like putting something into a box”
+        to destinationFile. If destinationFile already exists, its contents will
+        be cleared and overwritten. Otherwise, a new file named destinationFile
         containing the string will be created.
       </p>
-      <br />
       <p className="body">
         Similarly, the cat command can also be used with {'>'}. Example 2 writes
         the standard output of sourceFile to destinationFile.

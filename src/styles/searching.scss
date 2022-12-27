@@ -1,29 +1,38 @@
-.container {
-  font-weight: 400;
-  margin: 0 auto;
-  text-align: left;
-  width: 95%;
-}
-
 .header-text {
   font-weight: 400;
 }
 
-#lesson-content {
+.searching-container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
+  margin: 0 7rem;
 }
 
-#lesson-content > div {
-  background-color: #d9d9d9;
-  margin-left: 4vw;
-  margin-right: 4vw;
-  padding: 1em;
-  padding-bottom: 5vh;
-  text-align: center;
-  width: 20%;
+.searching-child {
+  background-color: #e0edf8;
+  padding: 1rem;
+}
+
+.searching-child:first-child {
+  margin: 0 2rem 0 6rem;
+}
+
+.searching-child:not(:first-child) {
+  margin: 0 6rem 0 2rem;
+}
+
+@media screen and (max-width: 900px) {
+  .searching-container {
+    display: block;
+    margin: 0 7rem;
+  }
+
+  .searching-child:first-child {
+    margin: 0 0 1rem;
+  }
+
+  .searching-child:not(:first-child) {
+    margin: 0;
+  }
 }
 
 #task-description {
@@ -35,26 +44,12 @@
 
 #task-description > div {
   position: relative;
-  width: 40%;
-}
-
-#helpful-commands-button {
-  border: 1px solid #000;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  left: 5vw;
-  padding: 1vw;
-  position: absolute;
-  text-align: center;
-  top: 1vh;
-  width: 40%;
+  width: 100%;
 }
 
 #penguin {
-  background-color: #d9d9d9;
-  height: 100%;
+  margin-top: 0.8rem;
   position: absolute;
-  right: 1vw;
-  width: 30%;
+  right: 15vw;
+  width: 8vw;
 }

@@ -7,15 +7,20 @@ import '../../styles/Permissions.scss';
 
 function Permissions(): JSX.Element {
   const taskPrompts = [
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit,\
-    sed do eiusmod tempor incididunt ut labore et dolore magna\
-     aliqua. Ut enim ad minim veniam, quis nostrud exercitation\
-     ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    'Tux found a cool file named hiddenStuff.txt but he isn’t able to open it. Can you help him read the contents?',
   ];
   const initFileSystem = new Directory(
     '/',
     undefined,
-    new Map([['mystery.txt', new File('mystery.txt', 'wow, what a mystery')]]),
+    new Map([
+      [
+        'hiddenStuff.txt',
+        new File(
+          'hiddenStuff.txt',
+          'This is super secret info. I bet no one can read it.'
+        ),
+      ],
+    ]),
     '/',
     true
   );
@@ -26,69 +31,94 @@ function Permissions(): JSX.Element {
         <div className="permissionContainer">
           <h1 className="lesson-title">Permissions</h1>
           <div className="body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
+            If you run a command like{' '}
+            <span className="try-out-command">ls -l</span> in a terminal,
+            you&apos;ll notice a set of 10 letters and/or dashes in the far left
+            column next to each item. These are the <b>file type</b> and{' '}
+            <b>permissions</b>.
           </div>
-          <div
-            style={{
-              background: 'gray',
-              width: 200,
-              height: 50,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
-            placeholder
+          <div className="body">
+            For example, let&apos;s break down the following set of letters:
+          </div>
+          <div className="permissions-example">
+            <span className="red-permissions">d</span>
+            <span className="green-permissions">rwx</span>
+            <span className="blue-permissions">r-x</span>
+            <span className="purple-permissions">r--</span>
+          </div>
+          <h2 className="heading-1 red">File Type</h2>
+          <div className="body">
+            The first letter indicates the <b>file type</b>.{' '}
+            <span className="try-out-command red-permissions">d</span> means the
+            item is a directory, whereas{' '}
+            <span className="try-out-command red-permissions">-</span> means the
+            item is a file.
+          </div>
+          <h2 className="heading-1 green">User Permissions</h2>
+          <div className="body">
+            The second through fourth letters are the <b>User permissions</b>.
+            The User is the owner of the file. They should have the most
+            permissions, as they created the file. In the example above, we see
+            the User has{' '}
+            <span className="try-out-command green-permissions">rwx</span>{' '}
+            permissions.
+          </div>
+          <div className="body">
+            <span className="try-out-command green-permissions">r</span> means
+            read, <span className="try-out-command green-permissions">w</span>{' '}
+            means write, and{' '}
+            <span className="try-out-command green-permissions">x</span> means
+            execute, so the User can perform all three actions.
+          </div>
+          <h2 className="heading-1 blue">Group Permissions</h2>
+          <div className="body">
+            The fifth through seventh letters are the <b>Group permissions</b>.
+            The Group can consist of multiple people and should have fewer or
+            the same number of permissions as the User, but more than or equal
+            to Other people.
+          </div>
+          <div className="body">
+            In this example,{' '}
+            <span className="try-out-command blue-permissions">r-x</span> means
+            the Group can read and execute the file, but not write to it (i.e.,
+            cannot make changes to the file).
+          </div>
+          <h2 className="heading-1 purple">Permissions</h2>
+          <div className="body">
+            The last three letters are the <b>Other permissions</b>. Other
+            includes people who did not create the file and are not in a special
+            Group. They should have, at most, equal to the Group permissions.
+          </div>
+          <div className="body">
+            In this example,{' '}
+            <span className="try-out-command purple-permissions">r--</span>{' '}
+            means Other people can only read the file, but not write or execute
+            it.
+          </div>
+          <h2 className="heading-1">Summary</h2>
+          <div className="body">
+            In summary, from the most permissions to least permissions, we have
+            User ≥ Group ≥ Other.
           </div>
           <h2 className="heading-1">
-            The first letter (red) indicates the file type.
+            The <span className="command-in-heading">chmod</span> Command
           </h2>
           <div className="body">
-            Lorem <span className="try-out-command">d</span> dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation
+            To change permissions, we use the{' '}
+            <span className="try-out-command">chmod</span> command. Note that{' '}
+            <span className="try-out-command">u</span> refers to the user,{' '}
+            <span className="try-out-command">g</span> refers to the group, and{' '}
+            <span className="try-out-command">o</span> refers to others. Two
+            examples are listed below:
           </div>
-          <h2 className="heading-1">
-            The first letter (red) indicates the file type.
-          </h2>
-          <div className="body">
-            Lorem <span className="try-out-command">d</span> dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation
-          </div>
-          <h2 className="heading-1">
-            The first letter (red) indicates the file type.
-          </h2>
-          <div className="body">
-            Lorem <span className="try-out-command">d</span> dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation
-          </div>
-          <h2 className="heading-1">
-            The first letter (red) indicates the file type.
-          </h2>
-          <div className="body">
-            Lorem <span className="try-out-command">d</span> dolor sit amet,
-            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation
-          </div>
-          <h2 className="heading-1">Example</h2>
           <div className="examples-container">
             <div className="example">
-              <div className="blue-text">give group write permission</div>
+              <div className="blue-text">Giving the group write permission</div>
               <div className="terminal">chmod g+w myFile.txt</div>
             </div>
             <div className="example">
               <div className="blue-text">
-                Give all three groups execute permission
+                Giving everyone execute permission
               </div>
               <div className="terminal">chmod +x</div>
             </div>
@@ -97,15 +127,20 @@ function Permissions(): JSX.Element {
 
         <Task
           taskPrompt={taskPrompts[0]}
-          taskName={'Task 1'}
+          taskName={'Task'}
           completed={false}
           fileSystem={initFileSystem}
           currentWorkingDirectory={currentWorkingDirectory}
         />
         <img
+          className="tux-egg"
           src={tuxHoldingEgg}
           alt="tux raising his flippers while holding an egg"
         />
+        <div className="body last-line">
+          🎉 Congrats, you&apos;ve reached the end! Click the{' '}
+          <em>start over</em> button below to return to the beginning. 🎉
+        </div>
       </div>
       <footer>
         <a href="searching">
@@ -115,7 +150,7 @@ function Permissions(): JSX.Element {
         </a>
         <a href="/">
           <button type="button" className="next-button">
-            Congrats, you&apos;ve reached the end! Click here to start over.
+            start over
           </button>
         </a>
       </footer>

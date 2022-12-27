@@ -14,3 +14,54 @@
   margin: 2vh 0;
   padding: 2vh;
 }
+
+.permissions-example {
+  background-color: #efefef;
+  font-family: Fira Code, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: auto;
+  padding: 0.5rem;
+  width: 200px;
+}
+
+.red-permissions {
+  color: #ff0404;
+}
+
+.green-permissions {
+  color: #31be72;
+}
+
+.blue-permissions {
+  color: #1a75ff;
+}
+
+.purple-permissions {
+  color: #c300e2;
+}
+
+.heading-1.red {
+  -webkit-text-stroke: 2px #ff0404;
+}
+
+.heading-1.green {
+  -webkit-text-stroke: 2px #31be72;
+}
+
+.heading-1.blue {
+  -webkit-text-stroke: 2px #1a75ff;
+}
+
+.heading-1.purple {
+  -webkit-text-stroke: 2px #c300e2;
+}
+
+.tux-egg {
+  width: 10%;
+}
+
+.last-line {
+  margin-top: 1rem;
+  text-align: center;
+}

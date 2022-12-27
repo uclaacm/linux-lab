@@ -56,7 +56,7 @@ function Stationary(): JSX.Element {
       <Task
         taskPrompt={"Type 'pwd' in the terminal and press enter. Where is Tux?"}
         taskName="Task 1"
-        completed={false}
+        solutions={['pwd']}
         fileSystem={task1FS}
         currentWorkingDirectory={task1CWD}
       />
@@ -78,7 +78,7 @@ function Stationary(): JSX.Element {
       <Task
         taskPrompt={"Can you figure out Tux's username?"}
         taskName="Task 2"
-        completed={false}
+        solutions={['whoami']}
         fileSystem={task1FS}
         currentWorkingDirectory={task1CWD}
       />
@@ -105,7 +105,7 @@ function Stationary(): JSX.Element {
           </p>
         }
         taskName="Task 3"
-        completed={false}
+        solutions={['man pwd', 'man whoami']}
         fileSystem={task1FS}
         currentWorkingDirectory={task1CWD}
       />

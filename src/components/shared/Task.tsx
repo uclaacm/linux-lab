@@ -61,9 +61,12 @@ function Task({
 
   useEffect(() => {
     solutions.forEach((solution) => {
-      if (lastCommand === solution) {
+      if (lastCommand.substring(2) === solution) {
+        console.log('correct solution');
         setCompleted(true);
         return;
+      } else {
+        console.log(lastCommand + ' !== ' + solution);
       }
     });
   }, [lastCommand]);

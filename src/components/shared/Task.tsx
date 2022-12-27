@@ -2,12 +2,11 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 import { IconContext } from 'react-icons';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import './../../styles/Task.scss';
+import { useReward } from 'react-rewards';
 import FileSystemRender from './FileSystemRender';
 import { Directory } from './globalTypes';
 import Terminal from './Terminal';
 import './../../styles/global.scss';
-
-import { useReward } from 'react-rewards';
 
 const defaultProps = {
   displayFileSystem: false,
@@ -62,11 +61,8 @@ function Task({
   useEffect(() => {
     solutions.forEach((solution) => {
       if (lastCommand.substring(2) === solution) {
-        console.log('correct solution');
         setCompleted(true);
         return;
-      } else {
-        console.log(lastCommand + ' !== ' + solution);
       }
     });
   }, [lastCommand]);

@@ -233,7 +233,10 @@ function Creation(): JSX.Element {
             The <span className="command-in-heading">cp</span> Command
           </h2>
         }
-        solutions={['cp sourceFile destinationFile', 'cp file1 file2 directoryPath']}
+        solutions={[
+          'cp sourceFile destinationFile',
+          'cp file1 file2 directoryPath',
+        ]}
         fileSystem={task3FS}
         currentWorkingDirectory={task3CWD}
         displayFileSystem={true}

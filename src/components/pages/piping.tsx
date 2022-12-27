@@ -113,7 +113,8 @@ function Piping(): JSX.Element {
       <Task
         taskPrompt={
           <p className="body task-prompt">
-            Try running <span className="try-out-command">echo Hello world!</span> in the
+            Try running{' '}
+            <span className="try-out-command">echo Hello world!</span> in the
             terminal!
           </p>
         }

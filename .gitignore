@@ -17,7 +17,7 @@ build/
 # Never commit individual sessions
 .DS_Store
 .vscode/
-.vs
+.vs/
 
 # misc
 .env.local

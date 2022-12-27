@@ -60,12 +60,12 @@ function Redirection(): JSX.Element {
       <Task
         taskPrompt={
           <p className="body task-prompt">
-            Try running <span className="try-out-command">{'>'}</span> in the
+            Try running <span className="try-out-command">cat mystery.txt &gt; anotherMystery.txt</span> in the
             terminal!
           </p>
         }
         taskName="Task 1"
-        completed={false}
+        solutions={['cat mystery.txt > anotherMystery.txt']}
         fileSystem={initFileSystem}
         currentWorkingDirectory={currentWorkingDirectory}
       />

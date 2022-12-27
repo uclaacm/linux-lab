@@ -113,12 +113,12 @@ function Piping(): JSX.Element {
       <Task
         taskPrompt={
           <p className="body task-prompt">
-            Try running <span className="try-out-command">echo</span> in the
+            Try running <span className="try-out-command">echo Hello world!</span> in the
             terminal!
           </p>
         }
         taskName="Task 1"
-        completed={false}
+        solutions={['echo Hello world!']}
         fileSystem={initFileSystem}
         currentWorkingDirectory={currentWorkingDirectory}
       ></Task>
@@ -153,7 +153,7 @@ function Piping(): JSX.Element {
           </p>
         }
         taskName="Task 2"
-        completed={false}
+        solutions={['cat mystery.txt']}
         fileSystem={initFileSystem}
         currentWorkingDirectory={currentWorkingDirectory}
       ></Task>

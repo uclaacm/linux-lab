@@ -121,7 +121,7 @@ function Searching(): JSX.Element {
           <Task
             taskPrompt={taskPrompts[0]}
             taskName="Task 1"
-            completed={true}
+            solutions={['find . -name glasses.txt']}
             fileSystem={task1FS}
             currentWorkingDirectory={task1CWD}
             displayFileSystem={true}
@@ -129,7 +129,7 @@ function Searching(): JSX.Element {
           <Task
             taskPrompt={taskPrompts[1]}
             taskName="Task 2"
-            completed={false}
+            solutions={['grep -R “camera” *']}
             fileSystem={task2FS}
             currentWorkingDirectory={task2CWD}
             displayFileSystem={true}

@@ -40,7 +40,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: './public/favicon.svg',
+      favicon: './public/favicon.ico',
       filename: './index.html',
     }),
     // TODO: Update configurable info for ManifestPlugin
@@ -58,7 +58,7 @@ module.exports = {
           sizes: [192, 512], // multiple sizes
         },
         {
-          src: path.resolve('./public/favicon.svg'),
+          src: path.resolve('./public/favicon.ico'),
           size: '1024x1024',
           purpose: 'maskable',
         },

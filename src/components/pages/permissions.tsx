@@ -149,7 +149,11 @@ function Permissions(): JSX.Element {
           </button>
         </a>
         <a href="/">
-          <button type="button" className="next-button">
+          <button
+            type="button"
+            className="next-button"
+            onClick={() => window.localStorage.clear()}
+          >
             start over
           </button>
         </a>

@@ -55,13 +55,24 @@ function Task({
   const [root, setRoot] = useState<Directory>(fileSystem);
   const [CWD, setCWD] = useState<Directory>(currentWorkingDirectory);
 
-  const [completed, setCompleted] = useState<boolean>(false);
+  const taskId =
+    String(window.location.pathname.substring(1)) +
+    String(taskName).replace(/\s/g, '');
+  const [completed, setCompleted] = useState<boolean>(
+    Boolean(window.localStorage.getItem(taskId)) ?? false
+  );
   const [lastCommand, setLastCommand] = useState<string>('');
 
   useEffect(() => {
     solutions.forEach((solution) => {
-      if (lastCommand.substring(2) === solution) {
+      if (
+        lastCommand.substring(2) === solution &&
+        !isAnimating &&
+        window.localStorage.getItem(taskId) !== 'true'
+      ) {
         setCompleted(true);
+        reward();
+        window.localStorage.setItem(taskId, String(true));
         return;
       }
     });
@@ -72,10 +83,6 @@ function Task({
     window.addEventListener('resize', () => handleResize(ref));
     return () => window.removeEventListener('resize', () => handleResize(ref));
   }, [ref]);
-
-  useEffect(() => {
-    if (completed && !isAnimating) reward();
-  }, [completed]);
 
   return (
     <div className="task">

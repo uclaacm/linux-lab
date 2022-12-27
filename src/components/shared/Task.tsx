@@ -63,8 +63,8 @@ function Task({
   }, [ref]);
 
   useEffect(() => {
-    if(completed && !isAnimating) reward();
-  },[completed]);
+    if (completed && !isAnimating) reward();
+  }, [completed]);
 
   return (
     <div className="task">

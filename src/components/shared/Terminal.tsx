@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { useState } from 'react';
 import '../../styles/Terminal.scss';
 import '../../styles/global.scss';
-import { Directory, File } from './globalTypes';
+import { Directory, File, FileSystemObject } from './globalTypes';
 
 function Terminal(prop: {
   fileSystem: Directory;
@@ -62,7 +62,7 @@ function Terminal(prop: {
     if (file.isDirectory) {
       return [[], [`cat: '${path}': Is a directory`]];
     }
-    console.log(((file as File).content ||= '\n'));
+    // console.log(((file as File).content ||= '\n'));
     return [[((file as File).content ||= '\n')], []];
   }
 
@@ -83,7 +83,7 @@ function Terminal(prop: {
       if (path.startsWith('/')) {
         dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
       } else {
-        console.log(pathArr.join('/'));
+        // console.log(pathArr.join('/'));
         dir = cwdCopy.getFileSystemObjectFromPath(pathArr.join('/'));
       }
     } else {
@@ -114,20 +114,40 @@ function Terminal(prop: {
     return executeTouch(path, true);
   }
 
-  function executeRm(path: string, flags: string, directory = false): string[] {
+  // This is very sinful spaghetti code, sorry :(
+  interface CopyAndRmResult {
+    fileSystemCopy: Directory | null;
+    cwdCopy: Directory | null;
+    err: string[];
+  }
+
+  function executeRm(
+    path: string,
+    flags: string,
+    directory = false,
+    prevCwd?: Directory,
+    prevFileSystem?: Directory
+  ): CopyAndRmResult {
+    const result: CopyAndRmResult = {
+      fileSystemCopy: null,
+      cwdCopy: null,
+      err: [],
+    };
+
     if (path === '.' || path === '..') {
-      return ['rm: "." and ".." may not be removed'];
+      result.err = ['rm: "." and ".." may not be removed'];
+      return result;
     }
     // Make a copy to avoid mutating the original (it's a state variable)
-    const fileSystemCopy = _.cloneDeep(prop.fileSystem);
+    const fileSystemCopy = _.cloneDeep(
+      prevFileSystem ? prevFileSystem : prop.fileSystem
+    );
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
-      prop.currentWorkingDirectory.path
+      prevCwd ? prevCwd.path : prop.currentWorkingDirectory.path
     ) as Directory;
     let fileName = '';
     let dir;
 
-    // If the path is absolute, find the directory to create the file in
-    // Otherwise, use the current working directory
     if (path.includes('/')) {
       const pathArr = path.split('/');
       fileName = pathArr.pop() || '';
@@ -143,7 +163,8 @@ function Terminal(prop: {
 
     const file = (dir as Directory)?.getChild(fileName);
     if (!file) {
-      return [`rm: '${path}': No such file or directory`];
+      result.err = [`rm: '${path}': No such file or directory`];
+      return result;
     }
 
     const rmDirAndEmptyDirectory = directory && (file as Directory).isEmpty();
@@ -151,79 +172,135 @@ function Terminal(prop: {
 
     if (!file.isDirectory || removeDirectory) {
       if (path === '/') {
+        result.err = [
+          "What are you doing? You can't delete the root directory!",
+        ];
         // TODO: Figure out how to handle this
-        return ["What are you doing? You can't delete the root directory!"];
+        return result;
       }
       (dir as Directory).removeFileSystemObject(fileName);
     } else {
       if (directory && !(file as Directory).isEmpty()) {
-        return [`rmdir: '${path}': Directory not empty`];
+        result.err = [`rm: '${path}': Directory not empty`];
+        return result;
       }
-      return [`rm: '${path}': is a directory`];
+      result.err = [`rm: '${path}': Is a directory`];
+      return result;
     }
+
+    result.cwdCopy = cwdCopy;
+    result.fileSystemCopy = fileSystemCopy;
+    result.err = [];
 
     prop.setFileSystem(fileSystemCopy);
     prop.setCurrentWorkingDirectory(cwdCopy);
-    return [];
+    return result;
   }
 
   function executeRmdir(path: string, flags: string): string[] {
-    return executeRm(path, flags, true);
+    return executeRm(path, flags, true).err;
   }
 
   function executeCopy(
-    path: string,
+    paths: string[],
     destination: string,
     flags: string
-  ): string[] {
+  ): CopyAndRmResult {
+    const result: CopyAndRmResult = {
+      fileSystemCopy: null,
+      cwdCopy: null,
+      err: [],
+    };
+
     // Make a copy to avoid mutating the original (it's a state variable)
     const fileSystemCopy = _.cloneDeep(prop.fileSystem);
     const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
       prop.currentWorkingDirectory.path
     ) as Directory;
-    const file = path.startsWith('/')
-      ? prop.fileSystem.getFileSystemObjectFromPath(path)
-      : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
-    let destDir;
-    let newFileName;
+    const newFiles: FileSystemObject[] = [];
+    let destDir = destination.startsWith('/')
+      ? fileSystemCopy.getFileSystemObjectFromPath(destination)
+      : cwdCopy.getFileSystemObjectFromPath(destination);
 
-    // If the path is absolute, find the directory to create the file in
-    // Otherwise, use the current working directory
-    if (destination.includes('/')) {
-      const pathArr = destination.split('/');
-      newFileName = pathArr.pop() || '';
-      if (path.startsWith('/')) {
-        destDir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
-      } else {
-        destDir = cwdCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+    console.info(paths, destination, flags);
+
+    for (const path of paths) {
+      const file = path.startsWith('/')
+        ? prop.fileSystem.getFileSystemObjectFromPath(path)
+        : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
+
+      // If the path is absolute, find the directory to create the file in
+      // Otherwise, use the current working directory
+      const newFileName = path.split('/').pop() || '';
+
+      if (!file) {
+        result.err = [`cp: '${path}': No such file or directory`];
+        return result;
       }
-    } else {
-      newFileName = destination;
-      destDir = cwdCopy;
+      if (file.isDirectory && !flags.toLowerCase().includes('r')) {
+        result.err = [`cp: '${path}' is a directory (not copied)`];
+        return result;
+      }
+
+      const childDir = (destDir as Directory).getChild(newFileName);
+      const newFile = _.cloneDeep(file);
+      if (childDir && childDir.isDirectory) {
+        destDir = childDir;
+      } else {
+        newFile.name = newFileName;
+      }
+
+      newFiles.push(newFile);
     }
 
-    if (!file) {
-      return [`cp: '${path}': No such file or directory`];
-    }
-    if (file.isDirectory && !flags.toLowerCase().includes('r')) {
-      return [`cp: '${path}' is a directory (not copied)`];
-    }
-    if (!destDir) {
-      return [`cp: '${destination}': No such file or directory`];
+    for (const newFile of newFiles) {
+      if (!destDir) {
+        result.err = [`cp: '${destination}': No such file or directory`];
+        return result;
+      }
+      (destDir as Directory).addFileSystemObject(newFile);
     }
 
-    const childDir = (destDir as Directory).getChild(newFileName);
-    const newFile = _.cloneDeep(file);
-    if (childDir && childDir.isDirectory) {
-      destDir = childDir;
-    } else {
-      newFile.name = newFileName;
-    }
+    result.cwdCopy = cwdCopy;
+    result.fileSystemCopy = fileSystemCopy;
 
-    (destDir as Directory).addFileSystemObject(newFile);
     prop.setFileSystem(fileSystemCopy);
     prop.setCurrentWorkingDirectory(cwdCopy);
-    return [];
+    return result;
+  }
+
+  function executeMove(paths: string[], destination: string): string[] {
+    // Make a copy to avoid mutating the original (it's a state variable)
+    let error: string[] = [];
+
+    // console.log(paths, destination, 'Executing copy part of move!');
+
+    let prevRes = executeCopy(paths, destination, '-r');
+    error = prevRes.err.map((err) => err.replace('cp', 'mv'));
+
+    // // If there are any errors in copy step, just return them and don't delete
+    if (error.length > 0) {
+      return error;
+    }
+
+    // Removing all the original files
+    for (const path of paths) {
+      prevRes = executeRm(
+        path,
+        '-r',
+        false,
+        // TODO: Change this logic here when refactoring code. This is incredibly cursed
+        prevRes.cwdCopy ? prevRes.cwdCopy : undefined,
+        prevRes.fileSystemCopy ? prevRes.fileSystemCopy : undefined
+      );
+      if (prevRes.err.length > 0) {
+        return error;
+      }
+    }
+
+    if (prevRes.fileSystemCopy) prop.setFileSystem(prevRes.fileSystemCopy);
+    if (prevRes.cwdCopy) prop.setCurrentWorkingDirectory(prevRes.cwdCopy);
+    return error;
   }
 
   function executeFind(path: string, flags: string): [string[], string[]] {
@@ -379,23 +456,32 @@ function Terminal(prop: {
         error = executeMkdir(path);
         break;
       case 'rm':
-        error = executeRm(path, flags);
+        error = executeRm(path, flags).err;
         break;
       case 'rmdir':
         error = executeRmdir(path, flags);
         break;
       case 'cp': {
         const cpArgs = path.split(' ');
-        if (cpArgs.length !== 2) {
+        if (cpArgs.length < 2) {
           error = ['cp: invalid usage'];
         } else {
-          error = executeCopy(cpArgs[0], cpArgs[1], flags);
+          const destination = cpArgs.pop();
+          // console.log(flags);
+          error = executeCopy(cpArgs, destination as string, flags).err;
         }
         break;
       }
-      case 'mv':
-        console.log('User input mv');
+      case 'mv': {
+        const mvArgs = path.split(' ');
+        if (mvArgs.length < 2) {
+          error = ['mv: invalid usage'];
+        } else {
+          const destination = mvArgs.pop();
+          error = executeMove(mvArgs, destination as string);
+        }
         break;
+      }
       case 'echo':
         output = [path];
         break;
@@ -403,13 +489,13 @@ function Terminal(prop: {
         [output, error] = executeCat(path);
         break;
       case 'grep':
-        console.log('User input grep');
+        // console.log('User input grep');
         break;
       case 'find':
         [output, error] = executeFind(path, flags);
         break;
       case 'chmod':
-        console.log('User input chmod');
+        // console.log('User input chmod');
         break;
       case 'clear':
         error = ['CLEAR'];

@@ -1,12 +1,38 @@
-.container {
-  font-weight: 400;
-  margin: 0 auto;
-  text-align: left;
-  width: 95%;
-}
-
 .header-text {
   font-weight: 400;
+}
+
+.searching-container {
+  display: flex;
+  margin: 0 7rem;
+}
+
+.searching-child {
+  background-color: #e0edf8;
+  padding: 1rem;
+}
+
+.searching-child:first-child {
+  margin: 0 2rem 0 6rem;
+}
+
+.searching-child:not(:first-child) {
+  margin: 0 6rem 0 2rem;
+}
+
+@media screen and (max-width: 900px) {
+  .searching-container {
+    display: block;
+    margin: 0 7rem;
+  }
+
+  .searching-child:first-child {
+    margin: 0 0 1rem;
+  }
+
+  .searching-child:not(:first-child) {
+    margin: 0;
+  }
 }
 
 #task-description {

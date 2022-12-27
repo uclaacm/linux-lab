@@ -2,7 +2,7 @@ import tuxPointing from '../../assets/images/tux-pointing.svg';
 import { Directory, File } from '../shared/globalTypes';
 import Modal from '../shared/Modal';
 import Task from './../shared/Task';
-import './../../styles/searching.scss';
+import '../../styles/searching.scss';
 import '../../styles/global.scss';
 
 function Searching(): JSX.Element {
@@ -83,15 +83,15 @@ function Searching(): JSX.Element {
           <span className="try-out-command">find</span> and{' '}
           <span className="try-out-command">grep</span>.
         </p>
-        <div className="iceberg-container">
-          <div className="iceberg-child">
+        <div className="searching-container">
+          <div className="searching-child">
             <span className="try-out-command">find</span>
             <p>
               recursively travels down the file hierarchy tree and, based on
               user-specified options, finds specific files or directories.
             </p>
           </div>
-          <div className="iceberg-child">
+          <div className="searching-child">
             <span className="try-out-command">grep</span>
             <p>
               (short for “global/regular expression/print”) searches for a

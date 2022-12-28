@@ -219,11 +219,43 @@ function Terminal(prop: {
       prop.currentWorkingDirectory.path
     ) as Directory;
     const newFiles: FileSystemObject[] = [];
+
+    // Determine whether to copy to a directory or rename the file
     let destDir = destination.startsWith('/')
       ? fileSystemCopy.getFileSystemObjectFromPath(destination)
       : cwdCopy.getFileSystemObjectFromPath(destination);
 
-    console.info(paths, destination, flags);
+    let newFileName = '';
+    let rename = false;
+
+    if (paths.length > 1) {
+      if (!destDir) {
+        result.err = [`cp: '${destination}': No such file or directory`];
+        return result;
+      }
+      if (!destDir.isDirectory) {
+        result.err = [`cp: '${destination}': Not a directory`];
+        return result;
+      }
+    } else if (!destDir || !destDir.isDirectory) {
+      const tempDest = destination.split('/');
+      newFileName = tempDest.pop() || '';
+      destination = tempDest.join('/');
+
+      destDir = destination.startsWith('/')
+        ? fileSystemCopy.getFileSystemObjectFromPath(destination)
+        : cwdCopy.getFileSystemObjectFromPath(destination);
+
+      if (!destDir) {
+        result.err = [`cp: '${destination}': No such file or directory`];
+        return result;
+      }
+      if (!destDir.isDirectory) {
+        result.err = [`cp: '${destination}': Not a directory`];
+        return result;
+      }
+      rename = true;
+    }
 
     for (const path of paths) {
       const file = path.startsWith('/')
@@ -232,7 +264,7 @@ function Terminal(prop: {
 
       // If the path is absolute, find the directory to create the file in
       // Otherwise, use the current working directory
-      const newFileName = path.split('/').pop() || '';
+      newFileName = !rename ? path.split('/').pop() || '' : newFileName;
 
       if (!file) {
         result.err = [`cp: '${path}': No such file or directory`];
@@ -255,10 +287,6 @@ function Terminal(prop: {
     }
 
     for (const newFile of newFiles) {
-      if (!destDir) {
-        result.err = [`cp: '${destination}': No such file or directory`];
-        return result;
-      }
       (destDir as Directory).addFileSystemObject(newFile);
     }
 
@@ -294,7 +322,8 @@ function Terminal(prop: {
         prevRes.cwdCopy ? prevRes.cwdCopy : undefined,
         prevRes.fileSystemCopy ? prevRes.fileSystemCopy : undefined
       );
-      if (prevRes.err.length > 0) {
+      error = prevRes.err.map((err) => err.replace('rm', 'mv'));
+      if (error.length > 0) {
         return error;
       }
     }

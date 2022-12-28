@@ -225,6 +225,7 @@ function Terminal(prop: {
       : cwdCopy.getFileSystemObjectFromPath(destination);
 
     let newFileName = '';
+    let rename = false;
 
     if (paths.length > 1) {
       if (!destDir) {
@@ -252,30 +253,7 @@ function Terminal(prop: {
         result.err = [`cp: '${destination}': Not a directory`];
         return result;
       }
-
-      const path = paths[0];
-      const file = path.startsWith('/')
-        ? prop.fileSystem.getFileSystemObjectFromPath(path)
-        : prop.currentWorkingDirectory.getFileSystemObjectFromPath(path);
-
-      if (!file) {
-        result.err = [`cp: '${path}': No such file or directory`];
-        return result;
-      }
-      if (file.isDirectory && !flags.toLowerCase().includes('r')) {
-        result.err = [`cp: '${path}' is a directory (not copied)`];
-        return result;
-      }
-
-      const childDir = (destDir as Directory).getChild(newFileName);
-      const newFile = _.cloneDeep(file);
-      if (childDir && childDir.isDirectory) {
-        destDir = childDir;
-      } else {
-        newFile.name = newFileName;
-      }
-
-      newFiles.push(newFile);
+      rename = true;
     }
 
     for (const path of paths) {
@@ -285,7 +263,7 @@ function Terminal(prop: {
 
       // If the path is absolute, find the directory to create the file in
       // Otherwise, use the current working directory
-      newFileName = path.split('/').pop() || '';
+      newFileName = !rename ? path.split('/').pop() || '' : newFileName;
 
       if (!file) {
         result.err = [`cp: '${path}': No such file or directory`];

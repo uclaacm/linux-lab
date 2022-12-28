@@ -321,7 +321,8 @@ function Terminal(prop: {
         prevRes.cwdCopy ? prevRes.cwdCopy : undefined,
         prevRes.fileSystemCopy ? prevRes.fileSystemCopy : undefined
       );
-      if (prevRes.err.length > 0) {
+      error = prevRes.err.map((err) => err.replace('rm', 'mv'));
+      if (error.length > 0) {
         return error;
       }
     }

@@ -159,6 +159,7 @@ function executeCd(
     err: [],
     out: [],
   };
+  console.log('path', path, 'cwd', currentWorkingDirectory.path);
   const CWDRelativeToFS = fileSystem.getFileSystemObjectFromPath(
     currentWorkingDirectory.path
   ) as Directory;
@@ -173,9 +174,6 @@ function executeCd(
     result.modifiedFS = fileSystem;
   } else {
     result.err = [newCWD];
-  }
-  if (result.modifiedFS) {
-    result.modifiedFS.isCurrentDirectory = false;
   }
   return result;
 }
@@ -221,8 +219,7 @@ function executeTouch(
     out: [],
   };
   // Make a copy to avoid mutating the original (it's a state variable)
-  const fileSystemCopy = _.cloneDeep(fileSystem);
-  const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
+  const cwdCopy = fileSystem.getFileSystemObjectFromPath(
     currentWorkingDirectory.path
   ) as Directory;
   let newFileName = '';
@@ -234,7 +231,7 @@ function executeTouch(
     const pathArr = path.split('/');
     newFileName = pathArr.pop() || '';
     if (path.startsWith('/')) {
-      dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      dir = fileSystem.getFileSystemObjectFromPath(pathArr.join('/'));
     } else {
       dir = cwdCopy.getFileSystemObjectFromPath(pathArr.join('/'));
     }
@@ -260,7 +257,7 @@ function executeTouch(
     return result;
   }
 
-  result.modifiedFS = fileSystemCopy;
+  result.modifiedFS = fileSystem;
   result.modifiedCWD = cwdCopy;
   return result;
 }
@@ -291,9 +288,7 @@ function executeRm(
     result.err = ['rm: "." and ".." may not be removed'];
     return result;
   }
-  // Make a copy to avoid mutating the original (it's a state variable)
-  const fileSystemCopy = _.cloneDeep(fileSystem);
-  const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
+  const cwdCopy = fileSystem.getFileSystemObjectFromPath(
     currentWorkingDirectory.path
   ) as Directory;
   let fileName = '';
@@ -303,7 +298,7 @@ function executeRm(
     const pathArr = path.split('/');
     fileName = pathArr.pop() || '';
     if (path.startsWith('/')) {
-      dir = fileSystemCopy.getFileSystemObjectFromPath(pathArr.join('/'));
+      dir = fileSystem.getFileSystemObjectFromPath(pathArr.join('/'));
     } else {
       dir = cwdCopy.getFileSystemObjectFromPath(pathArr.join('/'));
     }
@@ -338,7 +333,7 @@ function executeRm(
   }
 
   result.modifiedCWD = cwdCopy;
-  result.modifiedFS = fileSystemCopy;
+  result.modifiedFS = fileSystem;
   result.err = [];
 
   return result;
@@ -368,15 +363,14 @@ function executeCopy(
   };
 
   // Make a copy to avoid mutating the original (it's a state variable)
-  const fileSystemCopy = _.cloneDeep(fileSystem);
-  const cwdCopy = fileSystemCopy.getFileSystemObjectFromPath(
+  const cwdCopy = fileSystem.getFileSystemObjectFromPath(
     currentWorkingDirectory.path
   ) as Directory;
   const newFiles: FileSystemObject[] = [];
 
   // Determine whether to copy to a directory or rename the file
   let destDir = destination.startsWith('/')
-    ? fileSystemCopy.getFileSystemObjectFromPath(destination)
+    ? fileSystem.getFileSystemObjectFromPath(destination)
     : cwdCopy.getFileSystemObjectFromPath(destination);
 
   let newFileName = '';
@@ -397,7 +391,7 @@ function executeCopy(
     destination = tempDest.join('/');
 
     destDir = destination.startsWith('/')
-      ? fileSystemCopy.getFileSystemObjectFromPath(destination)
+      ? fileSystem.getFileSystemObjectFromPath(destination)
       : cwdCopy.getFileSystemObjectFromPath(destination);
 
     if (!destDir) {
@@ -446,7 +440,7 @@ function executeCopy(
   }
 
   result.modifiedCWD = cwdCopy;
-  result.modifiedFS = fileSystemCopy;
+  result.modifiedFS = fileSystem;
 
   return result;
 }

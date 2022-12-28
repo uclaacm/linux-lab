@@ -87,7 +87,7 @@ function Moving(): JSX.Element {
           </p>
         }
         taskName="Task 1"
-        completed={false}
+        solutions={['cd Notes']}
         fileSystem={task1FS}
         currentWorkingDirectory={task1CWD}
         displayFileSystem={true}
@@ -100,7 +100,7 @@ function Moving(): JSX.Element {
           </p>
         }
         taskName="Putting It All Together"
-        completed={false}
+        solutions={['ls -a']}
         fileSystem={task2FS}
         currentWorkingDirectory={task2CWD}
         displayFileSystem={true}

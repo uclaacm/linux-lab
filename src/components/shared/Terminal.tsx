@@ -236,7 +236,7 @@ function Terminal(prop: {
         result.err = [`cp: '${destination}': Not a directory`];
         return result;
       }
-    } else if (!destDir) {
+    } else if (!destDir || !destDir.isDirectory) {
       const tempDest = destination.split('/');
       newFileName = tempDest.pop() || '';
       destination = tempDest.join('/');

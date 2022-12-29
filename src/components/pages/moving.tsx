@@ -26,8 +26,8 @@ function Moving(): JSX.Element {
     <div>
       <h1 className="lesson-title">Moving Around the File System</h1>
       <p className="body">
-        Ok, we can now figure out information about ourselves, from where to who
-        we are. But what if we want to learn about our surroundings?
+        We can now figure out information about ourselves, from where to who we
+        are. But what if we want to learn about our surroundings?
       </p>
       <img src={tuxHoldingEgg} alt="tux hugging a pink egg" />
       <h2 className="heading-1">
@@ -92,6 +92,7 @@ function Moving(): JSX.Element {
         currentWorkingDirectory={task1CWD}
         displayFileSystem={true}
       />
+      <h2 className="heading-1">Putting It All Together</h2>
       <Task
         taskPrompt={
           <p className="body task-prompt">
@@ -99,7 +100,7 @@ function Moving(): JSX.Element {
             plain sight?
           </p>
         }
-        taskName="Putting It All Together"
+        taskName="Task 2"
         solutions={['ls -a']}
         fileSystem={task2FS}
         currentWorkingDirectory={task2CWD}

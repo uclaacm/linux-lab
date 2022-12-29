@@ -1,13 +1,15 @@
 # Linux Learning Lab
 
-![Production Build](https://github.com/uclaacm/teach-la-react-starter-barebones/workflows/Production%20Build/badge.svg)
+<img width="1511" alt="Screen Shot 2022-12-29 at 3 06 15 PM" src="https://user-images.githubusercontent.com/67720812/210006657-24bb3f10-8d48-44f4-875f-8c00232fd024.png">
+
+![Production Build](https://github.com/uclaacm/linux-lab/workflows/Production%20Build/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4932fc43-c02a-4724-bfc0-0253ac602219/deploy-status)](https://app.netlify.com/sites/teach-la-ts-react-starter/deploys)
 
 ## Overview 🐧
 
-Linux Learning Lab is a collaboration between [ACM Teach LA 🌱](https://teachla.uclaacm.com/) and [ACM Cyber 🔐](https://acmcyber.com/). ACM Cyber uses this app to train members in the basics of Linux navigation—a crucial tool for cybersecurity professionals and often used in Capture-the-Flag competitions. This app is also great for COMSCI 35L students and anyone wanting to learn the basics of Linux!
+Linux Learning Lab is a collaboration between [ACM Teach LA 🌱](https://teachla.uclaacm.com/) and [ACM Cyber 🔐](https://acmcyber.com/). ACM Cyber uses this app to train members in the basics of Linux navigation—a crucial tool for cybersecurity professionals and often used in Capture-the-Flag competitions. This app is also great for COM SCI 35L students and anyone wanting to learn the basics of Linux!
 
 ## Table of Contents
 

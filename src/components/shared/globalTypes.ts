@@ -158,6 +158,7 @@ export class Directory extends FileSystemObject {
     path: string
   ): Directory | string {
     currentWorkingDirectory.isCurrentDirectory = false;
+    console.log(currentWorkingDirectory);
     let newCwd: Directory | File | undefined;
 
     // If the path is absolute, we start from the root directory and find the new cwd
@@ -218,25 +219,5 @@ export class Directory extends FileSystemObject {
 
   private checkHidden(name: string) {
     return name.startsWith('.');
-  }
-}
-
-export function getFSObjectHelper(
-  path: string,
-  root: Directory,
-  cwd: Directory,
-  onFileNotFound?: () => string,
-  onIsNotDirectory?: () => string
-): Directory | File | string {
-  const fsObject = path.startsWith('/')
-    ? root.getFileSystemObjectFromPath(path)
-    : cwd.getFileSystemObjectFromPath(path);
-
-  if (fsObject === undefined && onFileNotFound) {
-    return onFileNotFound();
-  } else if (onIsNotDirectory && !fsObject!.isDirectory) {
-    return onIsNotDirectory();
-  } else {
-    return fsObject;
   }
 }

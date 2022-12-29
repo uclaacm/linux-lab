@@ -9,6 +9,29 @@ export interface TerminalCommandResult {
   out: string[];
 }
 
+export function getFSObjectHelper(
+  path: string,
+  root: Directory,
+  cwd: Directory,
+  onFileNotFound?: () => string,
+  onIsNotDirectory?: () => string
+): Directory | File | null | string {
+  const fsObject = path.startsWith('/')
+    ? root.getFileSystemObjectFromPath(path)
+    : cwd.getFileSystemObjectFromPath(path);
+
+  if (!fsObject && onFileNotFound) {
+    return onFileNotFound();
+  }
+  if (onIsNotDirectory && !fsObject!.isDirectory) {
+    return onIsNotDirectory();
+  }
+  if (!fsObject) {
+    return null;
+  }
+  return fsObject;
+}
+
 export function executeCommand(
   fileSystem: Directory,
   currentWorkingDirectory: Directory,
@@ -111,11 +134,15 @@ function executeMan(command: string): string[] {
     : ['Command invalid for purposes of this learning lab'];
 }
 
-function executeFind(path: string, flags: string): [string[], string[]] {
-  if (path || flags) {
-    return [[], ['find: Not implemented']];
-  }
-  return [[], []];
+function executeFind(path: string, flags: string): TerminalCommandResult {
+  console.log('find', path, flags);
+  const result: TerminalCommandResult = {
+    modifiedFS: null,
+    modifiedCWD: null,
+    err: [],
+    out: [],
+  };
+  return result;
 }
 
 function executeList(
@@ -130,21 +157,28 @@ function executeList(
     err: [],
     out: [],
   };
-  const displayAll = flags.includes('a');
-  const longFormat = flags.includes('l');
-  const fsObject = path.startsWith('/')
-    ? fileSystem.getFileSystemObjectFromPath(path)
-    : currentWorkingDirectory.getFileSystemObjectFromPath(path);
+  const [displayAll, longFormat]: [boolean, boolean] = [
+    flags.includes('a'),
+    flags.includes('l'),
+  ];
 
-  if (!fsObject) {
-    result.err = [`ls: '${path}': No such file or directory`];
-    return result;
-  }
-  if (!fsObject.isDirectory) {
+  const fsObject = getFSObjectHelper(
+    path,
+    fileSystem,
+    currentWorkingDirectory,
+    () => `ls: '${path}': No such file or directory`
+  );
+
+  if (typeof fsObject === 'string') {
+    result.err = [fsObject];
+  } else if (fsObject instanceof File) {
     result.out = [fsObject.name];
-    return result;
+  } else if (fsObject instanceof Directory) {
+    result.out = (fsObject as Directory).getChildrenNames(
+      displayAll,
+      longFormat
+    );
   }
-  result.out = (fsObject as Directory).getChildrenNames(displayAll, longFormat);
   return result;
 }
 
@@ -159,7 +193,6 @@ function executeCd(
     err: [],
     out: [],
   };
-  console.log('path', path, 'cwd', currentWorkingDirectory.path);
   const CWDRelativeToFS = fileSystem.getFileSystemObjectFromPath(
     currentWorkingDirectory.path
   ) as Directory;
@@ -319,7 +352,6 @@ function executeRm(
   if (!file.isDirectory || removeDirectory) {
     if (path === '/') {
       result.err = ["What are you doing? You can't delete the root directory!"];
-      // TODO: Figure out how to handle this
       return result;
     }
     (dir as Directory).removeFileSystemObject(fileName);

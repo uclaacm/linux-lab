@@ -14,7 +14,7 @@ const defaultProps = {
 
 type TaskProps = {
   taskPrompt: JSX.Element | string;
-  taskName: JSX.Element | string;
+  taskName: string;
   solutions: Array<string>;
   fileSystem: Directory;
   currentWorkingDirectory: Directory;

@@ -144,8 +144,10 @@ function Creation(): JSX.Element {
               <span className="try-out-command">rm</span> followed by the file
               name.
             </p>
-            Can <span className="try-out-command">rm</span> be used to remove a
-            directory? Give it a try.
+            <p className="body task-prompt">
+              Can <span className="try-out-command">rm</span> be used to remove
+              a directory? Give it a try.
+            </p>
             <p className="body task-prompt">
               The terminal printed an error message! Notice how the file system
               diagram remains unchanged because rm cannot be used to remove

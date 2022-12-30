@@ -7,6 +7,7 @@ export interface TerminalCommandResult {
   modifiedCWD: Directory | null;
   err: string[];
   out: string[];
+  clear?: boolean;
 }
 
 export function getFSObjectHelper(
@@ -119,7 +120,7 @@ export function executeCommand(
     case 'chmod':
       break;
     case 'clear':
-      result.out = ['CLEAR'];
+      result.clear = true;
       break;
     default:
       result.out = ['Invalid command. Try again.'];

@@ -113,9 +113,26 @@ export function executeCommand(
       result = executeCat(fileSystem, currentWorkingDirectory, path);
       break;
     case 'grep':
+      {
+        const args = path.split(' ');
+        if (
+          (args.length < 2 && !flags.toLowerCase().includes('r')) ||
+          args.length > 2
+        ) {
+          result.err = ['grep: invalid usage'];
+          return result;
+        }
+        result = executeGrep(
+          fileSystem,
+          currentWorkingDirectory,
+          args[1],
+          args[0],
+          flags
+        );
+      }
       break;
     case 'find':
-      [result.out, result.err] = executeFind(path, flags);
+      result = executeFind(path, flags);
       break;
     case 'chmod':
       break;
@@ -523,4 +540,88 @@ function executeMove(
   }
 
   return prevRes;
+}
+
+function executeGrep(
+  fileSystem: Directory,
+  currentWorkingDirectory: Directory,
+  path: string,
+  pattern: string,
+  flags: string
+): TerminalCommandResult {
+  path ||= '.';
+
+  const result: TerminalCommandResult = {
+    modifiedFS: null,
+    modifiedCWD: null,
+    err: [],
+    out: [],
+  };
+
+  const recursiveSearch = flags.toLowerCase().includes('r');
+
+  const file = getFSObjectHelper(
+    path,
+    fileSystem,
+    currentWorkingDirectory,
+    () => `grep: ${path}: No such file or directory`
+  );
+
+  if (typeof file === 'string') {
+    result.err = [file];
+    return result;
+  }
+
+  if (file?.isDirectory && !recursiveSearch) {
+    result.err = [`grep: ${path}: Is a directory`];
+    return result;
+  }
+
+  if (!recursiveSearch) {
+    const searchResult = findStringInFile(file, pattern);
+    if (searchResult) {
+      result.out = [searchResult];
+    }
+    return result;
+  }
+
+  const visited: string[] = [];
+  const queue: FileSystemObject[] = [];
+  queue.push(file as FileSystemObject);
+
+  while (queue.length > 0) {
+    const curr = queue.shift() as FileSystemObject;
+    if (visited.includes(curr.path)) {
+      continue;
+    }
+    visited.push(curr.path);
+    if (curr.isDirectory) {
+      if (!curr.children) {
+        continue;
+      }
+      curr.children.forEach((child) => queue.push(child));
+    } else {
+      const searchResult = findStringInFile(curr, pattern);
+      if (searchResult) {
+        result.out.push(curr.path + ': ' + searchResult);
+      }
+    }
+  }
+  console.log(result);
+  return result;
+}
+
+function findStringInFile(file: FileSystemObject, pattern: string) {
+  const fileContent = (file as File).content || '';
+  const lines = fileContent.split(' ');
+  for (const line of lines) {
+    const index = line.indexOf(pattern);
+    if (index !== -1) {
+      return `${line.slice(0, index)}<span>${line.slice(
+        index,
+        index + pattern.length
+      )}</span>${line.slice(index + pattern.length)}`;
+    }
+  }
+  return null;
 }

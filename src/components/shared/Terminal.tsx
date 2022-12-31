@@ -69,7 +69,7 @@ function Terminal(prop: {
     if (clear) {
       setCommands([]);
     } else {
-      setCommands([...commands, input, ...err, ...out]);
+      setCommands([...commands, input, ...err, out.join('<br/>')]);
     }
     prop.getLastCommand(input);
     setInputHistory(newHistory);
@@ -98,6 +98,13 @@ function Terminal(prop: {
     }
   }
 
+  function colorHighlight(command: string) {
+    if (!command.includes('<span>')) {
+      return <p className="command">{command}</p>;
+    }
+    return <span dangerouslySetInnerHTML={{ __html: command }} />;
+  }
+
   return (
     <div className="terminal">
       <div>
@@ -105,9 +112,7 @@ function Terminal(prop: {
           return command === '\n' ? (
             <br key={key} />
           ) : (
-            <p className="command" key={key}>
-              {command}
-            </p>
+            <span key={key}>{colorHighlight(command)}</span>
           );
         })}
       </div>

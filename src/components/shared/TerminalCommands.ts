@@ -115,7 +115,10 @@ export function executeCommand(
     case 'grep':
       {
         const args = path.split(' ');
-        if (args.length !== 2) {
+        if (
+          (args.length < 2 && !flags.toLowerCase().includes('r')) ||
+          args.length > 2
+        ) {
           result.err = ['grep: invalid usage'];
           return result;
         }
@@ -123,7 +126,8 @@ export function executeCommand(
           fileSystem,
           currentWorkingDirectory,
           args[1],
-          args[0]
+          args[0],
+          flags
         );
       }
       break;
@@ -542,15 +546,19 @@ function executeGrep(
   fileSystem: Directory,
   currentWorkingDirectory: Directory,
   path: string,
-  pattern: string
+  pattern: string,
+  flags: string
 ): TerminalCommandResult {
-  console.log('path: ' + path, 'pattern: ' + pattern);
+  path ||= '.';
+
   const result: TerminalCommandResult = {
     modifiedFS: null,
     modifiedCWD: null,
     err: [],
     out: [],
   };
+
+  const recursiveSearch = flags.toLowerCase().includes('r');
 
   const file = getFSObjectHelper(
     path,
@@ -564,23 +572,56 @@ function executeGrep(
     return result;
   }
 
-  if (file?.isDirectory) {
+  if (file?.isDirectory && !recursiveSearch) {
     result.err = [`grep: ${path}: Is a directory`];
     return result;
   }
 
+  if (!recursiveSearch) {
+    const searchResult = findStringInFile(file, pattern);
+    if (searchResult) {
+      result.out = [searchResult];
+    }
+    return result;
+  }
+
+  const visited: string[] = [];
+  const queue: FileSystemObject[] = [];
+  queue.push(file as FileSystemObject);
+
+  while (queue.length > 0) {
+    const curr = queue.shift() as FileSystemObject;
+    if (visited.includes(curr.path)) {
+      continue;
+    }
+    visited.push(curr.path);
+    if (curr.isDirectory) {
+      if (!curr.children) {
+        continue;
+      }
+      curr.children.forEach((child) => queue.push(child));
+    } else {
+      const searchResult = findStringInFile(curr, pattern);
+      if (searchResult) {
+        result.out.push(curr.path + ': ' + searchResult);
+      }
+    }
+  }
+  console.log(result);
+  return result;
+}
+
+function findStringInFile(file: FileSystemObject, pattern: string) {
   const fileContent = (file as File).content || '';
   const lines = fileContent.split(' ');
   for (const line of lines) {
     const index = line.indexOf(pattern);
     if (index !== -1) {
-      result.out.push(
-        `${line.slice(0, index)}<span>${line.slice(
-          index,
-          index + pattern.length
-        )}</span>${line.slice(index + pattern.length)}`
-      );
+      return `${line.slice(0, index)}<span>${line.slice(
+        index,
+        index + pattern.length
+      )}</span>${line.slice(index + pattern.length)}`;
     }
   }
-  return result;
+  return null;
 }

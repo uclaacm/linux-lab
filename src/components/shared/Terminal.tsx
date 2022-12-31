@@ -69,7 +69,7 @@ function Terminal(prop: {
     if (clear) {
       setCommands([]);
     } else {
-      setCommands([...commands, input, ...err, ...out]);
+      setCommands([...commands, input, ...err, out.join('<br/>')]);
     }
     prop.getLastCommand(input);
     setInputHistory(newHistory);

@@ -551,6 +551,8 @@ function executeGrep(
 ): TerminalCommandResult {
   path ||= '.';
 
+  path = path === '*' ? '.' : path;
+
   const result: TerminalCommandResult = {
     modifiedFS: null,
     modifiedCWD: null,

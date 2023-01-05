@@ -178,6 +178,7 @@ export function executeCommand(
       }
       break;
     case 'chmod':
+      result = executeChmod(fileSystem, currentWorkingDirectory, rawArgs);
       break;
     case 'clear':
       result.clear = true;
@@ -285,7 +286,13 @@ function executeCat(
     return result;
   }
 
-  result.out = [((file as File).content ||= '\n')];
+  const userCanReadFile = (file as File).permissions.user.read;
+  if (!userCanReadFile) {
+    result.err = [`cat: '${path}': Permission denied`];
+  } else {
+    const fileContent = ((file as File).content ||= '\n');
+    result.out = [fileContent];
+  }
   return result;
 }
 
@@ -715,6 +722,119 @@ function executeFind(
       curr.children.forEach((child) => queue.push(child));
     }
   }
+
+  return result;
+}
+
+function executeChmod(
+  fileSystem: Directory,
+  cwd: Directory,
+  args: string[]
+): TerminalCommandResult {
+  const result: TerminalCommandResult = {
+    modifiedFS: null,
+    modifiedCWD: null,
+    err: [],
+    out: [],
+  };
+
+  const permissions = args[0];
+  const path = (args[1] ||= '.');
+
+  const file = getFSObjectHelper(
+    path,
+    fileSystem,
+    cwd,
+    () => `chmod: ${path}: No such file or directory`
+  );
+
+  if (typeof file === 'string') {
+    result.err = [file];
+    return result;
+  }
+
+  if (!file) {
+    result.err = ['chmod: missing operand'];
+    return result;
+  }
+
+  const chmodArgs = permissions.split(',');
+
+  for (const permission of chmodArgs) {
+    const role = permission.charAt(0);
+    const action = permission.charAt(1);
+    const value = permission.substring(2).split('');
+    const roleMap: Map<string, string> = new Map([
+      ['u', 'user'],
+      ['g', 'group'],
+      ['o', 'other'],
+    ]);
+    const permissionMap: Map<string, string> = new Map([
+      ['r', 'read'],
+      ['w', 'write'],
+      ['x', 'execute'],
+    ]);
+
+    // Handling the case where the user does not specify a role
+    if (permission.length == 2 && (role === '+' || role === '-')) {
+      if (path === '.') {
+        file.children?.forEach((child) => {
+          const p = permissionMap.get(action);
+          const val = role === '+';
+          if (p === 'read' || p === 'write' || p === 'execute') {
+            Object.keys(child.permissions).forEach((r) => {
+              if (r === 'user' || r === 'group' || r === 'other') {
+                child.permissions[r][p] = val;
+              }
+            });
+          }
+        });
+        continue;
+      }
+    }
+
+    // Minor error handling
+    if (action !== '+' && action !== '-' && action !== '=') {
+      result.err = [`chmod: invalid mode: ${permissions}`];
+      continue;
+    }
+
+    const roleProp = roleMap.get(role) ?? 'user';
+    const validRoleProp =
+      roleProp === 'user' || roleProp === 'group' || roleProp === 'other';
+
+    if (!validRoleProp) {
+      result.err = [`chmod: invalid mode: ${permissions}`];
+      continue;
+    }
+
+    if (action === '=') {
+      file.permissions[roleProp].read = value.includes('r');
+      file.permissions[roleProp].write = value.includes('w');
+      file.permissions[roleProp].execute = value.includes('x');
+      continue;
+    }
+
+    for (const permissionToUpdate of value) {
+      const permissionUpdateProp =
+        permissionMap.get(permissionToUpdate) ?? 'read';
+      const validPermission =
+        permissionUpdateProp === 'read' ||
+        permissionUpdateProp === 'write' ||
+        permissionUpdateProp === 'execute';
+
+      if (validPermission) {
+        file.permissions[roleProp][permissionUpdateProp] =
+          action === '+' ? true : false;
+      } else {
+        result.err = [`chmod: invalid mode: ${permissions}`];
+        continue;
+      }
+    }
+  }
+
+  result.modifiedCWD = cwd;
+  result.modifiedFS = fileSystem;
 
   return result;
 }

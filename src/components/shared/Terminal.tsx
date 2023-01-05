@@ -38,7 +38,8 @@ function Terminal(prop: {
       _.cloneDeep(prop.currentWorkingDirectory),
       command,
       path,
-      flags
+      flags,
+      args
     );
 
     const { modifiedCWD, modifiedFS } = result;
@@ -69,7 +70,7 @@ function Terminal(prop: {
     if (clear) {
       setCommands([]);
     } else {
-      setCommands([...commands, input, ...err, out.join('<br/>')]);
+      setCommands([...commands, input, ...err, out.join('\n')]);
     }
     prop.getLastCommand(input);
     setInputHistory(newHistory);

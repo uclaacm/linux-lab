@@ -17,13 +17,16 @@ function Permissions(): JSX.Element {
         'hiddenStuff.txt',
         new File(
           'hiddenStuff.txt',
-          'This is super secret info. I bet no one can read it.'
+          'This is super secret info. I bet no one can read it.',
+          '/hiddenStuff.txt',
+          ['---', '---', '---']
         ),
       ],
     ]),
     '/',
     true
   );
+
   const currentWorkingDirectory = initFileSystem;
   return (
     <>
@@ -57,7 +60,7 @@ function Permissions(): JSX.Element {
           <h2 className="heading-1 green">User Permissions</h2>
           <div className="body">
             The second through fourth letters are the <b>User permissions</b>.
-            The User is the owner of the file. They should have the most
+            The User is the user of the file. They should have the most
             permissions, as they created the file. In the example above, we see
             the User has{' '}
             <span className="try-out-command green-permissions">rwx</span>{' '}

@@ -2,7 +2,7 @@ import Landing from '../pages/landing';
 import Creation from './../pages/creation';
 import Intro from './../pages/intro';
 import Moving from './../pages/moving';
-import Permissions from './../pages/permissions';
+import PermissionsPage from './../pages/permissions';
 import Piping from './../pages/piping';
 import Redirection from './../pages/redirection';
 import Searching from './../pages/searching';
@@ -30,10 +30,37 @@ export const PageMapping: Map<
   ['/piping', { component: Piping, pageName: 'Piping' }],
   ['/redirection', { component: Redirection, pageName: 'I/O Redirection' }],
   ['/searching', { component: Searching, pageName: 'Searching' }],
-  ['/permissions', { component: Permissions, pageName: 'Permissions' }],
+  ['/permissions', { component: PermissionsPage, pageName: 'Permissions' }],
 ]);
 
+interface Permission {
+  read: boolean;
+  write: boolean;
+  execute: boolean;
+}
+
+export class FilePermission {
+  user: Permission;
+  group: Permission;
+  other: Permission;
+
+  constructor(userArg: string, groupArg: string, otherArg: string) {
+    function getPermissions(permissions: string): Permission {
+      return {
+        read: permissions.includes('r'),
+        write: permissions.includes('w'),
+        execute: permissions.includes('x'),
+      };
+    }
+
+    this.user = getPermissions(userArg);
+    this.group = getPermissions(groupArg);
+    this.other = getPermissions(otherArg);
+  }
+}
+
 export class FileSystemObject {
+  permissions: FilePermission;
   constructor(
     public name: string,
     public path: string,
@@ -41,6 +68,7 @@ export class FileSystemObject {
     public parent?: FileSystemObject,
     public content?: string,
     public children?: Map<string, FileSystemObject>,
+    permissionsArg?: [string, string, string],
     public isHidden = false
   ) {
     this.name = name;
@@ -50,6 +78,8 @@ export class FileSystemObject {
     this.children = children;
     this.parent = parent;
     this.isHidden = isHidden;
+    permissionsArg ||= ['rwx', 'rwx', 'rwx'];
+    this.permissions = new FilePermission(...permissionsArg);
   }
 
   rename(newName: string): void {
@@ -75,9 +105,10 @@ export class File extends FileSystemObject {
     name: string,
     content = '',
     path = '',
+    permissions?: [string, string, string],
     parent?: FileSystemObject
   ) {
-    super(name, path, false, parent, content, undefined);
+    super(name, path, false, parent, content, undefined, permissions);
   }
 }
 
@@ -87,9 +118,10 @@ export class Directory extends FileSystemObject {
     parent?: FileSystemObject,
     children?: Map<string, FileSystemObject>,
     path = '/',
-    public isCurrentDirectory = false
+    public isCurrentDirectory = false,
+    permissions?: [string, string, string]
   ) {
-    super(name, path, true, parent, undefined, children);
+    super(name, path, true, parent, undefined, children, permissions);
     if (this.children) {
       this.children.forEach((child) => {
         this.addFileSystemObject(child);
@@ -167,7 +199,6 @@ export class Directory extends FileSystemObject {
     path: string
   ): Directory | string {
     currentWorkingDirectory.isCurrentDirectory = false;
-    console.log(currentWorkingDirectory);
     let newCwd: Directory | File | undefined;
 
     // If the path is absolute, we start from the root directory and find the new cwd

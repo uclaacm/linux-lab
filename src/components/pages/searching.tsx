@@ -29,7 +29,10 @@ function Searching(): JSX.Element {
           'dir1',
           undefined,
           new Map([
-            ['glasses.txt', new File('glasses.txt', '/dir1/glasses.txt')],
+            [
+              'glasses.txt',
+              new File('glasses.txt', 'glasses here!', '/dir1/glasses.txt'),
+            ],
           ])
         ),
       ],

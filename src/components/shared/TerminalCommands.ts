@@ -7,6 +7,7 @@ export interface TerminalCommandResult {
   modifiedCWD: Directory | null;
   err: string[];
   out: string[];
+  clear?: boolean;
 }
 
 export function getFSObjectHelper(
@@ -37,7 +38,8 @@ export function executeCommand(
   currentWorkingDirectory: Directory,
   command: string,
   path: string,
-  flags: string
+  flags: string,
+  rawArgs: string[]
 ): TerminalCommandResult {
   let result: TerminalCommandResult = {
     modifiedFS: null,
@@ -112,14 +114,73 @@ export function executeCommand(
       result = executeCat(fileSystem, currentWorkingDirectory, path);
       break;
     case 'grep':
+      {
+        const args = path.split(' ');
+        if (
+          (args.length < 2 && !flags.toLowerCase().includes('r')) ||
+          args.length > 2
+        ) {
+          result.err = ['grep: invalid usage'];
+          return result;
+        }
+        result = executeGrep(
+          fileSystem,
+          currentWorkingDirectory,
+          args[1],
+          args[0],
+          flags
+        );
+      }
       break;
     case 'find':
-      [result.out, result.err] = executeFind(path, flags);
+      {
+        // This is a temporary solution for processing the arguments,
+        // a better universal arg parser should be applied instead
+
+        let invalid = false;
+        const args = [];
+        const findFlags: Map<string, string> = new Map<string, string>();
+
+        // Rough way of checking correct usage based on number or arguments
+        // So far we only support -type and -name
+        if (rawArgs.length === 0 || rawArgs.length > 6) {
+          invalid = true;
+        }
+
+        for (let i = 0; i < rawArgs.length; i++) {
+          if (rawArgs[i].startsWith('-')) {
+            if (i + 1 >= rawArgs.length) {
+              invalid = true;
+              break;
+            }
+            if (rawArgs[i + 1].startsWith('-')) {
+              invalid = true;
+              break;
+            } else {
+              findFlags.set(rawArgs[i].slice(1), rawArgs[i + 1]);
+              i++;
+            }
+          } else {
+            args.push(rawArgs[i]);
+          }
+        }
+
+        if (invalid) {
+          result.err = ['find: invalid usage'];
+          return result;
+        }
+        result = executeFind(
+          fileSystem,
+          currentWorkingDirectory,
+          args,
+          findFlags
+        );
+      }
       break;
     case 'chmod':
       break;
     case 'clear':
-      result.out = ['CLEAR'];
+      result.clear = true;
       break;
     default:
       result.out = ['Invalid command. Try again.'];
@@ -132,17 +193,6 @@ function executeMan(command: string): string[] {
   return manPages[command]
     ? [manPages[command]]
     : ['Command invalid for purposes of this learning lab'];
-}
-
-function executeFind(path: string, flags: string): TerminalCommandResult {
-  console.log('find', path, flags);
-  const result: TerminalCommandResult = {
-    modifiedFS: null,
-    modifiedCWD: null,
-    err: [],
-    out: [],
-  };
-  return result;
 }
 
 function executeList(
@@ -522,4 +572,149 @@ function executeMove(
   }
 
   return prevRes;
+}
+
+function executeGrep(
+  fileSystem: Directory,
+  currentWorkingDirectory: Directory,
+  path: string,
+  pattern: string,
+  flags: string
+): TerminalCommandResult {
+  path ||= '.';
+
+  path = path === '*' ? '.' : path;
+
+  const result: TerminalCommandResult = {
+    modifiedFS: null,
+    modifiedCWD: null,
+    err: [],
+    out: [],
+  };
+
+  const recursiveSearch = flags.toLowerCase().includes('r');
+
+  const file = getFSObjectHelper(
+    path,
+    fileSystem,
+    currentWorkingDirectory,
+    () => `grep: ${path}: No such file or directory`
+  );
+
+  if (typeof file === 'string') {
+    result.err = [file];
+    return result;
+  }
+
+  if (file?.isDirectory && !recursiveSearch) {
+    result.err = [`grep: ${path}: Is a directory`];
+    return result;
+  }
+
+  if (!recursiveSearch) {
+    const searchResult = findStringInFile(file, pattern);
+    if (searchResult) {
+      result.out = [searchResult];
+    }
+    return result;
+  }
+
+  const visited: string[] = [];
+  const queue: FileSystemObject[] = [];
+  queue.push(file as FileSystemObject);
+
+  while (queue.length > 0) {
+    const curr = queue.shift() as FileSystemObject;
+    if (visited.includes(curr.path)) {
+      continue;
+    }
+    visited.push(curr.path);
+    if (curr.isDirectory) {
+      if (!curr.children) {
+        continue;
+      }
+      curr.children.forEach((child) => queue.push(child));
+    } else {
+      const searchResult = findStringInFile(curr, pattern);
+      if (searchResult) {
+        result.out.push(curr.path + ': ' + searchResult);
+      }
+    }
+  }
+  return result;
+}
+
+function findStringInFile(file: FileSystemObject, pattern: string) {
+  const fileContent = (file as File).content || '';
+  const lines = fileContent.split(' ');
+  for (const line of lines) {
+    const index = line.indexOf(pattern);
+    if (index !== -1) {
+      return `${line.slice(0, index)}<span>${line.slice(
+        index,
+        index + pattern.length
+      )}</span>${line.slice(index + pattern.length)}`;
+    }
+  }
+  return null;
+}
+
+function executeFind(
+  fileSystem: Directory,
+  cwd: Directory,
+  args: string[],
+  flags: Map<string, string>
+): TerminalCommandResult {
+  const result: TerminalCommandResult = {
+    modifiedFS: null,
+    modifiedCWD: null,
+    err: [],
+    out: [],
+  };
+  const path = args[0] || '.';
+  const fileToFind = flags.get('name') ?? args[1] ?? null;
+  const type = flags.get('type') ?? null;
+
+  const directoryToSearch = getFSObjectHelper(
+    path,
+    fileSystem,
+    cwd,
+    () => `find: ${path}: No such file or directory`,
+    () => `find ${path}: Not a directory`
+  );
+
+  // Supplied directory to search either does not exist or is a file
+  if (typeof directoryToSearch === 'string') {
+    result.err = [directoryToSearch];
+    return result;
+  }
+
+  const visited: string[] = [];
+  const queue: FileSystemObject[] = [];
+  queue.push(directoryToSearch as FileSystemObject);
+
+  while (queue.length > 0) {
+    const curr = queue.shift() as FileSystemObject;
+    if (visited.includes(curr.path)) {
+      continue;
+    }
+    visited.push(curr.path);
+
+    const currType = curr.isDirectory ? 'd' : 'f';
+    const matchingType = !type || type === currType;
+    const matchingName = !fileToFind || curr.name.includes(fileToFind);
+
+    if (matchingType && matchingName) {
+      result.out.push(curr.path);
+    }
+
+    if (curr.isDirectory) {
+      if (!curr.children) {
+        continue;
+      }
+      curr.children.forEach((child) => queue.push(child));
+    }
+  }
+
+  return result;
 }

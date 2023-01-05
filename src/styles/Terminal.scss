@@ -30,6 +30,14 @@
   width: 100%;
 }
 
+span {
+  white-space: pre-line;
+}
+
+span span span {
+  color: palevioletred;
+}
+
 .terminal-top-icicle {
   position: absolute;
   right: -10px;

@@ -17,7 +17,7 @@ function Terminal(prop: {
   const [inputHistory, setInputHistory] = useState<string[]>([]);
   const [inputHistoryIndex, setInputHistoryIndex] = useState(0);
 
-  function processInput(usertyped: string) {
+  function processInput(usertyped: string): TerminalCommandResult {
     const userInput = usertyped.trim().split(' ');
     const command = input.length > 1 ? userInput.slice(1, 2).join(' ') : '';
     const args = userInput.slice(2);
@@ -33,16 +33,16 @@ function Terminal(prop: {
     let path = args.slice(i).join(' ');
     path ||= '.';
 
-    console.log('Command: ' + command, 'Flags: ' + flags, 'Path: ' + path);
     const result: TerminalCommandResult = executeCommand(
       _.cloneDeep(prop.fileSystem),
       _.cloneDeep(prop.currentWorkingDirectory),
       command,
       path,
-      flags
+      flags,
+      args
     );
 
-    const { modifiedCWD, modifiedFS, err, out } = result;
+    const { modifiedCWD, modifiedFS } = result;
 
     if (modifiedFS) {
       prop.setFileSystem(modifiedFS);
@@ -50,8 +50,7 @@ function Terminal(prop: {
     if (modifiedCWD) {
       prop.setCurrentWorkingDirectory(modifiedCWD);
     }
-
-    return { err, out };
+    return result;
   }
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
@@ -66,12 +65,12 @@ function Terminal(prop: {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const result = processInput(input);
+    const { err, out, clear } = processInput(input);
     const newHistory = [...inputHistory, input];
-    if (result.err.length > 0 && result.err[0] === 'CLEAR') {
+    if (clear) {
       setCommands([]);
     } else {
-      setCommands([...commands, input, ...result.err, ...result.out]);
+      setCommands([...commands, input, ...err, out.join('\n')]);
     }
     prop.getLastCommand(input);
     setInputHistory(newHistory);
@@ -100,6 +99,13 @@ function Terminal(prop: {
     }
   }
 
+  function colorHighlight(command: string) {
+    if (!command.includes('<span>')) {
+      return <p className="command">{command}</p>;
+    }
+    return <span dangerouslySetInnerHTML={{ __html: command }} />;
+  }
+
   return (
     <div className="terminal">
       <div>
@@ -107,9 +113,7 @@ function Terminal(prop: {
           return command === '\n' ? (
             <br key={key} />
           ) : (
-            <p className="command" key={key}>
-              {command}
-            </p>
+            <span key={key}>{colorHighlight(command)}</span>
           );
         })}
       </div>

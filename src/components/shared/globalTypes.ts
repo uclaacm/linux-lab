@@ -106,6 +106,15 @@ export class Directory extends FileSystemObject {
     fileSystemObject.parent = this;
     fileSystemObject.path = this.getPathForChild(fileSystemObject.name);
     this.children.set(fileSystemObject.name, fileSystemObject);
+
+    // Recursively add children of children
+    this.children.forEach((child) => {
+      if (child.isDirectory && child.children) {
+        child.children.forEach((grandchild) => {
+          (child as Directory).addFileSystemObject(grandchild);
+        });
+      }
+    });
     return this;
   }
 

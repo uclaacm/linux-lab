@@ -641,7 +641,6 @@ function executeGrep(
       }
     }
   }
-  console.log(result);
   return result;
 }
 
@@ -706,7 +705,6 @@ function executeFind(
     const matchingName = !fileToFind || curr.name.includes(fileToFind);
 
     if (matchingType && matchingName) {
-      console.log('Explored match', curr);
       result.out.push(curr.path);
     }
 

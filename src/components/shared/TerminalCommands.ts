@@ -267,6 +267,14 @@ function executeCat(
   currentWorkingDirectory: Directory,
   path: string
 ): TerminalCommandResult {
+  let resultPath: string | null = null;
+
+  if (path.includes('>')) {
+    const files = path.split('>');
+    path = files[0].trim();
+    resultPath = files[1].trim();
+  }
+
   const result: TerminalCommandResult = {
     modifiedFS: null,
     modifiedCWD: null,
@@ -293,6 +301,48 @@ function executeCat(
     const fileContent = ((file as File).content ||= '\n');
     result.out = [fileContent];
   }
+
+  if (!resultPath) {
+    return result;
+  }
+  const resultFile = resultPath.startsWith('/')
+    ? fileSystem.getFileSystemObjectFromPath(resultPath)
+    : currentWorkingDirectory.getFileSystemObjectFromPath(resultPath);
+
+  if (resultFile && resultFile.isDirectory) {
+    result.err = [`bash: '${resultPath}': Is a directory`];
+    result.out = [];
+    return result;
+  }
+
+  if (resultFile && !resultFile.isDirectory) {
+    resultFile.content = result.out[0];
+    console.log('resultFile.content: ', resultFile.content);
+    result.modifiedFS = fileSystem;
+    result.modifiedCWD = currentWorkingDirectory;
+    result.out = [];
+    console.log(resultFile);
+    return result;
+  }
+
+  // Create the file since it does not exist
+  const touchResult = executeTouch(
+    fileSystem,
+    currentWorkingDirectory,
+    resultPath
+  );
+
+  result.modifiedFS = touchResult.modifiedFS;
+  result.modifiedCWD = touchResult.modifiedCWD;
+  const newlyCreatedFile = resultPath.startsWith('/')
+    ? (result.modifiedFS as Directory).getFileSystemObjectFromPath(resultPath)
+    : (result.modifiedCWD as Directory).getFileSystemObjectFromPath(resultPath);
+
+  if (newlyCreatedFile && !newlyCreatedFile.isDirectory) {
+    newlyCreatedFile.content = result.out[0];
+  }
+
+  result.out = [];
   return result;
 }
 

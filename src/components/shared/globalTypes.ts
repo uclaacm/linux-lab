@@ -180,9 +180,9 @@ export class Directory extends FileSystemObject {
         child.permissions.other,
       ]) {
         // permissionString += ' ';
-        permissionString += `${permission.read ? 'r' : '\u2009-'}`;
-        permissionString += `${permission.write ? 'w' : '\u2009-'}`;
-        permissionString += `${permission.execute ? 'x' : '\u2009-'}`;
+        permissionString += `${permission.read ? '\u2009r' : '\u2009-'}`;
+        permissionString += `${permission.write ? '\u2009w' : '\u2009-'}`;
+        permissionString += `${permission.execute ? '\u2009x' : '\u2009-'}`;
       }
       const options = {
         month: 'long',

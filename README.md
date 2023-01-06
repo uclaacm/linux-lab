@@ -51,7 +51,7 @@ If you haven't already, install Node.js. The installation instructions will be d
 ### macOS or Linux 🍎
 
 > Instructions for installing NVM on macOS and Linux (including WSL) are [here](https://github.com/nvm-sh/nvm#installing-and-updating).
-> 
+>
 > At this point you can run `nvm install`. Assuming you've already `cd`ed into the correct directory as mentioned earlier, this will download the LTS (Long-Term Support) version of Node.js for you. Then, run `nvm use` to make sure you've switched to the right version; if it tells you `Now using Node v16.13.2` or something similar, you're good to go!
 
 ### Windows 🪟
@@ -111,7 +111,8 @@ git push
 ```
 
 7. Make a [pull request](https://github.com/uclaacm/linux-lab/pulls) with your changes, and let a project lead know.
-> Netlify has a neat feature called "Deploy Previews" that give you a link to preview your changes; [see the blog post](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for more info!
+
+   > Netlify has a neat feature called "Deploy Previews" that give you a link to preview your changes; [see the blog post](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/) for more info!
 
 8. If your code passes code review, then we can merge it into `main`. Congratulations! If you'd like, it's now safe to delete your branch/fork.
 

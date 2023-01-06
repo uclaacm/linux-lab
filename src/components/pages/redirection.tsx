@@ -72,8 +72,74 @@ function Redirection(): JSX.Element {
         fileSystem={initFileSystem}
         currentWorkingDirectory={currentWorkingDirectory}
       />
+
+      <h1 className="lesson-title">
+        The <span className="command-in-heading">{'|'}</span> Command
+      </h1>
+      <p className="body">
+        Known as the pipe operator,{' '}
+        <span className="try-out-command">{'|'}</span> is often used to redirect
+        data between commands.
+      </p>
+      <div className="example-container">
+        <p className="blue-text">Example 1</p>
+        <div className="example-black-box">
+          <p className="example-box-text">
+            tux@tux:~$ cat reallyLongFile.txt | head
+          </p>
+          <p className="example-box-text">
+            According to
+            <br />
+            all known laws
+            <br />
+            of aviation,
+            <br />
+            there is no way
+            <br />
+            a bee should be
+            <br />
+            able to fly.
+            <br />
+            Its wings are
+            <br />
+            too small to get
+            <br />
+            its fat little body
+            <br />
+            off the ground.
+            <br />
+          </p>
+        </div>
+      </div>
+      <p className="body">
+        The presence of the <span className="try-out-command">ls</span> command
+        suggests that all of the contents of the reallyLongFile.txt should be
+        listed. However, only 10 lines are seen.
+      </p>
+      <p className="body">
+        This is because the output of{' '}
+        <span className="try-out-command">cat reallyLongFile.txt</span> is
+        redirected to the <span className="try-out-command">head</span> command,
+        which by default, displays only the first ten lines. Think of it as the
+        output of the left command becoming the input to the right command.
+      </p>
+
+      <h1 className="lesson-title">Wait a second...</h1>
+      <p className="body">
+        Aren&apos;t <span className="try-out-command">{'>'}</span> and{' '}
+        <span className="try-out-command">{'|'}</span> kinda doing the same
+        thing?
+      </p>
+      <p className="body">
+        You&apos;re right. The two commands share some similar functionalities.
+        However, <span className="try-out-command">{'>'}</span> is more for
+        redirecting data to files, whereas{' '}
+        <span className="try-out-command">{'|'}</span> is more for redirecting
+        data to another command.
+      </p>
+
       <footer>
-        <a href="piping">
+        <a href="inputOutput">
           <button type="button" className="back-button">
             back
           </button>

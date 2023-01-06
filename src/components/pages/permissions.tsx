@@ -130,7 +130,7 @@ function Permissions(): JSX.Element {
 
         <Task
           taskPrompt={taskPrompts[0]}
-          taskName={'Task'}
+          taskName="Task 1"
           solutions={['chmod u+r hiddenStuff.txt']}
           fileSystem={initFileSystem}
           currentWorkingDirectory={currentWorkingDirectory}

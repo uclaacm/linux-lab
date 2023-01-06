@@ -1,9 +1,9 @@
 import Landing from '../pages/landing';
 import Creation from './../pages/creation';
+import InputOutput from './../pages/inputOutput';
 import Intro from './../pages/intro';
 import Moving from './../pages/moving';
 import PermissionsPage from './../pages/permissions';
-import Piping from './../pages/piping';
 import Redirection from './../pages/redirection';
 import Searching from './../pages/searching';
 import Stationary from './../pages/stationary';
@@ -27,7 +27,7 @@ export const PageMapping: Map<
   ['/stationary', { component: Stationary, pageName: 'Stationary' }],
   ['/moving', { component: Moving, pageName: 'Moving' }],
   ['/creation', { component: Creation, pageName: 'Creation and Deletion' }],
-  ['/piping', { component: Piping, pageName: 'Piping' }],
+  ['/inputOutput', { component: InputOutput, pageName: 'Input/Output' }],
   ['/redirection', { component: Redirection, pageName: 'I/O Redirection' }],
   ['/searching', { component: Searching, pageName: 'Searching' }],
   ['/permissions', { component: PermissionsPage, pageName: 'Permissions' }],

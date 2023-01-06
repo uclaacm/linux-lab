@@ -1,10 +1,10 @@
 import tuxHoldingEgg from '../../assets/images/tux-holding-egg.svg';
 import '../../styles/global.scss';
-import '../../styles/piping.scss';
+import '../../styles/inputOutput.scss';
 import { Directory, File } from '../shared/globalTypes';
 import Task from '../shared/Task';
 
-function Piping(): JSX.Element {
+function InputOutput(): JSX.Element {
   const initFileSystem = new Directory(
     '/',
     undefined,
@@ -15,7 +15,7 @@ function Piping(): JSX.Element {
   const currentWorkingDirectory = initFileSystem;
   return (
     <div>
-      <h1 className="lesson-title">Piping</h1>
+      <h1 className="lesson-title">Input/Output (I/O)</h1>
       <div className="first-paragraph">
         <p className="body">
           If we want to perform a complicated task, typing one command at a time
@@ -174,4 +174,4 @@ function Piping(): JSX.Element {
   );
 }
 
-export default Piping;
+export default InputOutput;

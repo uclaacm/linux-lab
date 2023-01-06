@@ -8,7 +8,7 @@ function Intro(): JSX.Element {
     <div className="intro-container">
       <h1 className="lesson-title">INTRO TO LINUX</h1>
       <p className="body">
-        Like Windows and iOS, Linux is an <b>operating system (OS)</b>—a piece
+        Like Windows and MacOS, Linux is an <b>operating system (OS)</b>—a piece
         of software that manages a computer&apos;s basic functions, from
         figuring out which key a user presses to storing data. By taking care of
         these &quot;mundane&quot; tasks, the OS simplifies life for
@@ -42,7 +42,7 @@ function Intro(): JSX.Element {
       <p className="body">
         The POSIX file system is organized in a tree-like format, branching out
         from the root directory and into descendent directories containing files
-        and other subdirectories. If you&apos;ve ever used Windows or iOS, you
+        and other subdirectories. If you&apos;ve ever used Windows or MacOS, you
         can think of directories as folders and files as the documents within
         them. To interact with these files and directories, there exist numerous
         operations, such as open, close, read, and write.

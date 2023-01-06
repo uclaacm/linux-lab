@@ -27,17 +27,16 @@ function Stationary(): JSX.Element {
         The <span className="command-in-heading">pwd</span> Command
       </h2>
       <p className="body">
-        For example, just as you can make nested folders on Windows/MacOS and
-        double click to navigate into one, Linux lets you interact with the file
-        system in a similar way, though these “folders” are called{' '}
-        <b>directories</b> in Linux.
+        Just as you can make nested folders on Windows/MacOS and double click to
+        navigate into one, Linux lets you interact with the file system in a
+        similar way! These “folders” are called <b>directories</b> in Linux.
       </p>
       <p className="body">
         Let&#39;s say you have a file called{' '}
         <span className="magenta-text">CS35L.pdf</span> in a subfolder. Windows
         users might see a <b>file path</b> like{' '}
         <span className="magenta-text">C:\Documents\Notes\CS35L.pdf</span>,
-        whereas Mac users might see{' '}
+        whereas MacOS users might see{' '}
         <span className="magenta-text">
           /Users/UserName/Documents/Notes/CS35L.pdf
         </span>
@@ -65,13 +64,12 @@ function Stationary(): JSX.Element {
         The <span className="command-in-heading">whoami</span> Command
       </h2>
       <p className="body">
-        We now know how to answer the question of <em>where?</em>, but what
-        about <em>who?</em> How do we figure out which account we are logged in
-        as?
+        We now know how to answer the question of <em>where</em>, but what about{' '}
+        <em>who?</em> How do we figure out which account we are logged in as?
         <div className="boxed">
           <p>
             The <span className="try-out-command">whoami</span> command displays
-            the user id.
+            the username of the current user.
           </p>
         </div>
       </p>
@@ -90,9 +88,9 @@ function Stationary(): JSX.Element {
         more. Luckily, you don&#39;t need to memorize what each command does.
         <div className="boxed">
           <p>
-            Instead, the <span className="try-out-command">man</span> command,
-            short for “manual”, displays explanations, options, and examples for
-            specified commands.
+            The <span className="try-out-command">man</span> command, short for
+            “manual”, displays explanations, options, and examples for specified
+            commands.
           </p>
         </div>
       </p>

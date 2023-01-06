@@ -1,9 +1,84 @@
 import '../../styles/global.scss';
+import { useState } from 'react';
 import { Directory, File } from '../shared/globalTypes';
-// import Bar from '../shared/progressbar';
+import Bar from '../shared/progressbar';
 import Task from '../shared/Task';
 
+const data = [
+  {
+    command: 'touch',
+    info: [
+      "The 'touch' command makes a new empty file.",
+      " Run 'touch emptyFile' and see how the file system diagram changes.",
+      "If you then run 'cat emptyFile', notice how nothing is printed because the file has no contents!",
+    ],
+  },
+  {
+    command: 'mkdir',
+    info: [
+      "The 'mkdir' command makes a new empty directory.",
+      "Run 'mkdir newDir' and see how the file system diagram changes.",
+      "Notice how you can now change into the newly-created directory with 'cd newDir'!",
+      'Awesome, so now you know how to create files and directories. As you will learn below, commands for deletion are quite similar (plus, the names basically tell you what the command does!).',
+    ],
+  },
+  {
+    command: 'rm',
+    info: [
+      "The 'rm' command removes an existing file.",
+      "Looks like we have three files in the current directory. Go ahead and remove one of them with the command 'rm fileName'.",
+      'Can rm be used to remove a directory? Give it a try.',
+      'The terminal printed an error message! Notice how the file system diagram remains unchanged because rm cannot be used to remove directories. To remove a directory, we need to learn another command: rmdir.',
+      'The terminal also printed an error message: rm: DIRNAME: is a directory',
+    ],
+  },
+  {
+    command: 'rmdir',
+    info: [
+      'The rmdir command removes an existing empty directory.',
+      "Try running 'rmdir nonemptyDir'.",
+      "Uh oh! The terminal printed an error message. Looks like the directory must be empty before we can use rmdir. Now, we could manually rm all the files in a directory one by one, but there's an easier way: the -rf options combination.",
+      'We could manually rm all the files in a directory one by one, but there’s an easier way: the -rf options combination.',
+      'For example, rm -rf nonemptyDir recursively and forcefully (i.e., does not ask for confirmation) removes all files within the nonemptyDir directory before also deleting the directory.',
+      "Congrats! You've learned the basic commands needed to create and delete things. Two more related commands are cp and mv.",
+    ],
+  },
+  {
+    command: 'cp',
+    info: [
+      'The cp command copies one file to another.',
+      "'cp sourceFile destinationFile' copies the contents of sourceFile into destinationFile, though the two will have different timestamps.",
+      "'cp file1 file2 directoryPath' copies the contents of file1 and file2 to two new files in the directoryPath directory, though the two new files will have different timestamps from the two original files.",
+    ],
+  },
+  {
+    command: 'mv',
+    info: [
+      'The mv command moves/renames files.',
+      "'mv oldName newName' renames a file called oldName to newName, with the timestamp remaining unchanged.",
+      "'mv file1 file2 directoryPath' moves file1 and file2 to directoryPath, with the timestamps remaining unchanged.",
+    ],
+  },
+];
+
 function Creation(): JSX.Element {
+  const [page, setPage] = useState(0);
+
+  function increasePage() {
+    if (page == 5) {
+      window.location.href = 'piping';
+    } else {
+      setPage(page + 1);
+    }
+  }
+
+  function decreasePage() {
+    if (page == 0) {
+      window.location.href = 'moving';
+    } else {
+      setPage(page - 1);
+    }
+  }
   const task1FS = new Directory('/', undefined, new Map(), '/', true);
   const task1CWD = task1FS as Directory;
 
@@ -63,10 +138,25 @@ function Creation(): JSX.Element {
   return (
     <div>
       <h1 className="lesson-title">Creation and Deletion</h1>
+
       <p className="body">
         At the heart of any project is the ability to create and delete things.
-        So let&apos;s start with commands that let us make things.
+        So let’s start with making commands.
       </p>
+
+      <h2 className="heading-1">
+        The <span className="command-in-heading">{data[page].command}</span>{' '}
+        Command
+      </h2>
+
+      <div className="body">
+        {data[page].info.map((sent) => (
+          <div key={sent}>{sent}</div>
+        ))}
+      </div>
+
+      <Bar totalsteps={6} currentstep={page} />
+
       <br />
       <Task
         taskPrompt={
@@ -274,19 +364,21 @@ function Creation(): JSX.Element {
       />
       <br />
 
-      {/* TODO: subpages and bar */}
-      {/* <Bar totalsteps={6} currentstep={1} /> */}
       <footer>
-        <a href="moving">
-          <button type="button" className="back-button">
-            back
-          </button>
-        </a>
-        <a href="piping">
-          <button type="button" className="next-button">
-            next
-          </button>
-        </a>
+        <button
+          type="button"
+          className="back-button"
+          onClick={() => decreasePage()}
+        >
+          back
+        </button>
+        <button
+          type="button"
+          className="next-button"
+          onClick={() => increasePage()}
+        >
+          next
+        </button>
       </footer>
     </div>
   );

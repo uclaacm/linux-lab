@@ -170,32 +170,32 @@ export class Directory extends FileSystemObject {
 
   getChildrenNames(showHidden = false, longFormat = false): Array<string> {
     return this.getChildren(showHidden).map((child) => {
-      if (longFormat) {
-        let permissionString = '';
-        for (const permission of [
-          child.permissions.user,
-          child.permissions.group,
-          child.permissions.other,
-        ]) {
-          permissionString += ' ';
-          permissionString += `${permission.read ? 'r' : '-'}`;
-          permissionString += `${permission.write ? 'w' : '-'}`;
-          permissionString += `${permission.execute ? 'x' : '-'}`;
-        }
-        const options = {
-          month: 'long',
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false,
-        };
-        // The user is tux, so we just hardcode that
-        return `${permissionString} tux ${new Date().toLocaleString(
-          'en-us',
-          options
-        )} ${child.name}`;
+      if (!longFormat) {
+        return child.name;
       }
-      return child.name;
+      let permissionString = child.isDirectory ? 'd' : '-';
+      for (const permission of [
+        child.permissions.user,
+        child.permissions.group,
+        child.permissions.other,
+      ]) {
+        // permissionString += ' ';
+        permissionString += `${permission.read ? 'r' : '\u2009-'}`;
+        permissionString += `${permission.write ? 'w' : '\u2009-'}`;
+        permissionString += `${permission.execute ? 'x' : '\u2009-'}`;
+      }
+      const options = {
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      };
+      // The user is tux, so we just hardcode that
+      return `${permissionString} tux ${new Date().toLocaleString(
+        'en-us',
+        options
+      )} ${child.name}`;
     });
   }
 

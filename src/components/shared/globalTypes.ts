@@ -169,10 +169,34 @@ export class Directory extends FileSystemObject {
   }
 
   getChildrenNames(showHidden = false, longFormat = false): Array<string> {
-    if (longFormat) {
-      // TODO: implement long format
-    }
-    return this.getChildren(showHidden).map((child) => child.name);
+    return this.getChildren(showHidden).map((child) => {
+      if (longFormat) {
+        let permissionString = '';
+        for (const permission of [
+          child.permissions.user,
+          child.permissions.group,
+          child.permissions.other,
+        ]) {
+          permissionString += ' ';
+          permissionString += `${permission.read ? 'r' : '-'}`;
+          permissionString += `${permission.write ? 'w' : '-'}`;
+          permissionString += `${permission.execute ? 'x' : '-'}`;
+        }
+        const options = {
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        };
+        // The user is tux, so we just hardcode that
+        return `${permissionString} tux ${new Date().toLocaleString(
+          'en-us',
+          options
+        )} ${child.name}`;
+      }
+      return child.name;
+    });
   }
 
   getChild(name: string): Directory | File | undefined {

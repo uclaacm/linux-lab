@@ -726,6 +726,23 @@ function executeFind(
   return result;
 }
 
+function setAllPermissions(
+  permissionMap: Map<string, string>,
+  action: string,
+  role: string,
+  file: FileSystemObject
+): void {
+  const p = permissionMap.get(action);
+  const val = role === '+';
+  if (p === 'read' || p === 'write' || p === 'execute') {
+    Object.keys(file.permissions).forEach((r) => {
+      if (r === 'user' || r === 'group' || r === 'other') {
+        file.permissions[r][p] = val;
+      }
+    });
+  }
+}
+
 function executeChmod(
   fileSystem: Directory,
   cwd: Directory,
@@ -779,18 +796,12 @@ function executeChmod(
     if (permission.length == 2 && (role === '+' || role === '-')) {
       if (path === '.') {
         file.children?.forEach((child) => {
-          const p = permissionMap.get(action);
-          const val = role === '+';
-          if (p === 'read' || p === 'write' || p === 'execute') {
-            Object.keys(child.permissions).forEach((r) => {
-              if (r === 'user' || r === 'group' || r === 'other') {
-                child.permissions[r][p] = val;
-              }
-            });
-          }
+          setAllPermissions(permissionMap, action, role, child);
         });
-        continue;
+      } else {
+        setAllPermissions(permissionMap, action, role, file);
       }
+      continue;
     }
 
     // Minor error handling

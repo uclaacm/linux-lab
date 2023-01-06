@@ -73,7 +73,7 @@ function Redirection(): JSX.Element {
         currentWorkingDirectory={currentWorkingDirectory}
       />
       <footer>
-        <a href="piping">
+        <a href="inputOutput">
           <button type="button" className="back-button">
             back
           </button>

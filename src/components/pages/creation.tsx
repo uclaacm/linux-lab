@@ -284,7 +284,7 @@ function Creation(): JSX.Element {
             back
           </button>
         </a>
-        <a href="piping">
+        <a href="inputOutput">
           <button type="button" className="next-button">
             next
           </button>
